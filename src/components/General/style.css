@@ -1,0 +1,35 @@
+header {
+    background: yellow;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+footer{
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #222;
+    color: yellow;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.logo img {
+    height: 30px;
+}
+.footer__copy{
+    display: grid;
+    align-content: space-between;
+}
+.footer__nav{
+    display: grid;
+    gap: 10px;
+}
+.footer__nav a:hover{
+    color: orange;
+}

@@ -1,0 +1,11 @@
+.card-lite {
+    background-color: #fff;
+    display: grid;
+    gap: 12px;
+    border: 1px solid forestgreen;
+    padding: 12px;
+    border-radius: 8px;
+}
+.card-lite img {
+    height: 120px;
+}
