@@ -12,16 +12,26 @@ const promoData = ["=)", "^_^", "O_o", "x_x", "=(", ";(", "0l0"];
 const App = () => {
     // const user = localStorage.getItem("userSer")
     const [user, setUser] = useState(localStorage.getItem("userSer"))
+    const [goods, setGoods] = useState(testData)
+    const [searchResult, setSearchResult] = useState("")
     return (
         <>
-            <Header user={user} upd={setUser}/>
+            <Header
+                user={user}
+                upd={setUser}
+                searchArr = {testData}
+                setGoods={setGoods}
+                setSearchResult={setSearchResult}
+            />
             <div>
-                <h1>First Page</h1>
+                
+                {/* <h1>First Page</h1> */}
                 <div className="container">
-                    {testData.map((pro, i) => (
+                {searchResult && <p className="search-result">{searchResult}</p>}
+                    {goods.map((pro, i) => (
                         <Card key={i} img={pro.pictures} name={pro.name} price={pro.price} />
                     ))}
-                    {promoData.map(el => <Promo key={el} text={el}/>)}
+                    {/* {promoData.map(el => <Promo key={el} text={el}/>)} */}
                 </div>
             </div>
             <Footer/>

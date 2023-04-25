@@ -2,8 +2,16 @@ header {
     background: yellow;
     padding: 12px 20px;
     display: flex;
+    gap: 12px;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+header .search-block {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 footer{
     padding: 12px 20px;
@@ -50,3 +58,13 @@ footer{
 .header__menu span:hover {
     color: orange;
 } */
+
+@media (min-width: 576px){
+    header{
+        flex-wrap: no-wrap;
+    }
+    header .search-block {
+        order: 0;
+        width: auto;
+    }
+}

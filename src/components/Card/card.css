@@ -5,7 +5,16 @@
     border: 1px solid forestgreen;
     padding: 12px;
     border-radius: 8px;
+    grid-template-rows: 120px auto 1fr 30px;
+    align-content: first start;
+}
+.card-lite h4{
+    margin: 0;
+}
+.card-lite p{
+    margin: 0;
 }
 .card-lite img {
-    height: 120px;
+    height: 100%;
+    justify-self: center;
 }
