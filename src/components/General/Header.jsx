@@ -1,10 +1,11 @@
+import {Link} from "react-router-dom"
 import Logo from "./Logo";
 import {
     BalloonHeart,
     Cart4,
     PersonCircle,
     BuildingUp,
-    BuildingDown
+    // BuildingDown
 } from "react-bootstrap-icons";
 
 import Search from "../Search";
@@ -22,10 +23,10 @@ const Header = ({
         // localStorage.setItem("userSer", "Sergey")
         // upd("Sergey")
     }
-    const logout = () => {
-        localStorage.removeItem("userSer")
-        upd(null)
-    }
+    // const logout = () => {
+    //     localStorage.removeItem("userSer")
+    //     upd(null)
+    // }
     return <header>
         <Logo/>
         <div className="search-block">
@@ -38,21 +39,21 @@ const Header = ({
         <nav className="header__menu">
 
             {user && <>
-                <a href="">
+                <Link to="/">
                     <BalloonHeart title="Избранное"/>
-                </a>
-                <a href="">
+                </Link>
+                <Link to="/">
                     <Cart4 title="Корзина"/>
-                </a>
-                <a href="">
+                </Link>
+                <Link to="/profile">
                     <PersonCircle title="Личный кабинет"/>
-                </a>
+                </Link>
             </>
             }
-
+            
             <span>
                 {!user && <BuildingUp title="Войти" onClick={login}/>}
-                {user && <BuildingDown title="Выйти" onClick={logout}/>}
+                {/* {user && <BuildingDown title="Выйти" onClick={logout}/>} */}
             </span>
         </nav>
     </header>

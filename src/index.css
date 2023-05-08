@@ -40,3 +40,18 @@ p {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-link{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-shadow: 0 0 2px yellow;
+}
+.info-link:hover{
+  text-shadow: 0 0 7px yellow;
+}

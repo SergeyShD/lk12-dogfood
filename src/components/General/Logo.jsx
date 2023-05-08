@@ -1,9 +1,10 @@
+import {Link} from "react-router-dom"
 import logoImg from "../../assents/images/logo.png";
 
-const Logo = () => <a className="logo" href="/">
+const Logo = () => <Link className="logo" to="/">
     {/* <span className="logo__pic"></span> */}
     <img src={logoImg} alt="DogFood" />
     <span className="logo__text">DogFood</span>
-</a>
+</Link>
 
 export default Logo;
