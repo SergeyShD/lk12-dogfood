@@ -17,6 +17,8 @@
     box-sizing: border-box;
     position: relative;
     border-radius: 8px;
+    display: block;
+	height: auto;
 }
 .modal-close{
     position: absolute;
