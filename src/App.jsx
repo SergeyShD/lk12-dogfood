@@ -11,6 +11,7 @@ import Catalog from "./pages/Catalog"
 import OldPage from "./pages/Old";
 import Profile from "./pages/Profile"
 import Product from "./pages/Product"
+import AddProduct from "./pages/AddProduct";
 
 
 // console.log(testData);
@@ -82,6 +83,7 @@ const App = () => {
                         />}/>
                     <Route path="/profile" element={<Profile user={user} setUser={setUser}/>}/>
                     <Route path="/product/:id" element={<Product/>}/>
+                    <Route path="/add/product" element={<AddProduct/>}/>
                 </Routes>
             </main>
             <Footer/>
