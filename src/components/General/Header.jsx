@@ -12,10 +12,10 @@ import Search from "../Search";
 
 const Header = ({
         user,
-        upd,
+        // upd,
         searchArr,
         setGoods,
-        setSearchResult,
+        // setSearchResult,
         setModalOpen
     }) => {
     const login = () => {
@@ -33,7 +33,7 @@ const Header = ({
             <Search
                 data={searchArr}
                 setGoods={setGoods}
-                setSearchResult={setSearchResult}
+                // setSearchResult={setSearchResult}
             />
         </div>
         <nav className="header__menu">

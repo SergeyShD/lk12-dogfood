@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect, createContext} from "react"
 import {Routes, Route, Link} from "react-router-dom"
 
 import testData from "./assents/data.json";
@@ -13,6 +13,7 @@ import Profile from "./pages/Profile"
 import Product from "./pages/Product"
 import AddProduct from "./pages/AddProduct";
 
+import Ctx from "./ctx"
 
 // console.log(testData);
 
@@ -57,14 +58,21 @@ const App = () => {
     useEffect(()=>{
         setGoods(baseData)
     }, [baseData])
+
+
     return (
-        <>
+        <Ctx.Provider value={{
+            searchResult,
+            setSearchResult,
+            setBaseData,
+            baseData
+        }}>
             <Header
                 user={user}
                 upd={setUser}
                 searchArr = {baseData}
                 setGoods={setGoods}
-                setSearchResult={setSearchResult}
+                // setSearchResult={setSearchResult}
                 setModalOpen={setModalOpen}
             />
             <main>
@@ -73,12 +81,13 @@ const App = () => {
                     <Route path="/catalog" element={
                         <Catalog
                             goods={goods}
-                            setBaseData={setBaseData}
+                            // setBaseData={setBaseData}
                             userId={userId}
+                            // searchText={searchResult}
                         />}/>
                     <Route path="/old" element={
                         <OldPage
-                            searchText={searchResult}
+                            // searchText={searchResult}
                             goods={goods}
                         />}/>
                     <Route path="/profile" element={<Profile user={user} setUser={setUser}/>}/>
@@ -92,7 +101,7 @@ const App = () => {
                 setIsActive={setModalOpen}
                 setUser={setUser}
             />
-        </>
+        </Ctx.Provider>
     )
 }
 

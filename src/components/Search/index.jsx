@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext} from "react"
 import {useNavigate} from "react-router-dom"
+import Ctx from "../../ctx"
 import "./style.css"
 
-const Search = ({data, setGoods, setSearchResult}) => {
-    
+const Search = ({data, setGoods}) => {
+    const {setSearchResult} = useContext(Ctx)
     const navigate = useNavigate()
     const [text, setText] = useState("")
     const [num, setNum] = useState(0)
