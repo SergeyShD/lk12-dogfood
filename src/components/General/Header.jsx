@@ -39,7 +39,7 @@ const Header = ({
         <nav className="header__menu">
 
             {user && <>
-                <Link to="/">
+                <Link to="/favorites">
                     <BalloonHeart title="Избранное"/>
                 </Link>
                 <Link to="/">

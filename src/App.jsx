@@ -12,6 +12,7 @@ import OldPage from "./pages/Old";
 import Profile from "./pages/Profile"
 import Product from "./pages/Product"
 import AddProduct from "./pages/AddProduct";
+import Favorites from "./pages/Favorites";
 
 import Ctx from "./ctx"
 
@@ -56,7 +57,7 @@ const App = () => {
     }, [token])
 
     useEffect(()=>{
-        setGoods(baseData)
+        //setGoods(baseData)
     }, [baseData])
 
 
@@ -65,7 +66,11 @@ const App = () => {
             searchResult,
             setSearchResult,
             setBaseData,
-            baseData
+            baseData,
+            goods,
+            setGoods,
+            userId,
+            token
         }}>
             <Header
                 user={user}
@@ -93,6 +98,8 @@ const App = () => {
                     <Route path="/profile" element={<Profile user={user} setUser={setUser}/>}/>
                     <Route path="/product/:id" element={<Product/>}/>
                     <Route path="/add/product" element={<AddProduct/>}/>
+                    <Route path="/favorites" element={<Favorites/>}/>
+
                 </Routes>
             </main>
             <Footer/>
