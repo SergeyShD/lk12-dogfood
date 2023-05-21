@@ -6,7 +6,6 @@ import Ctx from "../ctx"
 const Favorites = () => {
 	const {userId, baseData} = useContext(Ctx)
 
-
     return <Container className="d-block">
 		<Row className="g-4">
 			<Col xs={12}>
