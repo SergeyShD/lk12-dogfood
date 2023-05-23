@@ -49,12 +49,11 @@ const Slider = ({desktop = 4, mobile = 1}) => {
         console.log(gds)
     },[gds])
 
-    return <Container style={{gridTemplateColumns: "1fr"}}>
-        <Carousel controls={false} interval={5000} indicators={false}>
+    return <Carousel controls={false} interval={5000} indicators={false}>
             {gds.map((el, i) => <Carousel.Item key={i}>
                 <Row>
                     {el.map(card => <Col xs={12/cnt} key={card._id}>
-                        <BsCard {...card} />
+                        <BsCard {...card}/>
                     </Col>)}
                     {/*<Col xs={3}><BsCard {...el} /></Col>*/}
                     {/*<Col xs={3}><BsCard {...el} /></Col>*/}
@@ -63,7 +62,7 @@ const Slider = ({desktop = 4, mobile = 1}) => {
                 </Row>
             </Carousel.Item>)}
         </Carousel>
-    </Container>
+    {/* </Container> */}
 }
 
 export default Slider

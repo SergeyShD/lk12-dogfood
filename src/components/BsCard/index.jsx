@@ -57,7 +57,7 @@ const BsCard = ({
         <Card.Img variant="top" src={pictures} alt={name} className="align-self-center w-auto" height="100"/>
         <Card.Body className="d-flex flex-column">
             <Card.Title as="h4">{price} ₽</Card.Title>
-            <Card.Text className="text-secondary fs-5 flex-grow-1">{name}</Card.Text>
+            <Card.Text className="text-secondary fs-5 flex-grow-1 " style={{ height: '100px' }}>{name}</Card.Text>
             <Button variant="warning" className="w-100">Купить</Button>
         </Card.Body>
         <Link to={`/product/${_id}`} className="card-link"></Link>

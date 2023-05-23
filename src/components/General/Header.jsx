@@ -33,6 +33,7 @@ const Header = ({
             <Search
                 data={searchArr}
                 setGoods={setGoods}
+                user={user}
                 // setSearchResult={setSearchResult}
             />
         </div>

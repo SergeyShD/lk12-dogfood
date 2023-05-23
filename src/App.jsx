@@ -83,6 +83,7 @@ const App = () => {
             <main>
                 <Routes>
                     <Route path="/" element={<Home user={user} setActive={setModalOpen}/>}/>
+                    {user && <>
                     <Route path="/catalog" element={
                         <Catalog
                             goods={goods}
@@ -99,8 +100,9 @@ const App = () => {
                     <Route path="/product/:id" element={<Product/>}/>
                     <Route path="/add/product" element={<AddProduct/>}/>
                     <Route path="/favorites" element={<Favorites/>}/>
-
+                    </>}
                 </Routes>
+                
             </main>
             <Footer/>
             <Modal

@@ -1,21 +1,32 @@
+import {useContext} from "react";
 import {Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {Container, Row, Col} from "react-bootstrap";
+import Ctx from "../../ctx";
 
 const Advertising = ({
-    name,
-    pictures,
-    _id
+    giftName
 }) => {
+    const {goods} = useContext(Ctx);
+    
+    const advert = goods.filter(el => el.name === giftName)[0]
+
     return <>
-        <Card className="pt-3 h-100" id={"pro_" + _id}>
-            <Card.Body className="d-flex flex-column">
-                <Card.Text className="text-secondary fs-5 flex-grow-1">Подарок за первый заказ</Card.Text>
-                <Card.Text className="text-secondary fs-5 flex-grow-1">{name}</Card.Text>
+        {advert && <Card className="d-flex flex-row p-3 align-items-center" >
+            <Card.Body className="d-flex flex-column ">
+                <Card.Text className="fs-2">Подарок за первый заказ!</Card.Text>
+                <Card.Text className="text-secondary fs-7">{advert.name}</Card.Text>
             </Card.Body>
-            <Card.Img variant="top" src={pictures} alt={name} className="align-self-center w-auto" height="100"/>
-            <Link to={`/product/${_id}`} className="card-link"></Link>
-        </Card>
+            <Card.Body style={{height:"200px"}}>
+                <Card.Img
+                    // variant="bottom" 
+                    src={advert.pictures}
+                    alt={advert.name}
+                    className="align-self-center w-auto h-100"
+                />
+            </Card.Body>
+            <Link to={`/product/${advert._id}`} className="card-link"></Link>
+        </Card>}
     </>
 }
 

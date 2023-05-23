@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom"
 import Ctx from "../../ctx"
 import "./style.css"
 
-const Search = () => {
+const Search = (user) => {
     const {setSearchResult, baseData, setGoods} = useContext(Ctx)
     
     const navigate = useNavigate()
@@ -35,7 +35,7 @@ const Search = () => {
         setNum(result.length)
     }, [text, baseData])
     return <>
-        <input className="search" type="search" value={text} onChange={changeValue}/>
+        <input className="search" type="search" value={text} onChange={changeValue} disabled={user}/>
     </>
 }
 
