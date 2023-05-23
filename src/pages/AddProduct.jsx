@@ -1,9 +1,12 @@
 
-import {useState} from "react"
+import {useState, useContext} from "react"
 import {Container, Row, Col, Form, Button} from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import Ctx from "../ctx"
+
 const AddProduct = () => {
     const navigate = useNavigate()
+    const {api, setBaseData} = useContext(Ctx)
     const [name, setName] = useState("")
     const [link, setLink] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpZro4K74i5eFYf81TWxcg1G3vUOkc0IheA&usqp=CAU")
     const [price, setPrice] = useState(999)
@@ -60,20 +63,15 @@ const AddProduct = () => {
             tags: tagWord && !tags.includes(tagWord) ? [...tags, tagWord] : tags
         }
         console.log(body)
-        fetch("https://api.react-learning.ru/products",{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-            },
-            body: JSON.stringify(body)
-        })
-        .then(res => res.json())
+        api.addProduct(body)
         .then(data => {
             console.log(data)
             if (!data.err && !data.error){
                 clearForm()
                 navigate(`/product/${data._id}`)
+                setBaseData(prev => [...prev, data])
+                // api.getProducts()
+                //     .then(data => setBaseData(data.products))
             }
         })
     }

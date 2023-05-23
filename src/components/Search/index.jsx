@@ -35,7 +35,7 @@ const Search = (user) => {
         setNum(result.length)
     }, [text, baseData])
     return <>
-        <input className="search" type="search" value={text} onChange={changeValue} disabled={user}/>
+        <input className="search" type="search" value={text} onChange={changeValue} disabled={!user}/>
     </>
 }
 

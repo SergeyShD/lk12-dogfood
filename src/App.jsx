@@ -15,6 +15,7 @@ import AddProduct from "./pages/AddProduct";
 import Favorites from "./pages/Favorites";
 
 import Ctx from "./ctx"
+import Api from "./Api"
 
 // console.log(testData);
 
@@ -23,7 +24,8 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("userSer"))
     const [userId, setUserId] = useState(localStorage.getItem("userSer-id"))
     const [token, setToken] = useState(localStorage.getItem("token"))
-
+    const [api, setApi] = useState(new Api(token))
+    
     const [baseData, setBaseData] = useState([])
     const [goods, setGoods] = useState(baseData)
     const [searchResult, setSearchResult] = useState("")
@@ -42,19 +44,32 @@ const App = () => {
         }
     }, [user])
     useEffect(()=>{
+        setApi(new Api(token))
         console.log("token", token)
-        if(token){
-            fetch("https://api.react-learning.ru/products", {
-                headers:{
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                setBaseData(data.products)
-            })
-        }
+        // if(token){
+        //     fetch("https://api.react-learning.ru/products", {
+        //         headers:{
+        //             "Authorization": `Bearer ${token}`
+        //         }
+        //     })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         setBaseData(data.products)
+        //     })
+        // }
     }, [token])
+
+    useEffect(() => {
+        if (token){
+            api.getProducts()
+                .then(data => {
+                    console.log(data)
+                    setBaseData(data.products)
+                })
+        } else {
+            setBaseData([])
+        }
+    }, [api])
 
     useEffect(()=>{
         //setGoods(baseData)
@@ -70,7 +85,8 @@ const App = () => {
             goods,
             setGoods,
             userId,
-            token
+            token,
+            api
         }}>
             <Header
                 user={user}
@@ -86,7 +102,7 @@ const App = () => {
                     {user && <>
                     <Route path="/catalog" element={
                         <Catalog
-                            goods={goods}
+                            goods={goods} //!!!!!!!!!!!!!
                             // setBaseData={setBaseData}
                             userId={userId}
                             // searchText={searchResult}
@@ -94,7 +110,7 @@ const App = () => {
                     <Route path="/old" element={
                         <OldPage
                             // searchText={searchResult}
-                            goods={goods}
+                            goods={goods} //!!!!!!!!!!!!!
                         />}/>
                     <Route path="/profile" element={<Profile user={user} setUser={setUser}/>}/>
                     <Route path="/product/:id" element={<Product/>}/>

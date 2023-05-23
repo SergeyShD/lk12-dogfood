@@ -15,6 +15,8 @@ const Slider = ({desktop = 4, mobile = 1}) => {
             setCnt(mobile)
         }
         window.addEventListener("resize", function() {
+            console.log(window.innerWidth)
+            console.log(cnt)
             if (window.innerWidth <= 768) {
                 setCnt(mobile)
             } else {
@@ -22,6 +24,9 @@ const Slider = ({desktop = 4, mobile = 1}) => {
             }
         })
     }, [])
+    useEffect(() => {
+        console.log("cnt", cnt)
+    }, [cnt])
 
     useEffect(() => {
         if(baseData.length){

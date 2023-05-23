@@ -24,7 +24,7 @@ const Home = ({user, setActive}) => {
                     </Col>
                 </Row>}
                 <Row>
-                    <Col xs={12}  lg={6}>
+                    <Col xs={12}  lg={5}>
                         <Banner/>
                     </Col>
                 </Row>
