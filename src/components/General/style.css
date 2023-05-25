@@ -60,10 +60,6 @@ footer{
 .logo:hover {
     color: orange;
 }
-/* .header__menu a:hover,
-.header__menu span:hover {
-    color: orange;
-} */
 
 @media (min-width: 576px){
     header{

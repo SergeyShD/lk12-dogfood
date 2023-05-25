@@ -21,11 +21,9 @@ const AddProduct = () => {
         const val = e.target.value
         const last = val[val.length-1]
         setTagWord(val)
-        // console.log(val)
         if(/\s/.test(last)){
             const word = val.slice(0, val.length - 1)
             const test = tags.filter(tg => tg.toLowerCase() === word.toLowerCase())
-            // console.log(test)
             if(!test.length){
                 setTags(prev => [...prev, word])
             }
@@ -70,11 +68,10 @@ const AddProduct = () => {
                 clearForm()
                 navigate(`/product/${data._id}`)
                 setBaseData(prev => [...prev, data])
-                // api.getProducts()
-                //     .then(data => setBaseData(data.products))
             }
         })
     }
+
     return <Container style={{gridTemplateColumns: "auto"}}>
         <Row>
             <Col xs={12}><h1>Добавить новый товар</h1></Col>
@@ -186,4 +183,5 @@ const AddProduct = () => {
         </Row>
     </Container>
 }
+
 export default AddProduct

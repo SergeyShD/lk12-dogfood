@@ -13,14 +13,12 @@ import Profile from "./pages/Profile"
 import Product from "./pages/Product"
 import AddProduct from "./pages/AddProduct";
 import Favorites from "./pages/Favorites";
+import BottomPanel from './components/BottomPanel'
 
 import Ctx from "./ctx"
 import Api from "./Api"
 
-// console.log(testData);
-
 const App = () => {
-    // const user = localStorage.getItem("userSer")
     const [user, setUser] = useState(localStorage.getItem("userSer"))
     const [userId, setUserId] = useState(localStorage.getItem("userSer-id"))
     const [token, setToken] = useState(localStorage.getItem("token"))
@@ -30,6 +28,8 @@ const App = () => {
     const [goods, setGoods] = useState(baseData)
     const [searchResult, setSearchResult] = useState("")
     const [modalOpen, setModalOpen] = useState(false)
+
+    const isMobile = (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
 
     useEffect(() => {
         if(user){
@@ -46,17 +46,6 @@ const App = () => {
     useEffect(()=>{
         setApi(new Api(token))
         console.log("token", token)
-        // if(token){
-        //     fetch("https://api.react-learning.ru/products", {
-        //         headers:{
-        //             "Authorization": `Bearer ${token}`
-        //         }
-        //     })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         setBaseData(data.products)
-        //     })
-        // }
     }, [token])
 
     useEffect(() => {
@@ -72,9 +61,7 @@ const App = () => {
     }, [api])
 
     useEffect(()=>{
-        //setGoods(baseData)
     }, [baseData])
-
 
     return (
         <Ctx.Provider value={{
@@ -93,7 +80,6 @@ const App = () => {
                 upd={setUser}
                 searchArr = {baseData}
                 setGoods={setGoods}
-                // setSearchResult={setSearchResult}
                 setModalOpen={setModalOpen}
             />
             <main>
@@ -102,15 +88,13 @@ const App = () => {
                     {user && <>
                     <Route path="/catalog" element={
                         <Catalog
-                            goods={goods} //!!!!!!!!!!!!!
-                            // setBaseData={setBaseData}
+                            goods={goods}
                             userId={userId}
-                            // searchText={searchResult}
+
                         />}/>
                     <Route path="/old" element={
                         <OldPage
-                            // searchText={searchResult}
-                            goods={goods} //!!!!!!!!!!!!!
+                            goods={goods}
                         />}/>
                     <Route path="/profile" element={<Profile user={user} setUser={setUser}/>}/>
                     <Route path="/product/:id" element={<Product/>}/>
@@ -126,6 +110,7 @@ const App = () => {
                 setIsActive={setModalOpen}
                 setUser={setUser}
             />
+            {user && (isMobile && <BottomPanel/>)}
         </Ctx.Provider>
     )
 }

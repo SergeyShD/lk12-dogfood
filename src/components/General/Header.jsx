@@ -5,28 +5,21 @@ import {
     Cart4,
     PersonCircle,
     BuildingUp,
-    // BuildingDown
+
 } from "react-bootstrap-icons";
 
 import Search from "../Search";
 
 const Header = ({
         user,
-        // upd,
         searchArr,
         setGoods,
-        // setSearchResult,
         setModalOpen
     }) => {
     const login = () => {
         setModalOpen(true)
-        // localStorage.setItem("userSer", "Sergey")
-        // upd("Sergey")
     }
-    // const logout = () => {
-    //     localStorage.removeItem("userSer")
-    //     upd(null)
-    // }
+
     return <header>
         <Logo/>
         <div className="search-block">
@@ -34,11 +27,9 @@ const Header = ({
                 data={searchArr}
                 setGoods={setGoods}
                 user={user}
-                // setSearchResult={setSearchResult}
             />
         </div>
         <nav className="header__menu">
-
             {user && <>
                 <Link to="/favorites">
                     <BalloonHeart title="Избранное"/>
@@ -51,10 +42,8 @@ const Header = ({
                 </Link>
             </>
             }
-            
             <span>
                 {!user && <BuildingUp title="Войти" onClick={login}/>}
-                {/* {user && <BuildingDown title="Выйти" onClick={logout}/>} */}
             </span>
         </nav>
     </header>

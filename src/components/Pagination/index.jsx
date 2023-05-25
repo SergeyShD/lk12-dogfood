@@ -14,11 +14,14 @@ const Pagination = ({hk}) => {
 
 
     return <>
-        {/* <BsPag>{items}</BsPag> */}
         <BsPag>
             {hk.page !== 1 && <>
                 <BsPag.Prev onClick={hk.prev}/>
-                <BsPag.Item onClick={step}>{hk.page - 1}</BsPag.Item>
+                <BsPag.Item onClick={step}>
+                    {
+                        hk.page - 1
+                    }
+                </BsPag.Item>
             </>}
             <BsPag.Item active>{hk.page}</BsPag.Item>
             {hk.page !== hk.maxPage && <>

@@ -1,19 +1,12 @@
-import {useContext} from "react";
 import {Container, Row, Col, Button} from "react-bootstrap";
 import {Link} from "react-router-dom"
-import { Journals, CaretRight, List} from "react-bootstrap-icons"
+import {List} from "react-bootstrap-icons"
 import Slider from "../components/Slider"
 import Banner from "../components/Banner"
 import Advertising from "../components/Advertising"
 import ProductAdvertising from "../components/ProductAdvertising";
-import Ctx from "../ctx";
-
 
 const Home = ({user, setActive}) => {
-    // const {goods} = useContext(Ctx);
-    
-    // const advert = goods.filter(el => el.name === "Куриная кругля")[0]
-    // console.log(advert)
 
     const giftAdvertising = {
         name:"Корм для собак мелких пород курица с овощами",
@@ -86,9 +79,6 @@ const Home = ({user, setActive}) => {
                 <Col xs={12}>
                     <Advertising proGiftAdv={giftAdvertising}/>
                 </Col>
-                {/* <Col xs={12}>
-                    <Slider desktop={3} mobile={2}/>
-                </Col> */}
                 {user && <Col xs={12}>
                     <Slider desktop={3} mobile={2}/>
                 </Col>}

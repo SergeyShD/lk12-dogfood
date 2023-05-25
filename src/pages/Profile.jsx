@@ -23,8 +23,6 @@ const Profile = ({user, setUser}) => {
         <h1>Личный кабинет</h1>
         <p>Привет, {userData?.name || "Гость"}!</p>
         <div>{userData?.email}</div>
-        {/* <Link to="/add/product">Добавить товар</Link>
-        <br/> */}
         <Button variant="warning" as={Link} to="/add/product">Добавить товар</Button>
         <br/>
         <button onClick={logOut}>Выйти из аккаунта</button>

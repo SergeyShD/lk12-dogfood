@@ -27,26 +27,7 @@ const Slider = ({desktop = 4, mobile = 1}) => {
     useEffect(() => {
         console.log(baseData)
         if (baseData.length) {
-        /*
-            // reduce
-            setGds(baseGoods.reduce((acc, el, i) => {
-                if (i < 5) {
-                // if (acc.length < 5) {
-                    acc.push(el)
-                }
-                return acc;
-            }, []));
-        */
-        /*
-        // filter
-        setGds(baseData.filter((el, i) => i < 5));
-        */
-        // const itemArr = []
-        // [
-        //     [e, e, e, e]   4
-        //     [e, e, e, e]      4
-        //     [e, e, e]    4
-        // ]
+
             setGds(baseData.reduce((acc, el, i) => {
                 if (i % cnt === 0) {
                     acc.push([]);
@@ -69,10 +50,6 @@ const Slider = ({desktop = 4, mobile = 1}) => {
                     {el.map(card => <Col xs={12 / cnt} key={card._id}>
                         <BsCard {...card} />
                     </Col>)}
-                    {/*<Col xs={3}><BsCard {...el} /></Col>*/}
-                    {/*<Col xs={3}><BsCard {...el} /></Col>*/}
-                    {/*<Col xs={3}><BsCard {...el} /></Col>*/}
-                    {/*<Col xs={3}><BsCard {...el} /></Col>*/}
                 </Row>
             </Carousel.Item>)}
         </Carousel>

@@ -74,13 +74,6 @@ h4{
   justify-content: center;
   align-items: center;
 }
-/* .info-link{
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  text-shadow: 0 0 2px yellow;
-  padding: 20px;
-} */
 .info-link{
   display: flex;
   align-items: center;

@@ -1,16 +1,9 @@
-import {useContext} from "react";
 import {Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {Container, Row, Col} from "react-bootstrap";
-import Ctx from "../../ctx";
 
 const ProductAdvertising = ({
     proAdv
 }) => {
-    // const {goods} = useContext(Ctx);
-    // console.log(goods)
-    // const advert = goods.filter(el => el.name === nameAdv)[0]
-    // console.log(advert)
 
     return <>
         {proAdv && <>

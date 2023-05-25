@@ -10,12 +10,6 @@ class Api {
         if (isContentType) {
             headers["Content-Type"] = "application/json"
         }
-        /*
-        * {
-        *   "Authorization": "Bearer ..."
-        *   "Content-Type": "application/json"
-        * }
-        * */
         return headers;
     }
     getProducts() {

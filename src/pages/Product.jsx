@@ -40,4 +40,5 @@ const delHandler = () => {
         }
     </>
 }
+
 export default Product
