@@ -1,5 +1,5 @@
 header {
-    background: yellow;
+    background: #FFE44D;
     padding: 12px 20px;
     display: flex;
     gap: 12px;
@@ -17,8 +17,8 @@ footer{
     padding: 12px 20px;
     display: flex;
     justify-content: space-between;
-    background-color: #222;
-    color: yellow;
+    background-color: #FFE44D;
+    color: #1F1F1B;
 }
 .logo{
     display: flex;
@@ -37,7 +37,10 @@ footer{
 .footer__nav{
     display: grid;
     gap: 10px;
+    padding-left: 0;
+    margin: none;
 }
+
 .footer__nav a:hover{
     color: orange;
 }
@@ -53,6 +56,9 @@ footer{
 }
 .header__menu svg:hover {
     fill: orange;
+}
+.logo:hover {
+    color: orange;
 }
 /* .header__menu a:hover,
 .header__menu span:hover {

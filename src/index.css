@@ -12,6 +12,10 @@ a{
   color: inherit;
   text-decoration: none;
 }
+a:hover{
+  color: orange;
+}
+
 ul{
   margin: 0;
   list-style: none;
@@ -19,6 +23,10 @@ ul{
 p {
   color: forestgreen;
   font-size: 20px;
+  font-family: sans-serif;
+}
+h4{
+  font-family: sans-serif;
 }
 .container {
   padding: 30px;
@@ -34,6 +42,27 @@ p {
   font-size: 1rem
 }
 
+.phone-number, .email{
+  font-size: 14px;
+  color: black;
+  margin: 0;
+}
+
+.social-network{
+  
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.social-network a:hover {
+  color: orange;
+}
+.social-network svg {
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+}
+
 @media (min-width: 576px){
   .container{
     grid-template-columns: repeat(3, 1fr);
@@ -45,12 +74,24 @@ p {
   justify-content: center;
   align-items: center;
 }
-.info-link{
+/* .info-link{
   display: flex;
   align-items: center;
   cursor: pointer;
   text-shadow: 0 0 2px yellow;
+  padding: 20px;
+} */
+.info-link{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-shadow: 0 0 2px #FFE44D;
+  padding-bottom: 20px;
+  text-transform: uppercase;
+  font-size: 30px;
+  letter-spacing: 5px;
+  text-align: center;
 }
 .info-link:hover{
-  text-shadow: 0 0 7px yellow;
+  text-shadow: 0 0 7px orange;
 }

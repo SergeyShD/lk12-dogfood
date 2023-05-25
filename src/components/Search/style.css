@@ -1,8 +1,8 @@
 .search{
-    width: 280px;
+    width: 450px;
     height: 30px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid #1F1F1B;
     outline: none;
     background-color: inherit;
     padding: 4px 8px;
@@ -10,5 +10,16 @@
     font-size: 1rem;
 }
 .search:focus{
-    background-color: white;
+    background-color: #fffaa0;
+    border: 1px solid #fffaa0;
 }
+@media (max-width: 768px){
+    .search{
+        width: 250px;
+    }
+}
+/* @media (max-width: 768px){
+    .search{
+        width: 350px;
+    }
+} */

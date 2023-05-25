@@ -47,17 +47,42 @@ const BsCard = ({
     }, [isLike])
 
 
-    return <Card className="pt-3 h-100" id={"pro_" + _id}>
+    return <Card
+        className="pt-3 h-100 border"
+        id={"pro_" + _id}
+        style={{
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(${pictures})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            // filter: "blur(8px)",
+        }}>
         {userId 
             && <span className="card-like" onClick={likeHandler}>
             {isLike ? <SuitHeartFill/> : <SuitHeart/>}
         </span>
         }
-        <Card.Img variant="top" src={pictures} alt={name} className="align-self-center w-auto" height="100"/>
+            <Card.Img
+                // variant="top"
+                src={pictures}
+                alt={name}
+                className="align-self-center w-auto border "
+                height="100"
+                
+                // style={{ border: "1px solid transparent"}}
+            />
         <Card.Body className="d-flex flex-column">
             <Card.Title as="h4">{price} ₽</Card.Title>
-            <Card.Text className="text-secondary fs-5 flex-grow-1 " style={{ height: '100px' }}>{name}</Card.Text>
-            <Button variant="warning" className="w-100">Купить</Button>
+            <Card.Text className="text-secondary fs-5 flex-grow-1 " >{name}</Card.Text>
+            <Button className="w-100"
+                style={{
+                    background: "#FFE44D",
+                    border: "none",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.2em",
+                    wordSpacing: "0.2em",
+                    color: "white",
+                    fontWeight: "bold",
+                }}>Купить</Button>
         </Card.Body>
         <Link to={`/product/${_id}`} className="card-link"></Link>
     </Card>

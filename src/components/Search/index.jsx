@@ -4,6 +4,7 @@ import Ctx from "../../ctx"
 import "./style.css"
 
 const Search = (user) => {
+    console.log("user: ", user)
     const {setSearchResult, baseData, setGoods} = useContext(Ctx)
     
     const navigate = useNavigate()
@@ -35,7 +36,7 @@ const Search = (user) => {
         setNum(result.length)
     }, [text, baseData])
     return <>
-        <input className="search" type="search" value={text} onChange={changeValue} disabled={!user}/>
+        <input className="search" type="search" value={text} onChange={changeValue} disabled={!user.user}/>
     </>
 }
 
