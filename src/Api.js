@@ -55,8 +55,8 @@ class Api {
             body: JSON.stringify(body)
         }).then(res => res.json())
     }
-    delReview(id) {
-        return fetch(`${this.path}/products/review/${id}`, {
+    delReview(id, r_id) {
+        return fetch(`${this.path}/products/review/${id}/${r_id}`, {
             method: "DELETE",
             headers: this.setHeaders()
         }).then(res => res.json())
