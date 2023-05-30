@@ -19,9 +19,7 @@ const Card = ({
 
     const likeHandler = () => {
         setIsLike(!isLike)
-        console.log("Привет")
         setBaseData((old) => old.map(el => {
-            console.log(el)
             if(el._id === _id){
                 isLike
                 ? el.likes = el.likes.filter(lk => lk !== user)

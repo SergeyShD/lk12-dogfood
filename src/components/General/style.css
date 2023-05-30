@@ -38,7 +38,6 @@ footer{
     display: grid;
     gap: 10px;
     padding-left: 0;
-    margin: none;
 }
 
 .footer__nav a:hover{
@@ -63,7 +62,7 @@ footer{
 
 @media (min-width: 576px){
     header{
-        flex-wrap: no-wrap;
+        flex-wrap: nowrap;
     }
     header .search-block {
         order: 0;

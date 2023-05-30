@@ -14,38 +14,38 @@ const BottomPanel = () => {
 
     return (
         <div className="bottom-panel-container">
-        <div className="bottom-panel">
-            <Link to="/">
-                <div className="icon">
-                    <House size={20} />
-                    <span>Главная</span>
-                </div>
-            </Link>
-            <Link to="/catalog">
-                <div className="icon">
-                    <Grid size={20} />
-                    <span>Каталог</span>
-                </div>
-            </Link>
-            <Link to="/">
-                <div className="icon">
-                    <Cart size={20} />
-                    <span>Корзина</span>
-                </div>
-            </Link>
-            <Link to="/favorites">
-                <div className="icon">
-                    <Heart size={20} />
-                    <span>Избранное</span>
-                </div>
-            </Link>
-            <Link to="/profile">
-                <div className="icon">
-                    <Person size={20} />
-                    <span>Профиль</span>
-                </div>
-            </Link>
-        </div>
+            <div className="bottom-panel">
+                <Link to="/">
+                    <div className="icon">
+                        <House size={20} />
+                        <span>Главная</span>
+                    </div>
+                </Link>
+                <Link to="/catalog">
+                    <div className="icon">
+                        <Grid size={20} />
+                        <span>Каталог</span>
+                    </div>
+                </Link>
+                <Link to="/">
+                    <div className="icon">
+                        <Cart size={20} />
+                        <span>Корзина</span>
+                    </div>
+                </Link>
+                <Link to="/favorites">
+                    <div className="icon">
+                        <Heart size={20} />
+                        <span>Избранное</span>
+                    </div>
+                </Link>
+                <Link to="/profile">
+                    <div className="icon">
+                        <Person size={20} />
+                        <span>Профиль</span>
+                    </div>
+                </Link>
+            </div>
         </div>
     );
 };

@@ -48,7 +48,7 @@ const Home = ({user, setActive}) => {
                     <Col xs={12}  lg={6}>
                         <Link to="/catalog">
                             <Button
-                                classname="buttonCatalog"
+                                className="buttonCatalog"
                                 style={{
                                     backgroundColor: "white",
                                     border: "none",

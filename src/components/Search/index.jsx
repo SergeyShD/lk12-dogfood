@@ -4,7 +4,6 @@ import Ctx from "../../ctx"
 import "./style.css"
 
 const Search = (user) => {
-    console.log("user: ", user)
     const {setSearchResult, baseData, setGoods} = useContext(Ctx)
     
     const navigate = useNavigate()

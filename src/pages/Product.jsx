@@ -2,8 +2,9 @@ import {useState, useEffect, useContext} from "react";
 import {useParams, Link, useNavigate} from "react-router-dom";
 import {Basket2, Plus} from "react-bootstrap-icons"
 import {Container, Row, Col, Table, Card, Button, Form} from "react-bootstrap";
-
+import Api from "../Api"
 import Ctx from "../ctx"
+import LikeButton from "../components/LikeButton"
 
 const Product = () => {
 	const { id } = useParams()
@@ -50,7 +51,6 @@ const Product = () => {
 	useEffect(() => {
 		api.getSingleProduct(id)
 			.then(serverData => {
-				console.log(id, serverData);
 				setData(serverData);
 			})
 	}, [])
@@ -58,11 +58,28 @@ const Product = () => {
 	const delHandler = () => {
 		api.delSingleProduct(id)
 			.then(data => {
-				console.log(data)
 				setBaseData(prev => prev.filter(el => el._id !== id));
 				navigate("/catalog");
 			})
 	}
+
+	const [count, setCount] = useState(0);
+
+	const increment  = () => {
+		setCount(count + 1);
+	};
+
+	const decrement  = () => {
+		if(count>0){
+			setCount(count - 1);
+		}
+	};
+
+	const сountChange = (event) => {
+		const newCount = parseInt(event.target.value);
+		setCount(newCount);
+	};
+
 	return  <Container style={{gridTemplateColumns: "1fr"}}>
 		<Row className="g-3">
 		<Link to={`/catalog#pro_${id}`}>Назад</Link>
@@ -77,8 +94,26 @@ const Product = () => {
 					<Col xs={12} md={6}>
 						<img src={data.pictures} alt={data.name} className="w-100"/>
 					</Col>
-					<Col xs={12} md={6} className={`${data.discount ? "text-danger" : "text-secondary"} fw-bold fs-1`}>
-						{Math.ceil(data.price * (100 - data.discount) / 100)} ₽
+					<Col>
+						<Col xs={12} md={6} className={`${data.discount ? "text-danger" : "text-secondary"} fw-bold fs-1`}>
+							{Math.ceil(data.price * (100 - data.discount) / 100)} ₽
+						</Col>
+						<Row>
+							<Col xs={3} className="d-flex align-items-center justify-content-between border rounded-pill">
+										<span className="clickable" onClick={decrement}>-</span>
+										<input value={count} className="col-4 border-0 text-center" onChange={сountChange}/>
+										<span className="clickable" onClick={increment}>+</span>
+							</Col>
+							<Col xs={9}>
+								<Button className="w-100 h-100 rounded-pill">В корзину</Button>
+							</Col>
+						</Row>
+						<Col xs={12}><LikeButton likes={data.likes} _id={data._id} />
+							<span onClick={LikeButton.likeHandler}>В избранное</span>
+						</Col>
+						<Row>
+						
+						</Row>
 					</Col>
 					<Col xs={12}>
 						<Table>
@@ -101,7 +136,7 @@ const Product = () => {
 						<Row className="g-3">
 							{data.reviews.map(el => <Col xs={12} sm={6} md={4} key={el._id}>
 									<Card className="h-100">
-										<Card.Body classname="position-relative">
+										<Card.Body className="position-relative">
 											<span className="d-flex w-100 align-items-center mb-2">
 												<span style={{
 													width: "30px",

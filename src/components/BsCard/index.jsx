@@ -2,6 +2,8 @@ import {useState, useContext, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {SuitHeart, SuitHeartFill} from "react-bootstrap-icons";
 import {Card, Button} from "react-bootstrap";
+import LikeButton from "../LikeButton"
+
 import Ctx from "../../ctx"
 
 const BsCard = ({
@@ -36,12 +38,10 @@ const BsCard = ({
         if(likeFlag){
             api.setLike(_id, isLike)
             .then(data => {
-                console.log(data)
                 setLikeFlag(false)
                 // setBaseData((old) => old.map(el => el._id === data._id ? data : el))
                 api.getProducts()
                     .then(newData => {
-                        console.log(newData)
                         setBaseData(newData.products)
                     })
             })
@@ -73,15 +73,27 @@ const BsCard = ({
                     backgroundSize: "cover",
                 }}>
         {userId 
-            && <span
-                    className="card-like"
-                    onClick={likeHandler}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    >
-            {isLike ? <SuitHeartFill color={isHovered ? "black" : "red"} /> :
-                        <SuitHeart color={isHovered ? "black" : "red"} />}
-        </span>
+            && <>
+                <div style={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        cursor: "pointer",
+                        zIndex: "1",
+                        color: "crimson",
+                    }}>
+                    <LikeButton likes={likes} _id={_id}/>
+                </div>
+            </>
+        //     <span
+        //             className="card-like"
+        //             onClick={likeHandler}
+        //             onMouseEnter={handleMouseEnter}
+        //             onMouseLeave={handleMouseLeave}
+        //             >
+        //     {isLike ? <SuitHeartFill color={isHovered ? "black" : "red"} /> :
+        //                 <SuitHeart color={isHovered ? "black" : "red"} />}
+        // </span>
         }
         <Card.Img
             // variant="top"

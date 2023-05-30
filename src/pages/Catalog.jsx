@@ -13,6 +13,7 @@ const Catalog = ({goods, userId}) => {
 		paginate.step(1)
 	}, [searchResult])
 
+	console.log(paginate.pageData())
 	return <Container className="d-block">
 		<Row className="g-4">
 			{searchResult && <Col xs={12} className="search-result">

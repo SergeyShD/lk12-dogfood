@@ -45,14 +45,12 @@ const App = () => {
     }, [user])
     useEffect(()=>{
         setApi(new Api(token))
-        console.log("token", token)
     }, [token])
 
     useEffect(() => {
         if (token){
             api.getProducts()
                 .then(data => {
-                    console.log(data)
                     setBaseData(data.products)
                 })
         } else {

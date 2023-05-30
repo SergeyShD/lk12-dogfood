@@ -20,7 +20,6 @@ const Profile = ({setUser}) => {
 			delete body.avatar;
 		}
 		body[name] = val;
-		console.log(body);
 		api.updAdmin(body, name === "avatar").then(data => setUserData(data));
 	}
 
@@ -32,7 +31,6 @@ const Profile = ({setUser}) => {
 	useEffect(() => {
 		api.getAdmin()
 			.then(data => {
-				console.log(data);
 				setUserData(data);
 			})
 	}, [])
