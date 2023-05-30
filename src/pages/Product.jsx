@@ -3,6 +3,8 @@ import {useParams, Link, useNavigate} from "react-router-dom";
 import {Basket2, Plus, Truck, Award} from "react-bootstrap-icons"
 import {Container, Row, Col, Table, Card, Button, Form} from "react-bootstrap";
 import Rating from "../components/Rating"
+import RatingStatic from "../components/RatingStatic"
+
 import Api from "../Api"
 import Ctx from "../ctx"
 import LikeButton from "../components/LikeButton"
@@ -100,11 +102,26 @@ const Product = () => {
 		setCount(newCount);
 	};
 
+	const decrementClass = count === 0 ? "disabled" : "clickable"
+	const incrementClass = "clickable"
+	
+	const averageRating = data.name && Math.round(data.reviews.reduce((acc, el) => {return acc + el.rating}, 0)/data.reviews.length * 10) / 10
+
 	return  <Container style={{gridTemplateColumns: "1fr"}}>
 		<Row className="g-3">
-		<Link to={`/catalog#pro_${id}`}>Назад</Link>
+			<Col className="xs-1">
+				<Link to={`/catalog#pro_${id}`}>Назад</Link>
+			</Col>
 			{data.name
 				? <>
+					<Row className="d-flex align-items-center justify-content-start mt-2">
+						<Col xs={2} className="d-flex align-items-center">
+							<RatingStatic rating={averageRating}/>
+						</Col>
+						<Col xs={3}>
+							<a href="#reviews">Всего отзывов: {data.reviews.length}</a>
+						</Col>
+					</Row>
 					<Col xs={12}>
 						<div>
 							{data.author._id === userId && <Basket2 onClick={delHandler}/>}
@@ -122,9 +139,9 @@ const Product = () => {
 						</Row>
 						<Row className="mb-2 mt-2">
 							<Col xs={3} className="d-flex align-items-center justify-content-between border rounded-pill">
-								<span className="clickable" onClick={decrement}>-</span>
+								<span className={decrementClass} onClick={decrement}>-</span>
 								<input value={count} className="col-4 border-0 text-center" onChange={сountChange}/>
-								<span className="clickable" onClick={increment}>+</span>
+								<span className={incrementClass} onClick={increment}>+</span>
 							</Col>
 							<Col xs={9}>
 								<Button className="w-100 h-100 rounded-pill">В корзину</Button>
@@ -179,7 +196,7 @@ const Product = () => {
 							</tbody>
 						</Table>
 					</Col>
-					<h2>Отзывы</h2>
+					<h2 id="reviews">Отзывы</h2>
 					{!hideForm && <Col xs={12} >
 						<h3>Новый отзыв</h3>
 						<Form onSubmit={addReview}>
@@ -226,7 +243,7 @@ const Product = () => {
 									<Card className="h-100">
 										<Card.Body className="position-relative">
 											<Row className="d-flex align-items-center">
-												<Col xs={12} md={2}>
+												<Col xs={12} md={3}>
 													<Card.Img
 														src={el.author.avatar} style={{
 															width: "50px",
@@ -236,7 +253,7 @@ const Product = () => {
 														}}
 													/>
 												</Col>
-											<Col xs={12} md={10}>
+											<Col xs={12} md={9}>
 												<Card.Text className="text-primary">
 													{el.author.name}
 												</Card.Text>
@@ -245,11 +262,11 @@ const Product = () => {
 											<Row>
 												<Card.Text className="small text-muted">{dataConvert(el.updated_at)[0]} в {dataConvert(el.updated_at)[1]}</Card.Text>
 											</Row>
-											<Card.Title><Rating rating={el.rating}/></Card.Title>
+											<Card.Title><RatingStatic rating={el.rating}/></Card.Title>
 											<Card.Text className="fs-6 text-secondary">{el.text}</Card.Text>
                                             {el.author._id === userId && <>
 												<span className="text-danger position-absolute end-0 bottom-0 pe-3 pb-2">
-													<Basket2 onClick={()=>delReview(el._id)}/>
+													<Basket2 onClick={()=>delReview(el._id)} style={{cursor: "pointer"}}/>
 												</span>
 											</>}
                                         </Card.Body>

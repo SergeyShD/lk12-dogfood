@@ -49,6 +49,7 @@ const LikeButton = ({ likes, _id, textRight=false }) => {
             onClick={likeHandler}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            style={{cursor: "pointer"}}
         >
             {isLike ? (
                 <SuitHeartFill color={isHovered ? "black" : "red"} />
