@@ -1,0 +1,38 @@
+import React, { useState } from 'react';
+import { StarFill, Star } from "react-bootstrap-icons";
+import "./style.css";
+
+const Rating = ({ rating = 0, isAnimationEnabled = false, onChange }) => {
+    const [selectedRating, setSelectedRating] = useState(rating);
+
+    const handleClick = (selected) => {
+        setSelectedRating(selected + 1);
+        onChange(selected + 1)
+    };
+
+    const stars = [];
+
+    for (let i = 0; i < 5; i++) {
+        if (i < selectedRating) {
+            stars.push(
+                <StarFill
+                    key={i}
+                    onClick={() => handleClick(i)}
+                    className={`star ${isAnimationEnabled ? '' : 'no-animation'}`}
+                />
+        );
+        } else {
+            stars.push(
+                <Star
+                    key={i}
+                    onClick={() => handleClick(i)}
+                    className={`star ${isAnimationEnabled ? '' : 'no-animation'}`}
+                />
+            );
+        }
+    }
+
+    return <div>{stars}</div>;
+};
+
+export default Rating;

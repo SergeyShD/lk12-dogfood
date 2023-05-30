@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { SuitHeart, SuitHeartFill } from "react-bootstrap-icons";
+import "./style.css"
+
 import Ctx from "../../ctx";
 
-const LikeButton = ({ likes, _id }) => {
+const LikeButton = ({ likes, _id, textRight=false }) => {
     const { setBaseData, api, userId } = useContext(Ctx);
     const [isLike, setIsLike] = useState(likes.includes(userId));
     const [likeFlag, setLikeFlag] = useState(false);
@@ -44,16 +46,16 @@ const LikeButton = ({ likes, _id }) => {
 
     return (
         <span
-        
-        onClick={likeHandler}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+            onClick={likeHandler}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
-        {isLike ? (
-            <SuitHeartFill color={isHovered ? "black" : "red"} />
-        ) : (
-            <SuitHeart color={isHovered ? "black" : "red"} />
-        )}
+            {isLike ? (
+                <SuitHeartFill color={isHovered ? "black" : "red"} />
+            ) : (
+                <SuitHeart color={isHovered ? "black" : "red"} />
+            )}
+            {textRight && <span className={`ms-2 ${isHovered ? 'hovered-text' : ''}`}>{textRight}</span>}
         </span>
     );
 };

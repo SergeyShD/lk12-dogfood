@@ -1,0 +1,20 @@
+.star {
+    color: gold;
+    cursor: pointer;
+    animation: bounce 0.5s infinite alternate;
+}
+
+.star:hover {
+    animation: none;
+}
+.no-animation {
+    animation-play-state: paused;
+}
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}

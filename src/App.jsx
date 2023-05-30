@@ -31,6 +31,9 @@ const App = () => {
 
     const isMobile = (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
 
+    const priceCourierDelivery = "399 ₽"
+    const priceDeliveryToPoint = "199 ₽"
+
     useEffect(() => {
         if(user){
             setUserId(localStorage.getItem("userSer-id"))
@@ -71,7 +74,9 @@ const App = () => {
             setGoods,
             userId,
             token,
-            api
+            api,
+            priceCourierDelivery,
+            priceDeliveryToPoint
         }}>
             <Header
                 user={user}
