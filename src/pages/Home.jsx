@@ -7,7 +7,6 @@ import Advertising from "../components/Advertising"
 import ProductAdvertising from "../components/ProductAdvertising";
 
 const Home = ({user, setActive}) => {
-
     const giftAdvertising = {
         name:"Корм для собак мелких пород курица с овощами",
         pictures: "https://4lapy.ru/resize/480x480/upload/iblock/96a/96aed6f32b8fad486ce940106239f08f.jpg",
@@ -15,7 +14,6 @@ const Home = ({user, setActive}) => {
         background: "https://i.postimg.cc/y8w2vkSj/2.jpg",
         id: 12345
     }
-
     const advertising1 = {
         name:"Premium Fresh Meat Adult сухой корм для собак всех пород",
         pictures: "https://4lapy.ru/resize/480x480/upload/iblock/e4f/e4ff56cfd7bb7d14f354d8ee16552c5d.jpg",

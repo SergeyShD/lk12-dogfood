@@ -11,11 +11,13 @@ import LikeButton from "../components/LikeButton"
 
 const Product = () => {
 	const { id } = useParams()
-	const { api, userId, setBaseData, priceCourierDelivery, priceDeliveryToPoint} = useContext(Ctx);
+	const { api, userId, setBaseData, priceCourierDelivery, priceDeliveryToPoint, isMobile} = useContext(Ctx);
 	const [data, setData] = useState({});
 	const [revText, setRevText] = useState("");
 	const [revRating, setRevRating] = useState(0);
 	const [hideForm, setHideForm] = useState(true);
+	const [showAllReviews, setShowAllReviews] = useState(false);
+	const [showCntReviews, setshowCntReviews] = useState(isMobile ? 2 : 3);
 	const navigate = useNavigate();
 
 	const tableInfo = [
@@ -41,7 +43,6 @@ const Product = () => {
 		setRevRating(newRating);
 	};
 
-	// console.log(data.created_at)
 	const dataConvert = (data) => {
 		const date = new Date(data)
 		
@@ -77,6 +78,17 @@ const Product = () => {
 			})
 	}, [])
 
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth <= 768) {
+			setshowCntReviews(2);
+			} else {
+			setshowCntReviews(3);
+			}
+		}
+		window.addEventListener('resize', handleResize);
+	}, []);
+	
 	const delHandler = () => {
 		api.delSingleProduct(id)
 			.then(data => {
@@ -114,36 +126,47 @@ const Product = () => {
 			</Col>
 			{data.name
 				? <>
-					<Row className="d-flex align-items-center justify-content-start mt-2">
-						<Col xs={2} className="d-flex align-items-center">
-							<RatingStatic rating={averageRating}/>
-						</Col>
-						<Col xs={3}>
-							<a href="#reviews">Всего отзывов: {data.reviews.length}</a>
-						</Col>
-					</Row>
 					<Col xs={12}>
 						<div>
 							{data.author._id === userId && <Basket2 onClick={delHandler}/>}
 						</div>
 						<h1>{data.name}</h1>
 					</Col>
+					<Row className="d-flex align-items-center justify-content-start ">
+						<Col xs={12} md={2} >
+							Артикул: {Math.floor(Math.random(0,1)*10000000)}
+						</Col>
+						<Col xs={3} md={2} style={{minWidth: "100px"}}>
+							<div className="d-flex w-100 align-items-center justify-content-center">
+								<RatingStatic rating={averageRating}/>
+							</div>
+						</Col>
+						<Col xs={12} sm={6} md={6}>
+							<a href="#reviews"><u>Всего отзывов: {data.reviews.length}</u></a>
+						</Col>
+					</Row>
 					<Col xs={12} md={6}>
+						{data.discount && <div className="ps-2 pe-2 position-absolute rounded-pill sale bg-danger text-white border-none">Sale {data.discount}%</div>}
 						<img src={data.pictures} alt={data.name} className="w-100"/>
 					</Col>
-					<Col >
+					<Col>
 						<Row className="mb-2">
-							<Col xs={12} md={6} className={`${data.discount ? "text-danger" : "text-secondary"} fw-bold fs-1`}>
+							<Col xs={12} className="text-secondary fs-5 text-decoration-line-through">
+								{data.price} ₽
+							</Col>
+							<Col xs={12} className={`${data.discount ? "text-danger" : "text-secondary"} fw-bold fs-1`}>
 								{Math.ceil(data.price * (100 - data.discount) / 100)} ₽
 							</Col>
 						</Row>
-						<Row className="mb-2 mt-2">
-							<Col xs={3} className="d-flex align-items-center justify-content-between border rounded-pill">
-								<span className={decrementClass} onClick={decrement}>-</span>
-								<input value={count} className="col-4 border-0 text-center" onChange={сountChange}/>
-								<span className={incrementClass} onClick={increment}>+</span>
+						<Row>
+							<Col xs={4} className="d-flex align-items-center">
+								<div className="d-flex p-2 w-100 align-items-center justify-content-evenly border rounded-pill">
+									<span className={decrementClass} onClick={decrement}>-</span>
+									<input value={count} onChange={сountChange} className="border-0 text-center" style={{ width: '30px'}} />
+									<span className={incrementClass} onClick={increment}>+</span>
+								</div>
 							</Col>
-							<Col xs={9}>
+							<Col xs={8}>
 								<Button className="w-100 h-100 rounded-pill">В корзину</Button>
 							</Col>
 						</Row>
@@ -229,36 +252,51 @@ const Product = () => {
 					</Col>}
 					{data.reviews.length > 0 
 					? <Col xs={12}>
-						{hideForm && <Col>
-							<Button
-								variant="outline-info"
-								className="fs-7 border rounded-pill mt-3 mb-4"
-								onClick={() => setHideForm(false)}
-							>
-								Написать отзыв
-							</Button>
-						</Col>}
+						<Row className="xs-12 d-flex align-items-stretch pt-3 pb-4">
+	{hideForm && (
+		<Col>
+			<Button
+				variant="outline-info"
+				className="fs-7 border rounded-pill h-100" // Add 'h-100' class for full height
+				onClick={() => setHideForm(false)}
+			>
+				Написать отзыв
+			</Button>
+		</Col>
+	)}
+	<Col className="d-flex justify-content-end">
+		{showAllReviews ? (
+		<>
+			<Button 
+				className="fs-7 border rounded-pill"
+				onClick={() => setShowAllReviews(false)}>Скрыть все отзывы</Button>
+		</>
+		) : (
+		<>
+			<Button 
+				className="fs-7 border rounded-pill"
+				onClick={() => setShowAllReviews(true)}>Показать все отзывы
+			</Button>
+		</>
+		)}
+	</Col>
+</Row>
 						<Row className="g-3">
-							{data.reviews.map(el => <Col xs={12} sm={6} md={4} key={el._id}>
+							{data.reviews.slice(0, showAllReviews
+								? data.reviews.length
+								: showCntReviews).map(el => <Col xs={6} sm={6} md={4} key={el._id}>
 									<Card className="h-100">
 										<Card.Body className="position-relative">
-											<Row className="d-flex align-items-center">
-												<Col xs={12} md={3}>
-													<Card.Img
-														src={el.author.avatar} style={{
-															width: "50px",
-															height: "50px",
-															borderRadius: "50%",
-															objectFit: "cover",
-														}}
-													/>
-												</Col>
-											<Col xs={12} md={9}>
-												<Card.Text className="text-primary">
+										<Row className="d-flex align-items-center justify-content-start">
+											<Col xs={4} sm={3} lg={2}>
+												<Card.Img xs={12} md={3} src={el.author.avatar} style={{ width: '40px', height: '40px',  borderRadius: '50%'  }}/>
+											</Col>
+											<Col xs={12} sm={8} lg={10}>
+												<Card.Text>
 													{el.author.name}
 												</Card.Text>
 											</Col>
-											</Row>
+										</Row>
 											<Row>
 												<Card.Text className="small text-muted">{dataConvert(el.updated_at)[0]} в {dataConvert(el.updated_at)[1]}</Card.Text>
 											</Row>
@@ -274,6 +312,7 @@ const Product = () => {
 								</Col>
 							)}
 						</Row>
+						
 					</Col>
 					: hideForm && <Col><Button variant="outline-info" onClick={() => setHideForm(false)}>Написать отзыв</Button></Col>
 					}

@@ -76,7 +76,8 @@ const App = () => {
             token,
             api,
             priceCourierDelivery,
-            priceDeliveryToPoint
+            priceDeliveryToPoint,
+            isMobile
         }}>
             <Header
                 user={user}
@@ -93,7 +94,6 @@ const App = () => {
                         <Catalog
                             goods={goods}
                             userId={userId}
-
                         />}/>
                     <Route path="/old" element={
                         <OldPage

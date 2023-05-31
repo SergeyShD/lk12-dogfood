@@ -9,45 +9,41 @@ const Advertising = ({ proGiftAdv }) => {
             style={{
                 backgroundImage: `url(${proGiftAdv.background})`,
                 backgroundSize: 'cover',
-                
             }}>
-            <Col xs={12}  lg={8}>
             <Card.Body className="d-flex flex-column p-5">
                 <Card.Text
-                    className="text-white"
+                    className="text-white fs-1"
                     style={{
-                        fontSize: "46px",
                         fontWeight: "bold",
                         textShadow: "5px 0px 5px rgba(0, 0, 0, 0.2)", 
                         textTransform: "uppercase",
                     }}
-                >Подарок за первый заказ!</Card.Text>
+                    >
+                    Подарок за первый заказ!
+                </Card.Text>
                 <Card.Text
-                    className="text-white"
+                    className="text-white fs-4"
                     style={{
-                        fontSize: "24px",
                         fontWeight: "bold",
                         textShadow: "5px 0px 5px rgba(0, 0, 0, 0.2)", 
-                    }}
-                >{proGiftAdv.name}</Card.Text>
+                    }}>
+                    {proGiftAdv.name}
+                </Card.Text>
             </Card.Body>
-            </Col>
-                <Card.Img
-                    // variant="bottom" 
-                    src={proGiftAdv.pictures}
-                    alt={proGiftAdv.name}
-                    className="align-self-center w-auto"
-                    style = {{
-                        height:"200px",
-                        width:"200px",
-                        padding: "10px",
-                        boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.2)",
-                        borderRadius: "10px",
-                        maxHeight: '100%',
-                        objectFit: 'cover',
-                        borderRadius: '8px',
-                    }}
-                />
+            <Card.Img
+                src={proGiftAdv.pictures}
+                alt={proGiftAdv.name}
+                className="align-self-center w-auto"
+                style = {{
+                    height:"200px",
+                    maxwidth:"200px",
+                    padding: "10px",
+                    boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.2)",
+                    borderRadius: "10px",
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                }}
+            />
             <Link to={`/product/${proGiftAdv.id}`} className="card-link"></Link>
         </Card>
         }
