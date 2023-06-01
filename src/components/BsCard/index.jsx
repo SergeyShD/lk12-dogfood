@@ -85,15 +85,6 @@ const BsCard = ({
                     <LikeButton likes={likes} _id={_id}/>
                 </div>
             </>
-        //     <span
-        //             className="card-like"
-        //             onClick={likeHandler}
-        //             onMouseEnter={handleMouseEnter}
-        //             onMouseLeave={handleMouseLeave}
-        //             >
-        //     {isLike ? <SuitHeartFill color={isHovered ? "black" : "red"} /> :
-        //                 <SuitHeart color={isHovered ? "black" : "red"} />}
-        // </span>
         }
         <Card.Img
             // variant="top"

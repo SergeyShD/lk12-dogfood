@@ -253,34 +253,34 @@ const Product = () => {
 					{data.reviews.length > 0 
 					? <Col xs={12}>
 						<Row className="xs-12 d-flex align-items-stretch pt-3 pb-4">
-	{hideForm && (
-		<Col>
-			<Button
-				variant="outline-info"
-				className="fs-7 border rounded-pill h-100" // Add 'h-100' class for full height
-				onClick={() => setHideForm(false)}
-			>
-				Написать отзыв
-			</Button>
-		</Col>
-	)}
-	<Col className="d-flex justify-content-end">
-		{showAllReviews ? (
-		<>
-			<Button 
-				className="fs-7 border rounded-pill"
-				onClick={() => setShowAllReviews(false)}>Скрыть все отзывы</Button>
-		</>
-		) : (
-		<>
-			<Button 
-				className="fs-7 border rounded-pill"
-				onClick={() => setShowAllReviews(true)}>Показать все отзывы
-			</Button>
-		</>
-		)}
-	</Col>
-</Row>
+							{hideForm && (
+								<Col>
+									<Button
+										variant="outline-info"
+										className="fs-7 border rounded-pill h-100" // Add 'h-100' class for full height
+										onClick={() => setHideForm(false)}
+									>
+										Написать отзыв
+									</Button>
+								</Col>
+							)}
+							<Col className="d-flex justify-content-end">
+								{showAllReviews ? (
+								<>
+									<Button 
+										className="fs-7 border rounded-pill"
+										onClick={() => setShowAllReviews(false)}>Скрыть все отзывы</Button>
+								</>
+								) : (
+								<>
+									<Button 
+										className="fs-7 border rounded-pill"
+										onClick={() => setShowAllReviews(true)}>Показать все отзывы
+									</Button>
+								</>
+								)}
+							</Col>
+						</Row>
 						<Row className="g-3">
 							{data.reviews.slice(0, showAllReviews
 								? data.reviews.length
