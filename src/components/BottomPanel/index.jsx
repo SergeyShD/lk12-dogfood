@@ -1,5 +1,5 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React from 'react'
+import { useEffect } from 'react'
 import './style.css';
 import { House, Grid, Cart, Heart, Person } from 'react-bootstrap-icons'
 import {Link, useLocation } from "react-router-dom"

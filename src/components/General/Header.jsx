@@ -1,14 +1,14 @@
 import {Link} from "react-router-dom"
-import Logo from "./Logo";
+import Logo from "./Logo"
 import {
     BalloonHeart,
     Cart4,
     PersonCircle,
     BuildingUp,
 
-} from "react-bootstrap-icons";
+} from "react-bootstrap-icons"
 
-import Search from "../Search";
+import Search from "../Search"
 
 const Header = ({
         user,
@@ -49,4 +49,4 @@ const Header = ({
     </header>
 }
 
-export default Header;
+export default Header

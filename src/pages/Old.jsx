@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import {Link} from "react-router-dom"
 import Card from "../components/Card/Card"
-import Promo from "../components/Promo/Promo"
+// import Promo from "../components/Promo/Promo"
 import Ctx from "../ctx"
 
 const promoData = ["=)", "^_^", "O_o", "x_x", "=(", ";(", "0l0"];

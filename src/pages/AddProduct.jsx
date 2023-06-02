@@ -64,7 +64,7 @@ const AddProduct = () => {
         .then(data => {
             if (!data.err && !data.error){
                 clearForm()
-                navigate(`/product/${data._id}`)
+                // navigate(`/product/${data._id}`)
                 setBaseData(prev => [...prev, data])
             }
         })
@@ -146,7 +146,6 @@ const AddProduct = () => {
                                     <option value={55}>55%</option>
                                     <option value={60}>60%</option>
                             </Form.Select>
-
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label htmlFor="pro-info">Название товара</Form.Label>

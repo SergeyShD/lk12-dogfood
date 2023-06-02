@@ -1,6 +1,5 @@
 import {Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {Col} from "react-bootstrap";
 
 const Advertising = ({ proGiftAdv }) => {
     return <>
@@ -12,36 +11,39 @@ const Advertising = ({ proGiftAdv }) => {
             }}>
             <Card.Body className="d-flex flex-column p-5">
                 <Card.Text
-                    className="text-white fs-1"
                     style={{
+                        color: "white",
+                        fontSize: "2rem",
                         fontWeight: "bold",
                         textShadow: "5px 0px 5px rgba(0, 0, 0, 0.2)", 
                         textTransform: "uppercase",
                     }}
-                    >
+                >
                     Подарок за первый заказ!
                 </Card.Text>
                 <Card.Text
-                    className="text-white fs-4"
                     style={{
+                        color: "white",
+                        fontSize: "1.5rem",
                         fontWeight: "bold",
                         textShadow: "5px 0px 5px rgba(0, 0, 0, 0.2)", 
-                    }}>
+                    }}
+                >
                     {proGiftAdv.name}
                 </Card.Text>
             </Card.Body>
             <Card.Img
                 src={proGiftAdv.pictures}
                 alt={proGiftAdv.name}
-                className="align-self-center w-auto"
-                style = {{
-                    height:"200px",
-                    maxwidth:"200px",
+                style={{
+                    alignSelf: "center",
+                    width: "auto",
+                    height: "200px",
+                    maxWidth: "200px",
                     padding: "10px",
                     boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.2)",
                     borderRadius: "10px",
-                    objectFit: 'cover',
-                    borderRadius: '8px',
+                    objectFit: "cover",
                 }}
             />
             <Link to={`/product/${proGiftAdv.id}`} className="card-link"></Link>
@@ -50,4 +52,4 @@ const Advertising = ({ proGiftAdv }) => {
     </>
 }
 
-export default Advertising;
+export default Advertising

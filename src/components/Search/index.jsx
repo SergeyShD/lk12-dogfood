@@ -30,7 +30,7 @@ const Search = (user) => {
         setSearchResult(str)
     }, [num, text])
     useEffect(()=>{
-        let result = baseData.filter(el => el.name.toLowerCase().includes(text))
+        let result = baseData.filter(el => el.name.includes(text.toLowerCase()))
         setGoods(result)
         setNum(result.length)
     }, [text, baseData])

@@ -5,4 +5,4 @@ const Banner = () => <div>
     <p className="description">Всегда свежие лакомства ручной работы<br/>с доставкой по России и Миру</p>
 </div>
 
-export default Banner;
+export default Banner

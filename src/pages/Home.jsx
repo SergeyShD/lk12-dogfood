@@ -1,10 +1,10 @@
-import {Container, Row, Col, Button} from "react-bootstrap";
+import {Container, Row, Col, Button} from "react-bootstrap"
 import {Link} from "react-router-dom"
 import {List} from "react-bootstrap-icons"
 import Slider from "../components/Slider"
 import Banner from "../components/Banner"
 import Advertising from "../components/Advertising"
-import ProductAdvertising from "../components/ProductAdvertising";
+import ProductAdvertising from "../components/ProductAdvertising"
 
 const Home = ({user, setActive}) => {
     const giftAdvertising = {
@@ -34,7 +34,9 @@ const Home = ({user, setActive}) => {
             <Container className="d-block">
                 {!user && <Row>
                     <Col >
-                        <span className="info-link" onClick={() => {setActive(true)}}>Авторизуйтесь, чтобы получить доступ к сайту</span>
+                        <span className="info-link" onClick={() => {setActive(true)}}>
+                            Авторизуйтесь, чтобы получить доступ к сайту
+                        </span>
                     </Col>
                 </Row>}
                 <Row>
@@ -45,26 +47,17 @@ const Home = ({user, setActive}) => {
                 {user && <Row>
                     <Col xs={12}  lg={6}>
                         <Link to="/catalog">
-                            <Button
-                                className="buttonCatalog"
-                                style={{
-                                    backgroundColor: "white",
-                                    border: "none",
-                                    borderRadius: "15px",
-                                    color: "black",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    textAlign: "center"
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.target.style.backgroundColor = "#fffaa0";
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.target.style.backgroundColor = "white";
-                                }}
-                                >
-                                <List style={{ marginRight: "5px" }}/>
+                            <Button className="
+                                    d-flex
+                                    rounded-pill
+                                    border-0
+                                    text-black
+                                    justify-content-center
+                                    align-items-center
+                                    text-center
+                                    button__catalog
+                            ">
+                                <List className="me-2"/>
                                 Каталог товаров
                             </Button>
                         </Link>
@@ -72,7 +65,7 @@ const Home = ({user, setActive}) => {
                 </Row>}
             </Container>
         </Container>
-        <Container className="d-block" >
+        <Container className="d-block">
             <Row className="g-4">    
                 <Col xs={12}>
                     <Advertising proGiftAdv={giftAdvertising}/>

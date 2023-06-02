@@ -1,34 +1,47 @@
-import {Pagination as BsPag} from "react-bootstrap"
+import { Pagination as BsPag } from "react-bootstrap";
 
-const Pagination = ({hk}) => {
+const Pagination = ({ hk, pageRange}) => {
     const step = (e) => {
-        hk.step(+e.target.innerText)
-    }
+        hk.step(+e.target.innerText);
+    };
+
     let items = [];
-    let i = 1;
-    do {
-        items.push(<BsPag.Item key={i} active={i === hk.page} onClick={step}>{i}</BsPag.Item>)
-        i++;
-    } while (i <= hk.maxPage);
+    let i = hk.page - pageRange > 0 ? hk.page - pageRange : 1;
+    const end = hk.page + pageRange < hk.maxPage ? hk.page + pageRange : hk.maxPage;
 
+    if (i !== 1) {
+        items.push(
+            <BsPag.First key="first" onClick={() => hk.step(1)} />
+        );
+        items.push(
+            <BsPag.Prev key="prev" onClick={() => hk.step(hk.page - 1)} />
+        );
+    }
 
-
-    return <>
-        <BsPag>
-            {hk.page !== 1 && <>
-                <BsPag.Prev onClick={hk.prev}/>
-                <BsPag.Item onClick={step}>
-                    {
-                        hk.page - 1
-                    }
+    for (; i <= end; i++) {
+        if (i > 0) {
+            items.push(
+                <BsPag.Item
+                    key={i}
+                    active={i === hk.page}
+                    onClick={i === hk.page ? null : step}
+                >
+                    {i}
                 </BsPag.Item>
-            </>}
-            <BsPag.Item active>{hk.page}</BsPag.Item>
-            {hk.page !== hk.maxPage && <>
-                <BsPag.Item onClick={step}>{hk.page + 1}</BsPag.Item>
-                <BsPag.Next onClick={hk.next}/>
-            </>}
-        </BsPag>
-    </>
-}
+            );
+        }
+    }
+
+    if (end !== hk.maxPage) {
+        items.push(
+            <BsPag.Next key="next" onClick={() => hk.step(hk.page + 1)} />
+        );
+        items.push(
+            <BsPag.Last key="last" onClick={() => hk.step(hk.maxPage)} />
+        );
+    }
+
+    return <BsPag>{items}</BsPag>;
+};
+
 export default Pagination;

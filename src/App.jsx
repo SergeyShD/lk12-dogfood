@@ -1,18 +1,18 @@
 import {useState, useEffect, createContext} from "react"
 import {Routes, Route, Link} from "react-router-dom"
 
-import testData from "./assents/data.json";
+// import testData from "./assents/data.json";
 
-import { Header, Footer } from "./components/General";
+import { Header, Footer } from "./components/General"
 import Modal from "./components/Modal"
 
 import Home from "./pages/Home"
 import Catalog from "./pages/Catalog"
-import OldPage from "./pages/Old";
+import OldPage from "./pages/Old"
 import Profile from "./pages/Profile"
 import Product from "./pages/Product"
-import AddProduct from "./pages/AddProduct";
-import Favorites from "./pages/Favorites";
+import AddProduct from "./pages/AddProduct"
+import Favorites from "./pages/Favorites"
 import BottomPanel from './components/BottomPanel'
 
 import Ctx from "./ctx"
@@ -118,4 +118,4 @@ const App = () => {
     )
 }
 
-export default App;
+export default App

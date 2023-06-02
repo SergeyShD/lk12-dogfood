@@ -5,12 +5,10 @@ import {SuitHeart, SuitHeartFill} from "react-bootstrap-icons"
 import Ctx from "../../ctx"
 
 const Card = ({
-    discount,
     likes,
     name,
     pictures,
     price,
-    tags,
     _id,
     user
 }) => {
