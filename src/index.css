@@ -65,6 +65,7 @@ h4{
 
 .trash{
   min-width: 20px;
+  cursor: pointer;
 }
 .trash:hover, .close:hover{
   color: red;
@@ -126,9 +127,16 @@ h4{
 }
 .button__catalog:hover{
   background-color: #fffaa0;
-  
-}
 
+}
+.card-link {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  /* bottom:3.5em; */
+}
 @keyframes bounce {
   0% {
       transform: translateY(0);

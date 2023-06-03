@@ -10,13 +10,18 @@ import LikeButton from "../components/LikeButton"
 
 const Product = () => {
 	const { id } = useParams()
-	const { api, userId, priceCourierDelivery, priceDeliveryToPoint, isMobile} = useContext(Ctx)
+	const { api, userId, priceCourierDelivery, priceDeliveryToPoint, isMobile, basket, setBasket} = useContext(Ctx)
 	const [data, setData] = useState({})
 	const [revText, setRevText] = useState("")
 	const [revRating, setRevRating] = useState(0)
 	const [hideForm, setHideForm] = useState(true)
 	const [showAllReviews, setShowAllReviews] = useState(false)
 	const [showCntReviews, setshowCntReviews] = useState(isMobile ? 2 : 3)
+
+	const prodInBasket = basket.find(el => el.id === id)
+	// console.log(basket.find(el => el.id === id))
+	const [count, setCount] = useState(prodInBasket ? prodInBasket.cnt : 0)
+	
 	// const navigate = useNavigate();
 
 	const tableInfo = [
@@ -84,22 +89,72 @@ const Product = () => {
 		window.addEventListener('resize', handleResize)
 	}, []);
 
-	const [count, setCount] = useState(0)
+	// const inBasket = basket.filter(el => el.id === id).length > 0
 
-	const increment  = () => {
+
+	const increment = (event) => {
+		event.preventDefault()
+		event.stopPropagation()
 		setCount(count + 1)
-	};
-
-	const decrement  = () => {
-		if(count>0){
-			setCount(count - 1)
+		if(count)
+			setBasket(prev => prev.map((el) => {
+				if(el.id === id){
+					el.cnt++
+				}
+				return el
+			}))
+		else{
+			setBasket(prev => [...prev,{
+				id,
+				price: data.price,
+				discount: data.discount,
+				cnt: 1
+			}])
 		}
 	};
 
+	const decrement  = (event) => {
+		event.preventDefault()
+		event.stopPropagation()
+		if(count > 1){
+			setCount(count - 1)
+			console.log(data.price)
+			
+			setBasket(prev => prev.map((el) => {
+				if(el.id === id){
+					el.cnt--
+				}
+				return el
+			}))
+		}
+		else{
+			setCount(count - 1)
+			setBasket(prev => prev.filter(el => el.id !== id))
+		}
+	};
 	const сountChange = (event) => {
+		event.preventDefault()
+		event.stopPropagation()
 		const newCount = parseInt(event.target.value)
+		if(count)
+			setBasket(prev => prev.map((el) => {
+				if(el.id === id){
+					el.cnt = newCount
+				}
+				return el
+			}))
+		else{
+			setBasket(prev => [...prev,{
+				id,
+				price: data.price,
+				discount: data.discount,
+				cnt: newCount
+			}])
+		}
 		newCount ? setCount(newCount) : setCount(0)
 	};
+
+	const incrToCart = !prodInBasket ? increment : (() => {})
 
 	const decrementClass = count === 0 ? "disabled" : "clickable"
 	
@@ -111,16 +166,28 @@ const Product = () => {
 	// 	return (data.reviews.some((el)=>el._id === userId))
 	// }
 
+	// const addToBasket = (event) => {
+    //     event.preventDefault()
+    //     event.stopPropagation()
+    //     setBasket(prev => [...prev,{
+    //         id: _id,
+    //         price,
+    //         discount,
+    //         cnt: 1
+    //     }])
+    // }
+
+
 	return  <Container style={{gridTemplateColumns: "1fr"}}>
 		<Row className="g-3">
 			<Col xs={4} sm={3} lg={2}>
-					<Button
-						className="w-100 rounded-pill"
-						as={Link}
-						to={`/catalog#pro_${id}`}
-					>
-						Назад
-					</Button>
+				<Button
+					className="w-100 rounded-pill"
+					as={Link}
+					to={`/catalog#pro_${id}`}
+				>
+					Назад
+				</Button>
 			</Col>
 			{data.name
 				? <>
@@ -177,25 +244,34 @@ const Product = () => {
 						<Row>
 							<Col xs={4} className="d-flex align-items-center">
 								<div className="d-flex
-												p-2
 												w-100
 												align-items-center
 												justify-content-evenly
 												border
 												rounded-pill"
 								>
-									<span className={decrementClass} onClick={decrement}>-</span>
+									<span className={`${decrementClass} fs-4`} onClick={decrement}>-</span>
 									<input 
 										value={count}
 										onChange={сountChange}
-										className="border-0 text-center"
+										className="border-0 text-center fs-5"
 										style={{ width: '30px'}}
 									/>
-									<span className="clickable" onClick={increment}>+</span>
+									<span className="clickable fs-4" onClick={increment}>+</span>
 								</div>
 							</Col>
 							<Col xs={8}>
-								<Button className="w-100 h-100 rounded-pill">В корзину</Button>
+								<Button 
+									className="w-100 h-100 rounded-pill position-relative"
+									onClick={incrToCart}
+								>
+									{!prodInBasket
+										? "Добавить в корзину"
+										: <>
+											Перейти в корзину
+											<Link to={`/basket`} className="card-link"></Link>
+										</>}
+								</Button>
 							</Col>
 						</Row>
 						<Row className="mb-4 mt-4">

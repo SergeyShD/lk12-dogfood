@@ -14,7 +14,7 @@ const Input = ({val, isActive, upd, changeActive, name}) => {
             <Col xs={12} md={9}>
                 <Form.Control value={inp} onChange={(e) => setInput(e.target.value)}/>
             </Col>
-            <Col xs={12} lg={3} className="d-flex fs-5 align-items-center justify-content-start">
+            <Col xs={12} lg={3} className={`d-flex fs-5 align-items-center ${name !== "avatar" ? "justify-content-start" : "justify-content-end"}`}>
                 <X className="me-4 close" onClick={() => changeActive(false)}/>
                 <Check className="check" onClick={() => {
                                 changeActive(false)

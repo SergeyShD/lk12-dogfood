@@ -8,13 +8,13 @@ import Pagination from "../components/Pagination"
 const Catalog = ({ goods, userId }) => {
 	const { searchResult, isMobile } = useContext(Ctx)
 	const paginate = usePagination(goods, 12)
-	const [pageRange, setPageRange] = useState(5)
+	const [pageRange, setPageRange] = useState(isMobile ? 1 : 5)
 
 	const handleResize = () => {
 		if (window.innerWidth <= 768 || isMobile) {
-		setPageRange(1)
+			setPageRange(1)
 		} else {
-		setPageRange(5)
+			setPageRange(5)
 		}
 	}
 
@@ -29,14 +29,14 @@ const Catalog = ({ goods, userId }) => {
 	return (
 		<Container className="d-block">
 			<Row className="g-4">
+				<Col xs={12}>
+					<h1>Каталог</h1>
+				</Col>
 				{searchResult && (
 					<Col xs={12} className="search-result">
 						{searchResult}
 					</Col>
 				)}
-				<Col xs={12}>
-					<h1>Каталог</h1>
-				</Col>
 				{paginate.pageData().map((pro, i) => (
 					<Col key={i} xs={12} sm={6} md={4} lg={3}>
 						<BsCard img={pro.pictures} {...pro} user={userId} />
@@ -53,7 +53,7 @@ const Catalog = ({ goods, userId }) => {
 						overflow-hidden
 					"
 				>
-				<Pagination hk={paginate} pageRange={pageRange} />
+					<Pagination hk={paginate} pageRange={pageRange}/>
 				</Col>
 			</Row>
 		</Container>

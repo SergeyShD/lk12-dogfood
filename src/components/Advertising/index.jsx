@@ -37,7 +37,6 @@ const Advertising = ({ proGiftAdv }) => {
                 alt={proGiftAdv.name}
                 style={{
                     alignSelf: "center",
-                    width: "auto",
                     height: "200px",
                     maxWidth: "200px",
                     padding: "10px",

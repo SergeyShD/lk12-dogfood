@@ -14,15 +14,23 @@ import Product from "./pages/Product"
 import AddProduct from "./pages/AddProduct"
 import Favorites from "./pages/Favorites"
 import BottomPanel from './components/BottomPanel'
+import Basket from "./pages/Basket"
 
 import Ctx from "./ctx"
 import Api from "./Api"
 
 const App = () => {
+    let basketStore = localStorage.getItem("basket")
+    if (basketStore && basketStore[0] === "["){
+        basketStore = JSON.parse(basketStore)
+    } else {
+        basketStore = []
+    }
     const [user, setUser] = useState(localStorage.getItem("userSer"))
     const [userId, setUserId] = useState(localStorage.getItem("userSer-id"))
     const [token, setToken] = useState(localStorage.getItem("token"))
     const [api, setApi] = useState(new Api(token))
+    const [basket, setBasket] = useState(basketStore)
     
     const [baseData, setBaseData] = useState([])
     const [goods, setGoods] = useState(baseData)
@@ -64,6 +72,10 @@ const App = () => {
     useEffect(()=>{
     }, [baseData])
 
+    useEffect(() => {
+        localStorage.setItem("basket", JSON.stringify(basket))
+    })
+
     return (
         <Ctx.Provider value={{
             searchResult,
@@ -77,7 +89,9 @@ const App = () => {
             api,
             priceCourierDelivery,
             priceDeliveryToPoint,
-            isMobile
+            isMobile,
+            basket,
+            setBasket
         }}>
             <Header
                 user={user}
@@ -103,6 +117,7 @@ const App = () => {
                     <Route path="/product/:id" element={<Product/>}/>
                     <Route path="/add/product" element={<AddProduct/>}/>
                     <Route path="/favorites" element={<Favorites/>}/>
+                    <Route path="/basket" element={<Basket/>}/>
                     </>}
                 </Routes>
                 

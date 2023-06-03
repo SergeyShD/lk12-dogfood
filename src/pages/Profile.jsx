@@ -7,7 +7,7 @@ import UpdatedInput from "../components/UpdatedInput"
 
 const Profile = ({setUser}) => {
 	const navigate = useNavigate()
-	const { api } = useContext(Ctx)
+	const { api, baseData } = useContext(Ctx)
 	const [userData, setUserData] = useState({})
 	const [inpName, setInpName] = useState(false)
 	const [inpEmail, setInpEmail] = useState(false)
@@ -17,9 +17,13 @@ const Profile = ({setUser}) => {
 	// Ссылка на картинку: https://i.postimg.cc/DySB3tTR/Brann-Bronzebeard.png
 
 	const updUser = (name, val) => {
-		let body = {...userData}
-		if (name !== "avatar") {
-			delete body.avatar
+		let body = {
+			name:userData.name,
+			about: userData.about
+		}
+
+		if (name === "avatar") {
+			body = {avatar: userData.avatar}
 		}
 		body[name] = val
 		api.updAdmin(body, name === "avatar").then(data => setUserData(data))
@@ -67,14 +71,8 @@ const Profile = ({setUser}) => {
 									name="name"
 								/>
 							</Row>
-							<Row className="pb-2">
-								<UpdatedInput
-									val={userData.email}
-									isActive={inpEmail}
-									changeActive={setInpEmail}
-									upd={updUser}
-									name="email"
-								/>
+							<Row className="pb-2 fs-5">
+								<Col>{userData.email}</Col>
 							</Row>
 							<Row>
 								<UpdatedInput
@@ -113,8 +111,9 @@ const Profile = ({setUser}) => {
 							name="avatar"
 						/>
 						<Row className="mt-3">
-							<Figure>
+							<Figure className="d-flex align-items-center justify-content-center">
 								<Figure.Image
+									
 									src={userData.avatar}
 									alt={userData.email}
 								/>
