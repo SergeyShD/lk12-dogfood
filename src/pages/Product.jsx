@@ -7,6 +7,7 @@ import RatingStatic from "../components/RatingStatic"
 
 import Ctx from "../ctx"
 import LikeButton from "../components/LikeButton"
+import QuantityCounter from "../components/QuantityCounter"
 
 const Product = () => {
 	const { id } = useParams()
@@ -19,8 +20,7 @@ const Product = () => {
 	const [showCntReviews, setshowCntReviews] = useState(isMobile ? 2 : 3)
 
 	const prodInBasket = basket.find(el => el.id === id)
-	// console.log(basket.find(el => el.id === id))
-	const [count, setCount] = useState(prodInBasket ? prodInBasket.cnt : 0)
+	const [cnt, setCount] = useState(0)
 	
 	// const navigate = useNavigate();
 
@@ -89,94 +89,26 @@ const Product = () => {
 		window.addEventListener('resize', handleResize)
 	}, []);
 
-	// const inBasket = basket.filter(el => el.id === id).length > 0
+	const inBasket = basket.filter(el => el.id === id).length > 0
 
+	const addToBasket = !inBasket
+        ? (event) => {
+            event.preventDefault()
+            event.stopPropagation()
+			cnt > 1 ? setCount(0) : setCount(1)
+            setBasket(prev => [...prev,{
+                id,
+                price: data.price,
+                discount: data.discount,
+                cnt: 1
+            }])
+        }
+        : (() => {})
 
-	const increment = (event) => {
-		event.preventDefault()
-		event.stopPropagation()
-		setCount(count + 1)
-		if(count)
-			setBasket(prev => prev.map((el) => {
-				if(el.id === id){
-					el.cnt++
-				}
-				return el
-			}))
-		else{
-			setBasket(prev => [...prev,{
-				id,
-				price: data.price,
-				discount: data.discount,
-				cnt: 1
-			}])
-		}
-	};
-
-	const decrement  = (event) => {
-		event.preventDefault()
-		event.stopPropagation()
-		if(count > 1){
-			setCount(count - 1)
-			console.log(data.price)
-			
-			setBasket(prev => prev.map((el) => {
-				if(el.id === id){
-					el.cnt--
-				}
-				return el
-			}))
-		}
-		else{
-			setCount(count - 1)
-			setBasket(prev => prev.filter(el => el.id !== id))
-		}
-	};
-	const сountChange = (event) => {
-		event.preventDefault()
-		event.stopPropagation()
-		const newCount = parseInt(event.target.value)
-		if(count)
-			setBasket(prev => prev.map((el) => {
-				if(el.id === id){
-					el.cnt = newCount
-				}
-				return el
-			}))
-		else{
-			setBasket(prev => [...prev,{
-				id,
-				price: data.price,
-				discount: data.discount,
-				cnt: newCount
-			}])
-		}
-		newCount ? setCount(newCount) : setCount(0)
-	};
-
-	const incrToCart = !prodInBasket ? increment : (() => {})
-
-	const decrementClass = count === 0 ? "disabled" : "clickable"
 	
 	const averageRating = data.name && (
 		Math.round(data.reviews.reduce((acc, el) => acc + el.rating, 0) / data.reviews.length * 10) / 10
 	)
-
-	// const includeArrRev = (data) => {
-	// 	return (data.reviews.some((el)=>el._id === userId))
-	// }
-
-	// const addToBasket = (event) => {
-    //     event.preventDefault()
-    //     event.stopPropagation()
-    //     setBasket(prev => [...prev,{
-    //         id: _id,
-    //         price,
-    //         discount,
-    //         cnt: 1
-    //     }])
-    // }
-
 
 	return  <Container style={{gridTemplateColumns: "1fr"}}>
 		<Row className="g-3">
@@ -241,29 +173,14 @@ const Product = () => {
 								</Col>
 							</>}
 						</Row>
-						<Row>
-							<Col xs={4} className="d-flex align-items-center">
-								<div className="d-flex
-												w-100
-												align-items-center
-												justify-content-evenly
-												border
-												rounded-pill"
-								>
-									<span className={`${decrementClass} fs-4`} onClick={decrement}>-</span>
-									<input 
-										value={count}
-										onChange={сountChange}
-										className="border-0 text-center fs-5"
-										style={{ width: '30px'}}
-									/>
-									<span className="clickable fs-4" onClick={increment}>+</span>
-								</div>
+						<Row className="justify-content-between">
+							<Col xs={4} sm={4} lg={3} className="d-flex align-items-center">
+								<QuantityCounter id={id} data={data}/>
 							</Col>
-							<Col xs={8}>
+							<Col xs={8} sm={8} lg={9}>
 								<Button 
 									className="w-100 h-100 rounded-pill position-relative"
-									onClick={incrToCart}
+									onClick={addToBasket}
 								>
 									{!prodInBasket
 										? "Добавить в корзину"
