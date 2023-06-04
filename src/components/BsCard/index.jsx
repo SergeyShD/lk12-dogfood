@@ -47,7 +47,10 @@ const BsCard = ({
                 <h4 className="price">{price} ₽</h4>
                 <p className="name">{name}</p>
                 <button
-                    className={`${!inBasket ? "button-buy" : "button-toCard"} position-relative`}
+                    className={`${!inBasket 
+                        ? "button-buy"
+                        : "button-toCard"} position-relative`
+                    }
                     onClick={addToBasket}
                 >
                     {!inBasket
@@ -64,24 +67,3 @@ const BsCard = ({
 }
 
 export default BsCard;
-
-{/* <Card id={"pro_" + _id}>
-            {userId && (
-                <div className="like-button">
-                    <LikeButton likes={likes} _id={_id} />
-                </div>
-            )}
-            <Card.Body>
-                <Card.Img src={pictures} alt={name}/>
-            </Card.Body>
-            <Card.Body>
-                <Card.Title as="h4">{price} ₽</Card.Title>
-                <Card.Text>{name}</Card.Text>
-                <Link to={`/product/${_id}`} className="card-link"></Link>
-            </Card.Body>
-            <Card.Body>
-                <Button disabled={inBasket} onClick={addToBasket}>
-                        Купить
-                </Button>
-            </Card.Body>
-        </Card> */}
