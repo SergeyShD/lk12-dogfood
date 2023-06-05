@@ -82,6 +82,7 @@ const QuantityCounter = ({ data, id, noDelete = false }) => {
     return (
         <div
             className="d-flex h-100 w-100 align-items-center justify-content-evenly border rounded-pill"
+            style={{maxHeight: "40px", maxWidth: "100px"}}
         >
             <Dash
                 className={`${decrementClass} fs-4`}

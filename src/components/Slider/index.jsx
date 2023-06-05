@@ -1,15 +1,13 @@
-import {useState, useContext, useEffect} from "react";
-import {Row, Col, Carousel, Container} from "react-bootstrap";
-import BsCard from "../BsCard";
-import Ctx from "../../ctx";
-
-import "./style.css";
+import {useState, useContext, useEffect} from "react"
+import {Row, Col, Carousel, Container} from "react-bootstrap"
+import BsCard from "../BsCard"
+import Ctx from "../../ctx"
 
 const Slider = ({desktop = 4, mobile = 1}) => {
 
-    const {baseData} = useContext(Ctx);
-    const [gds, setGds] = useState([[]]);
-    const [cnt, setCnt] = useState(desktop);
+    const {baseData} = useContext(Ctx)
+    const [gds, setGds] = useState([[]])
+    const [cnt, setCnt] = useState(desktop)
 
     useEffect(()=> {
         if (window.innerWidth <= 768) {
@@ -54,4 +52,4 @@ const Slider = ({desktop = 4, mobile = 1}) => {
     </Container>
 }
 
-export default Slider;
+export default Slider

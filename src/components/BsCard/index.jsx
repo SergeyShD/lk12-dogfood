@@ -1,8 +1,6 @@
-import {useState, useContext } from "react"
+import { useContext } from "react"
 import {Link} from "react-router-dom"
-import {Card, Button} from "react-bootstrap"
 import LikeButton from "../LikeButton"
-
 
 import Ctx from "../../ctx"
 import "./style.css"

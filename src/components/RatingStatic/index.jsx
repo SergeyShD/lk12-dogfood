@@ -1,4 +1,4 @@
-import { StarFill, StarHalf, Star } from "react-bootstrap-icons";
+import { StarFill, StarHalf, Star } from "react-bootstrap-icons"
 
 const RatingStatic = ({ rating = 0, isAnimationEnabled = false }) => {
     const stars = [];
@@ -31,7 +31,7 @@ const RatingStatic = ({ rating = 0, isAnimationEnabled = false }) => {
         }
     }
 
-    return stars;
+    return stars
 };
 
-export default RatingStatic;
+export default RatingStatic

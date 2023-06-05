@@ -137,6 +137,39 @@ h4{
   bottom:0;
   /* bottom:3.5em; */
 }
+
+.button-buy, .button-toCard{
+  width: 100%;
+  font-family: sans-serif;
+  border: none;
+  padding: 4px 4px;
+  border-radius: 16px;
+  position: relative;
+  z-index: 1;
+}
+.button-buy{
+  text-transform: uppercase;
+  word-spacing: 0.2em;
+  letter-spacing: 0.2em;
+  font-weight: bold;
+}
+.button-buy:hover, .button-toCard:hover{
+  background-color: #FFE44D;
+  color: rgb(92, 92, 116)
+}
+.button-toMain{
+  color:black;
+  border: none;
+  padding: 8px 16px 8px 16px;
+  border-radius: 32px;
+  font-weight: bold;
+  background: white;
+  box-shadow: 0px 0px 6px lightgrey;
+}
+.button-toMain:hover{
+  background-color: #FFE44D;
+}
+
 @keyframes bounce {
   0% {
       transform: translateY(0);

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { StarFill, Star } from "react-bootstrap-icons";
+import React, { useState } from 'react'
+import { StarFill, Star } from "react-bootstrap-icons"
 
 
 const Rating = ({ rating = 0, isAnimationEnabled = false, onChange }) => {
-    const [selectedRating, setSelectedRating] = useState(rating);
+    const [selectedRating, setSelectedRating] = useState(rating)
 
     const handleClick = (selected) => {
-        setSelectedRating(selected + 1);
+        setSelectedRating(selected + 1)
         onChange(selected + 1)
     };
 
@@ -32,7 +32,7 @@ const Rating = ({ rating = 0, isAnimationEnabled = false, onChange }) => {
         }
     }
 
-    return <div style={{cursor: "pointer"}}>{stars}</div>;
+    return <div style={{cursor: "pointer"}}>{stars}</div>
 };
 
 export default Rating;

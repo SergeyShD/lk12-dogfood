@@ -7,14 +7,12 @@ import UpdatedInput from "../components/UpdatedInput"
 
 const Profile = ({setUser}) => {
 	const navigate = useNavigate()
-	const { api, baseData } = useContext(Ctx)
+	const { api, userId, user, basket, userNameLS } = useContext(Ctx)
 	const [userData, setUserData] = useState({})
 	const [inpName, setInpName] = useState(false)
-	const [inpEmail, setInpEmail] = useState(false)
 	const [inpAbout, setInpAbout] = useState(false)
 	const [inpAvatar, setInpAvatar] = useState(false)
 	const [handleClick, setHandleClick] = useState(false)
-	// Ссылка на картинку: https://i.postimg.cc/DySB3tTR/Brann-Bronzebeard.png
 
 	const updUser = (name, val) => {
 		let body = {
@@ -26,7 +24,11 @@ const Profile = ({setUser}) => {
 			body = {avatar: userData.avatar}
 		}
 		body[name] = val
-		api.updAdmin(body, name === "avatar").then(data => setUserData(data))
+		api.updAdmin(body, name === "avatar").then(data => {
+			setUserData(data)
+			localStorage.setItem(userNameLS, data.name);
+		})
+		
 	}
 
 	const isButtonClick = () => {
@@ -35,7 +37,8 @@ const Profile = ({setUser}) => {
 
 	const logOut = () => {
 		setUser("")
-		localStorage.removeItem("user12")
+		localStorage.removeItem(user)
+		localStorage.removeItem(basket)
 		navigate("/")
 	}
 	useEffect(() => {
@@ -45,9 +48,10 @@ const Profile = ({setUser}) => {
 			})
 	}, [])
 
+	
 	return <>
 		<Container style={{gridTemplateColumns: "1fr"}}>
-			{userData?.name && <>
+			{userId && <>
 				<Row className="d-flex align-items-center">
 					<Col>
 						<h1>Личный кабинет</h1>

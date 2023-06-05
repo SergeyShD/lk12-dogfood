@@ -64,7 +64,7 @@ const AddProduct = () => {
         .then(data => {
             if (!data.err && !data.error){
                 clearForm()
-                // navigate(`/product/${data._id}`)
+                navigate(`/product/${data._id}`)
                 setBaseData(prev => [...prev, data])
             }
         })

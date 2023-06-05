@@ -8,7 +8,6 @@ import Modal from "./components/Modal"
 
 import Home from "./pages/Home"
 import Catalog from "./pages/Catalog"
-import OldPage from "./pages/Old"
 import Profile from "./pages/Profile"
 import Product from "./pages/Product"
 import AddProduct from "./pages/AddProduct"
@@ -19,6 +18,10 @@ import Basket from "./pages/Basket"
 import Ctx from "./ctx"
 import Api from "./Api"
 
+const userNameLS = "userName"
+const userIdLS = "userId"
+const userTokenLS = "userToken"
+
 const App = () => {
     let basketStore = localStorage.getItem("basket")
     if (basketStore && basketStore[0] === "["){
@@ -26,9 +29,9 @@ const App = () => {
     } else {
         basketStore = []
     }
-    const [user, setUser] = useState(localStorage.getItem("userSer"))
-    const [userId, setUserId] = useState(localStorage.getItem("userSer-id"))
-    const [token, setToken] = useState(localStorage.getItem("token"))
+    const [user, setUser] = useState(localStorage.getItem(userNameLS))
+    const [userId, setUserId] = useState(localStorage.getItem(userIdLS))
+    const [token, setToken] = useState(localStorage.getItem(userTokenLS))
     const [api, setApi] = useState(new Api(token))
     const [basket, setBasket] = useState(basketStore)
     
@@ -44,12 +47,12 @@ const App = () => {
 
     useEffect(() => {
         if(user){
-            setUserId(localStorage.getItem("userSer-id"))
-            setToken(localStorage.getItem("token"))
+            setUserId(localStorage.getItem(userIdLS))
+            setToken(localStorage.getItem(userTokenLS))
         }
         else{
-            localStorage.removeItem("userSer-id")
-            localStorage.removeItem("token")
+            localStorage.removeItem(userIdLS)
+            localStorage.removeItem(userTokenLS)
             setUserId(null)
             setToken(null)
         }
@@ -78,6 +81,7 @@ const App = () => {
 
     return (
         <Ctx.Provider value={{
+            user,
             searchResult,
             setSearchResult,
             setBaseData,
@@ -91,7 +95,10 @@ const App = () => {
             priceDeliveryToPoint,
             isMobile,
             basket,
-            setBasket
+            setBasket,
+            userNameLS,
+            userIdLS,
+            userTokenLS
         }}>
             <Header
                 user={user}
@@ -104,20 +111,17 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home user={user} setActive={setModalOpen}/>}/>
                     {user && <>
-                    <Route path="/catalog" element={
-                        <Catalog
-                            goods={goods}
-                            userId={userId}
-                        />}/>
-                    <Route path="/old" element={
-                        <OldPage
-                            goods={goods}
-                        />}/>
-                    <Route path="/profile" element={<Profile user={user} setUser={setUser}/>}/>
-                    <Route path="/product/:id" element={<Product/>}/>
-                    <Route path="/add/product" element={<AddProduct/>}/>
-                    <Route path="/favorites" element={<Favorites/>}/>
-                    <Route path="/basket" element={<Basket/>}/>
+                        <Route path="/catalog" element={
+                            <Catalog
+                                goods={goods}
+                                userId={userId}
+                            />}/>
+                        
+                        <Route path="/profile" element={<Profile user={user} setUser={setUser}/>}/>
+                        <Route path="/product/:id" element={<Product/>}/>
+                        <Route path="/add/product" element={<AddProduct/>}/>
+                        <Route path="/favorites" element={<Favorites/>}/>
+                        <Route path="/basket" element={<Basket/>}/>
                     </>}
                 </Routes>
                 

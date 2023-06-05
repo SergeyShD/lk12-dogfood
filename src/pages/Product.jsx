@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext } from "react"
-import {useParams, Link, useNavigate} from "react-router-dom"
-import {Trash, Truck, Award} from "react-bootstrap-icons"
+import {useParams, Link} from "react-router-dom"
+import {Trash, Award} from "react-bootstrap-icons"
 import {Container, Row, Col, Table, Card, Button, Form} from "react-bootstrap"
 import Rating from "../components/Rating"
 import RatingStatic from "../components/RatingStatic"
@@ -8,10 +8,11 @@ import RatingStatic from "../components/RatingStatic"
 import Ctx from "../ctx"
 import LikeButton from "../components/LikeButton"
 import QuantityCounter from "../components/QuantityCounter"
+import CardDelivery from "../components/CardDelivery"
 
 const Product = () => {
 	const { id } = useParams()
-	const { api, userId, priceCourierDelivery, priceDeliveryToPoint, isMobile, basket, setBasket} = useContext(Ctx)
+	const { api, userId, isMobile, basket, setBasket} = useContext(Ctx)
 	const [data, setData] = useState({})
 	const [revText, setRevText] = useState("")
 	const [revRating, setRevRating] = useState(0)
@@ -22,8 +23,6 @@ const Product = () => {
 	const prodInBasket = basket.find(el => el.id === id)
 	const [cnt, setCount] = useState(0)
 	
-	// const navigate = useNavigate();
-
 	const tableInfo = [
 		{
 			name:"wight",
@@ -81,9 +80,9 @@ const Product = () => {
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth <= 768) {
-			setshowCntReviews(2)
+				setshowCntReviews(2)
 			} else {
-			setshowCntReviews(3)
+				setshowCntReviews(3)
 			}
 		}
 		window.addEventListener('resize', handleResize)
@@ -201,23 +200,8 @@ const Product = () => {
 								/>
 							</Col>
 						</Row>
-						<Card className="mb-4 p-3 d-flex flex-row ">
-							<Card.Body>
-								<Truck className="d-flex justify-content-center align-items-center fs-2"/>
-							</Card.Body>
-							<Card.Body className="w-100">
-								<Card.Title className="mb-3 ">
-									Доставка по всему Миру!
-								</Card.Title>
-								<Card.Subtitle className="mb-3 text-muted">
-									Доставка курьером - от {priceCourierDelivery}
-								</Card.Subtitle>
-								<Card.Subtitle className="text-muted">
-									Доставка в пункт выдачи - от {priceDeliveryToPoint}
-								</Card.Subtitle>
-							</Card.Body>
-						</Card>
-						<Card className="mb-4 p-3 d-flex flex-row">
+						<CardDelivery/>
+						<Card className="mb-4 p-3 d-flex flex-row rounded-4">
 							<Card.Body>
 								<Award className="d-flex justify-content-center align-items-center fs-2"/>
 							</Card.Body>

@@ -8,7 +8,7 @@ const Modal = ({
     setIsActive,
     setUser
 }) => {
-    const {api} = useContext(Ctx)
+    const {api, userNameLS, userIdLS, userTokenLS} = useContext(Ctx)
     const [isReg, setIsReg] = useState(false);
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -45,12 +45,12 @@ const Modal = ({
             }
         }else{
             if(data && data.token){
-                localStorage.setItem("token", data.token)
+                localStorage.setItem(userTokenLS, data.token)
             }
             if (data && data.data){
-                localStorage.setItem("userSer", data.data.name)
+                localStorage.setItem(userNameLS, data.data.name)
                 setUser(data.data.name)
-                localStorage.setItem("userSer-id", data.data._id)
+                localStorage.setItem(userIdLS, data.data._id)
                 clearForm()
                 setIsActive(false)
             }

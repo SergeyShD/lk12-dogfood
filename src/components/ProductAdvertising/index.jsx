@@ -9,7 +9,7 @@ const ProductAdvertising = ({
         {proAdv && <>
             <Card
                 className="d-flex flex-column flex-md-row p-3 h-100"
-                id={"pro_" + proAdv.id}
+                // id={"pro_" + proAdv.id}
                 style={{
                     backgroundImage: `url(${proAdv.background})`,
                     backgroundSize: 'cover'

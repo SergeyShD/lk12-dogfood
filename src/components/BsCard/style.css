@@ -45,23 +45,5 @@ display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
     }
-.button-buy, .button-toCard{
-    width: 100%;
-    font-family: sans-serif;
-    border: none;
-    padding: 4px 4px;
-    border-radius: 16px;
-    position: relative;
-    z-index: 1;
-}
-.button-buy{
-    text-transform: uppercase;
-    word-spacing: 0.2em;
-    letter-spacing: 0.2em;
-    font-weight: bold;
-}
-.button-buy:hover, .button-toCard:hover{
-    background-color: #FFE44D;
-    color: rgb(92, 92, 116)
-}
+
 
