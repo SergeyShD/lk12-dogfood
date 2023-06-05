@@ -56,7 +56,7 @@ const Basket = () => {
                         <tbody>
                             {basket.map(el => filterData.filter(f => f._id === el.id).map(d => <Fragment key={d._id}>
                                     <tr key={el.id}>
-                                        <td class="text-center">
+                                        <td className="text-center">
                                             <img src={d.pictures} alt={d.name} height="70px"/>
                                         </td>
                                         <td className="align-middle">

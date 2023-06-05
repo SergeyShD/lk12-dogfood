@@ -45,6 +45,22 @@ const App = () => {
     const priceCourierDelivery = "399 ₽"
     const priceDeliveryToPoint = "199 ₽"
 
+    const getWordEnding = (count, word) => {
+        const lastDigit = count % 10
+        const lastTwoDigits = count % 100
+
+        switch (true) {
+            case (lastTwoDigits >= 11 && lastTwoDigits <= 19):
+                return `${word}ов`
+            case (lastDigit === 1):
+                return `${word}`
+            case (lastDigit >= 2 && lastDigit <= 4):
+                return `${word}а`
+            default:
+                return `${word}ов`
+        }
+    }
+
     useEffect(() => {
         if(user){
             setUserId(localStorage.getItem(userIdLS))
@@ -98,7 +114,8 @@ const App = () => {
             setBasket,
             userNameLS,
             userIdLS,
-            userTokenLS
+            userTokenLS,
+            getWordEnding
         }}>
             <Header
                 user={user}

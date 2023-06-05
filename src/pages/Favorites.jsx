@@ -19,7 +19,7 @@ const Favorites = () => {
 						</Col>
 					);
 				}
-				return <></>
+				return null
 			})}
 		</Row>
 	</Container>

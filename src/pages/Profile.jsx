@@ -87,24 +87,7 @@ const Profile = ({setUser}) => {
 									name="about"
 								/>
 							</Row>
-							<Row className="pt-4 pb-4">
-								<Col>
-									<Button
-										variant="warning" 
-										className="w-100 h-100 border rounded-pill"
-										as={Link} 
-										to="/add/product">
-											Добавить товар
-										</Button>
-								</Col>
-								<Col>
-									<Button
-										className="w-100 h-100 border rounded-pill"
-										onClick={isButtonClick}>
-											Мои товары
-										</Button>
-								</Col>
-							</Row>
+							
 					</Col>
 					<Col xs={12} sm={6}>
 						<UpdatedInput
@@ -123,6 +106,25 @@ const Profile = ({setUser}) => {
 								/>
 							</Figure>
 						</Row>
+					</Col>
+				</Row>
+				<Row className="g-3">
+					<Col xs={12} md={6}>
+						<Button
+							className="w-100 h-100 border rounded-pill"
+							as={Link} 
+							to="/add/product"
+						>
+							Добавить товар
+						</Button>
+					</Col>
+					<Col xs={12} md={6}>
+						<Button
+							className="w-100 h-100 border rounded-pill"
+							onClick={isButtonClick}
+						>
+							Мои товары
+						</Button>
 					</Col>
 				</Row>
 			</>}
