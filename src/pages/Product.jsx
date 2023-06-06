@@ -18,7 +18,8 @@ const Product = () => {
 	const [revRating, setRevRating] = useState(0)
 	const [hideForm, setHideForm] = useState(true)
 	const [showAllReviews, setShowAllReviews] = useState(false)
-	const [showCntReviews, setshowCntReviews] = useState(isMobile ? 2 : 3)
+	const [showCntReviews, setshowCntReviews] = useState((isMobile || window.innerWidth <= 768) ? 2 : 3)
+	const [showRatingError, setShowRatingError] = useState(false);
 
 	const prodInBasket = basket.find(el => el.id === id)
 	const [cnt, setCount] = useState(0)
@@ -53,6 +54,12 @@ const Product = () => {
 
 	const addReview = (e) => {
         e.preventDefault()
+		if (revRating === 0) {
+			setShowRatingError(true);
+			return;
+		}
+		
+		console.log(revRating)
 		api.setReview(data._id, {
 			text: revText,
 			rating: revRating
@@ -249,7 +256,12 @@ const Product = () => {
 						<h3>Новый отзыв</h3>
 						<Form onSubmit={addReview}>
 							<Form.Group className="mb-3">
-								<Rating isAnimationEnabled={true} onChange={handleRatingChange}/>
+								<Rating
+									isAnimationEnabled={true}
+									onChange={handleRatingChange}
+									onChangeError={setShowRatingError}
+								/>
+								{showRatingError && <span style={{ color: "red" }}>Пожалуйста, выберите рейтинг</span>}
 							</Form.Group>
 							<Form.Group  className="mb-3">
 								<Form.Label htmlFor="text">Комментарий:</Form.Label>

@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { StarFill, Star } from "react-bootstrap-icons"
 
 
-const Rating = ({ rating = 0, isAnimationEnabled = false, onChange }) => {
+const Rating = ({ rating = 0, isAnimationEnabled = false, onChange, onChangeError }) => {
     const [selectedRating, setSelectedRating] = useState(rating)
 
     const handleClick = (selected) => {
         setSelectedRating(selected + 1)
         onChange(selected + 1)
+        onChangeError(false)
     };
 
     const stars = [];
@@ -18,7 +19,7 @@ const Rating = ({ rating = 0, isAnimationEnabled = false, onChange }) => {
                 <StarFill
                     key={i}
                     onClick={() => handleClick(i)}
-                    className={`star ${isAnimationEnabled ? '' : 'no-animation'}`}
+                    className={`star ${isAnimationEnabled ? "" : "no-animation"}`}
                 />
         );
         } else {
@@ -26,7 +27,7 @@ const Rating = ({ rating = 0, isAnimationEnabled = false, onChange }) => {
                 <Star
                     key={i}
                     onClick={() => handleClick(i)}
-                    className={`star ${isAnimationEnabled ? '' : 'no-animation'}`}
+                    className={`star ${isAnimationEnabled ? "" : "no-animation"}`}
                 />
             );
         }

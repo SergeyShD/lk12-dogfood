@@ -1,53 +1,26 @@
-import {Card} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Container, Row, Col} from "react-bootstrap"
 
 const Advertising = ({ proGiftAdv }) => {
     return <>
-        {proGiftAdv && <Card
-            className="d-flex flex-column flex-lg-row p-3 align-items-center"
-            style={{
-                backgroundImage: `url(${proGiftAdv.background})`,
-                backgroundSize: 'cover',
-            }}>
-            <Card.Body className="d-flex flex-column p-5">
-                <Card.Text
-                    style={{
-                        color: "white",
-                        fontSize: "2rem",
-                        fontWeight: "bold",
-                        textShadow: "5px 0px 5px rgba(0, 0, 0, 0.2)", 
-                        textTransform: "uppercase",
-                    }}
-                >
-                    Подарок за первый заказ!
-                </Card.Text>
-                <Card.Text
-                    style={{
-                        color: "white",
-                        fontSize: "1.5rem",
-                        fontWeight: "bold",
-                        textShadow: "5px 0px 5px rgba(0, 0, 0, 0.2)", 
-                    }}
-                >
-                    {proGiftAdv.name}
-                </Card.Text>
-            </Card.Body>
-            <Card.Img
-                src={proGiftAdv.pictures}
-                alt={proGiftAdv.name}
-                style={{
-                    alignSelf: "center",
-                    height: "200px",
-                    maxWidth: "200px",
-                    padding: "10px",
-                    boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.2)",
-                    borderRadius: "10px",
-                    objectFit: "cover",
-                }}
-            />
-            <Link to={`/product/${proGiftAdv.id}`} className="card-link"></Link>
-        </Card>
-        }
+        <Container className="d-block position-relative border rounded-5 p-5">
+            <Row className="align-items-center">
+                <Col>
+                    <Row className="display-4 text-danger">
+                        Подарок за первый заказ!
+                    </Row>
+                    <Row className="fs-3 pt-3">
+                        {proGiftAdv.name}
+                    </Row>
+                </Col>
+                <Col xs={6} md={3} lg={3} className="text-center">
+                    <img
+                        src={proGiftAdv.pictures}
+                        alt={proGiftAdv.name}
+                        className="img-fluid d-block"
+                    />
+                </Col>
+            </Row>
+        </Container>
     </>
 }
 

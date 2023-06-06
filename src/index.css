@@ -145,6 +145,7 @@ h4{
   padding: 4px 4px;
   border-radius: 16px;
   position: relative;
+  background-color: #e5e5e5;
   z-index: 1;
 }
 .button-buy{
