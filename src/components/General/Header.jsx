@@ -17,8 +17,9 @@ const Header = ({
         searchArr,
         setGoods,
         setModalOpen
-    }) => {
-        const {basket} = useContext(Ctx)
+}) => {
+
+    const {basket} = useContext(Ctx)
 
     const login = () => {
         setModalOpen(true)

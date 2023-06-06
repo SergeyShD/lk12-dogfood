@@ -1,7 +1,5 @@
-import {useState, useEffect, createContext} from "react"
-import {Routes, Route, Link} from "react-router-dom"
-
-// import testData from "./assents/data.json";
+import {useState, useEffect} from "react"
+import {Routes, Route} from "react-router-dom"
 
 import { Header, Footer } from "./components/General"
 import Modal from "./components/Modal"
@@ -22,6 +20,17 @@ const userNameLS = "userName"
 const userIdLS = "userId"
 const userTokenLS = "userToken"
 
+const priceCourierDelivery = "399 ₽"
+const priceDeliveryToPoint = "199 ₽"
+
+const dataConvert = (data) => {
+    const date = new Date(data)
+    const options = { year: "numeric", month: "long", day: "numeric" }
+    const formattedDate = date.toLocaleDateString("ru-RU", options)
+    const time = date.toLocaleTimeString("ru-RU")
+    return `${formattedDate} в ${time}`
+}
+
 const App = () => {
     let basketStore = localStorage.getItem("basket")
     if (basketStore && basketStore[0] === "["){
@@ -41,9 +50,6 @@ const App = () => {
     const [modalOpen, setModalOpen] = useState(false)
 
     const isMobile = (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
-
-    const priceCourierDelivery = "399 ₽"
-    const priceDeliveryToPoint = "199 ₽"
 
     const getWordEnding = (count, word) => {
         const lastDigit = count % 10
@@ -118,7 +124,8 @@ const App = () => {
             userNameLS,
             userIdLS,
             userTokenLS,
-            getWordEnding
+            getWordEnding,
+            dataConvert
         }}>
             <Header
                 user={user}

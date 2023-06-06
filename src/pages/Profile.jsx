@@ -66,7 +66,9 @@ const Profile = ({setUser}) => {
 						<Button
 							variant="danger"
 							className="border rounded-pill"
-							onClick={logOut}>Выйти из аккаунта
+							onClick={logOut}
+						>
+							Выйти из аккаунта
 						</Button>
 					</Col>
 				</Row>
@@ -106,7 +108,6 @@ const Profile = ({setUser}) => {
 						<Row className="mt-3">
 							<Figure className="d-flex align-items-center justify-content-center">
 								<Figure.Image
-									
 									src={userData.avatar}
 									alt={userData.email}
 								/>
@@ -138,4 +139,4 @@ const Profile = ({setUser}) => {
 		{handleClick && <ModalMyProduct setHandleClick={setHandleClick}/>}
 	</>
 }
-export default Profile;
+export default Profile

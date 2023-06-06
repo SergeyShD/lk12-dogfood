@@ -11,7 +11,6 @@ const BsCard = ({
     name,
     pictures,
     price,
-    tags,
     _id
 }) => {
     const {userId, basket, setBasket} = useContext(Ctx)
