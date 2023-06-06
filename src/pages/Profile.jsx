@@ -28,6 +28,9 @@ const Profile = ({setUser}) => {
 			setUserData(data)
 			localStorage.setItem(userNameLS, data.name);
 		})
+		.catch(
+			setUserData({})
+		)
 		
 	}
 
@@ -46,6 +49,9 @@ const Profile = ({setUser}) => {
 			.then(data => {
 				setUserData(data)
 			})
+			.catch(
+				setUserData({})
+			)
 	}, [])
 
 	

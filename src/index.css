@@ -171,6 +171,17 @@ h4{
   background-color: #FFE44D;
 }
 
+.modal-warning{
+  position: absolute;
+  bottom: 120%;
+  left: 90%;
+  z-index: 1;
+  width: 140px;
+  max-width: none;
+  border: none;
+  user-select: none;
+}
+
 @keyframes bounce {
   0% {
       transform: translateY(0);

@@ -135,15 +135,7 @@ const QuantityCounter = ({ data, id, noDelete = false }) => {
                 onClose={handleNotificationClose}
                 delay={1800}
                 autohide
-                style={{
-                    position: "absolute",
-                    bottom: "120%",
-                    left: "90%",
-                    zIndex: 1,
-                    width: "140px",
-                    maxWidth: "none",
-                    border: "none"
-                }}
+                className="modal-warning"
             >
                 <Toast.Body className="text-center fw-bold text-danger">
                     В наличии всего {cntInWarehouse} {getWordEnding(cntInWarehouse, "товар")} !

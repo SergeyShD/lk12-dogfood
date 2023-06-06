@@ -83,6 +83,9 @@ const App = () => {
                 .then(data => {
                     setBaseData(data.products)
                 })
+                .catch(
+                    setBaseData([])
+                )
         } else {
             setBaseData([])
         }

@@ -33,6 +33,9 @@ const LikeButton = ({ likes, _id, textRight=false }) => {
             setBaseData(newData.products)
             })
         })
+        .catch(
+            setBaseData([])
+        )
         }
     }, [isLike])
 

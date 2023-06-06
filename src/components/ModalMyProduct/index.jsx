@@ -44,6 +44,9 @@ const ModalMyProduct = ({setHandleClick}) => {
 			.then(data => {
 				setBaseData(prev => prev.filter(el => el._id !== id))
 			})
+            .catch(
+                setBaseData([])
+            )
 	}
     const clickSetInEdit = (event, idClick="", check=false) => {
         event.stopPropagation()
@@ -103,6 +106,9 @@ const ModalMyProduct = ({setHandleClick}) => {
                 setInEdit(false)
             }
         })
+        .catch(
+            setBaseData([])
+        )
     }
 
     return (

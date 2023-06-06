@@ -69,12 +69,18 @@ const Product = () => {
 			setRevRating(0)
 			setHideForm(true)
 		})
+		.catch(
+            setRevText("")
+        )
 	}
 
 	const delReview = (id) => {
 		api.delReview(data._id, id).then(d => {
 			setData(d)
 		})
+		.catch(
+			setData({})
+		)
 	}
 
 	useEffect(() => {
@@ -82,6 +88,9 @@ const Product = () => {
 			.then(serverData => {
 				setData(serverData)
 			})
+			.catch(
+				setData({})
+			)
 	}, [])
 
 	useEffect(() => {
@@ -137,7 +146,11 @@ const Product = () => {
 							<RatingStatic rating={averageRating}/>
 						</Col>
 						<Col xs={7} sm={6} md={5}>
-							<a href="#reviews"><u>Всего отзывов: {data.reviews.length}</u></a>
+							<a href="#reviews">
+								<u>
+									Всего отзывов: {data.reviews.length}
+								</u>
+							</a>
 						</Col>
 					</Row>
 					<Col xs={12} md={6} className="d-relative p-4">
