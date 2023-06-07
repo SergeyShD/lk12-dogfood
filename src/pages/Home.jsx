@@ -6,28 +6,30 @@ import Banner from "../components/Banner"
 import Advertising from "../components/Advertising"
 import ProductAdvertising from "../components/ProductAdvertising"
 
+const giftAdvertising = {
+    name:"Корм для собак мелких пород курица с овощами",
+    pictures: "https://4lapy.ru/resize/480x480/upload/iblock/96a/96aed6f32b8fad486ce940106239f08f.jpg",
+    caption: "Подарок за первый заказ!",
+    background: "https://i.postimg.cc/y8w2vkSj/2.jpg",
+    id: 12345
+}
+const advertising1 = {
+    name:"Premium Fresh Meat Adult сухой корм для собак всех пород",
+    pictures: "https://4lapy.ru/resize/480x480/upload/iblock/e4f/e4ff56cfd7bb7d14f354d8ee16552c5d.jpg",
+    caption: "-30% на сухой корм для собак",
+    background: "https://i.postimg.cc/bwX9Dpj4/8.jpg",
+    id: 123456
+}
+const advertising2 = {
+    name:"Для собак миниатюрных пород косточки из индейки",
+    pictures: "https://4lapy.ru/resize/480x480/upload/iblock/224/224d501e057071bd458fce40d58b45d5.jpg",
+    caption: "100% натуральные",
+    background: "https://i.postimg.cc/HsnQPjTq/5.jpg",
+    id: 1234567
+}
+
 const Home = ({user, setActive}) => {
-    const giftAdvertising = {
-        name:"Корм для собак мелких пород курица с овощами",
-        pictures: "https://4lapy.ru/resize/480x480/upload/iblock/96a/96aed6f32b8fad486ce940106239f08f.jpg",
-        caption: "Подарок за первый заказ!",
-        background: "https://i.postimg.cc/y8w2vkSj/2.jpg",
-        id: 12345
-    }
-    const advertising1 = {
-        name:"Premium Fresh Meat Adult сухой корм для собак всех пород",
-        pictures: "https://4lapy.ru/resize/480x480/upload/iblock/e4f/e4ff56cfd7bb7d14f354d8ee16552c5d.jpg",
-        caption: "-30% на сухой корм для собак",
-        background: "https://i.postimg.cc/bwX9Dpj4/8.jpg",
-        id: 123456
-    }
-    const advertising2 = {
-        name:"Для собак миниатюрных пород косточки из индейки",
-        pictures: "https://4lapy.ru/resize/480x480/upload/iblock/224/224d501e057071bd458fce40d58b45d5.jpg",
-        caption: "100% натуральные",
-        background: "https://i.postimg.cc/HsnQPjTq/5.jpg",
-        id: 1234567
-    }
+    
 
     return <>
         <Container fluid style={{backgroundColor: "#FFE44D"}}>

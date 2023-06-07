@@ -6,7 +6,7 @@ import Ctx from "../../ctx"
 import {Link} from "react-router-dom"
 
 const ModalMyProduct = ({setHandleClick}) => {
-    const { goods, userId, api, setBaseData } = useContext(Ctx)
+    const { goods, userId, api, setBaseData, dataConvert } = useContext(Ctx)
     const [inputValue, setInputValue] = useState("")
     const [hoveredElement, setHoveredElement] = useState([false,null])
     const [inEdit, setInEdit] = useState(false)
@@ -31,19 +31,14 @@ const ModalMyProduct = ({setHandleClick}) => {
         ? goods.filter((el) => el.name.toLowerCase().includes(inputValue) && el.author._id === userId)
         : goods.filter((el) => el.author._id === userId)
     
-    const dataConvert = (data) => {
-        const date = new Date(data)
-        const options = { year: "numeric", month: "long", day: "numeric" }
-        const formattedDate = date.toLocaleDateString("ru-RU", options)
-        const time = date.toLocaleTimeString("ru-RU")
-        return `${formattedDate} в ${time}`
-    }
-    
     const delHandler = (id) => {
 		api.delSingleProduct(id)
 			.then(data => {
 				setBaseData(prev => prev.filter(el => el._id !== id))
 			})
+            .catch(
+                setBaseData([])
+            )
 	}
     const clickSetInEdit = (event, idClick="", check=false) => {
         event.stopPropagation()
@@ -103,6 +98,9 @@ const ModalMyProduct = ({setHandleClick}) => {
                 setInEdit(false)
             }
         })
+        .catch(
+            setBaseData([])
+        )
     }
 
     return (

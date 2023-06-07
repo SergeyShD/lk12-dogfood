@@ -68,6 +68,9 @@ const AddProduct = () => {
                 setBaseData(prev => [...prev, data])
             }
         })
+        .catch(
+            setBaseData([])
+        )
     }
 
     return <Container style={{gridTemplateColumns: "auto"}}>

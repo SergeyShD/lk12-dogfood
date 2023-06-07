@@ -32,21 +32,8 @@ const LikeButton = ({ likes, _id, textRight=false }) => {
                 setBaseData(newData.products)
             })
         })
-        .catch(
-            setBaseData([])
-        )
-    }
-
-    // useEffect(() => {
-    //     if (likeFlag) {
-    //     api.setLike(_id, isLike).then((data) => {
-    //         setLikeFlag(false);
-    //         api.getProducts().then((newData) => {
-    //         setBaseData(newData.products)
-    //         })
-    //     })
-    //     }
-    // }, [isLike])
+        }
+    }, [isLike])
 
     const handleMouseEnter = () => {
         setIsHovered(true)

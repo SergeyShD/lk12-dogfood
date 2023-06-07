@@ -12,7 +12,7 @@ import CardDelivery from "../components/CardDelivery"
 
 const Product = () => {
 	const { id } = useParams()
-	const { api, userId, isMobile, basket, setBasket} = useContext(Ctx)
+	const { api, userId, isMobile, basket, setBasket, dataConvert} = useContext(Ctx)
 	const [data, setData] = useState({})
 	const [revText, setRevText] = useState("")
 	const [revRating, setRevRating] = useState(0)
@@ -20,6 +20,7 @@ const Product = () => {
 	const [showAllReviews, setShowAllReviews] = useState(false)
 	const [showCntReviews, setshowCntReviews] = useState((isMobile || window.innerWidth <= 768) ? 2 : 3)
 	const [showRatingError, setShowRatingError] = useState(false);
+	const [reviews, setReviews] = useState([])
 
 	const prodInBasket = basket.find(el => el.id === id)
 	const [cnt, setCount] = useState(0)
@@ -43,15 +44,6 @@ const Product = () => {
 		setRevRating(newRating);
 	};
 
-	const dataConvert = (data) => {
-		const date = new Date(data)
-		const options = { year: "numeric", month: "long", day: "numeric" }
-		const formattedDate = date.toLocaleDateString("ru-RU", options)
-		const time = date.toLocaleTimeString("ru-RU")
-
-		return [formattedDate, time]
-	}
-
 	const addReview = (e) => {
         e.preventDefault()
 		if (revRating === 0) {
@@ -68,20 +60,31 @@ const Product = () => {
 			setRevText("")
 			setRevRating(0)
 			setHideForm(true)
+			setReviews(d.reviews)
 		})
+		.catch(
+            setRevText("")
+        )
 	}
 
 	const delReview = (id) => {
 		api.delReview(data._id, id).then(d => {
 			setData(d)
 		})
+		.catch(
+			setData({})
+		)
 	}
 
 	useEffect(() => {
 		api.getSingleProduct(id)
 			.then(serverData => {
 				setData(serverData)
+				setReviews(serverData.reviews)
 			})
+			.catch(
+				setData({})
+			)
 	}, [])
 
 	useEffect(() => {
@@ -113,7 +116,7 @@ const Product = () => {
 
 	
 	const averageRating = data.name && (
-		Math.round(data.reviews.reduce((acc, el) => acc + el.rating, 0) / data.reviews.length * 10) / 10
+		Math.round(reviews.reduce((acc, el) => acc + el.rating, 0) / reviews.length * 10) / 10
 	)
 
 	return  <Container style={{gridTemplateColumns: "1fr"}}>
@@ -137,7 +140,11 @@ const Product = () => {
 							<RatingStatic rating={averageRating}/>
 						</Col>
 						<Col xs={7} sm={6} md={5}>
-							<a href="#reviews"><u>Всего отзывов: {data.reviews.length}</u></a>
+							<a href="#reviews">
+								<u>
+									Всего отзывов: {reviews.length}
+								</u>
+							</a>
 						</Col>
 					</Row>
 					<Col xs={12} md={6} className="d-relative p-4">
@@ -242,7 +249,7 @@ const Product = () => {
 										: (el.name === "created_at"
 											? <>
 												<span className="me-3">
-													{dataConvert(data.created_at)[0]} в {dataConvert(data.created_at)[1]}
+													{dataConvert(data.created_at)}
 												</span>
 											</>
 											: data[el.name])
@@ -287,7 +294,7 @@ const Product = () => {
 							<Button type="submit">Добавить</Button>
 						</Form>
 					</Col>}
-					{data.reviews.length > 0 
+					{reviews.length > 0 
 					? <Col xs={12}>
 						<Row className="xs-12 d-flex align-items-stretch pb-4">
 							{hideForm && (
@@ -302,25 +309,31 @@ const Product = () => {
 								</Col>
 							)}
 							<Col className="d-flex justify-content-end">
-								{showAllReviews ? (
-								<>
-									<Button 
-										className="fs-7 border rounded-pill"
-										onClick={() => setShowAllReviews(false)}>Скрыть все отзывы</Button>
-								</>
-								) : (
-								<>
-									{data.reviews.length > 3 && <Button 
-										className="fs-7 border rounded-pill"
-										onClick={() => setShowAllReviews(true)}>Показать все отзывы
-									</Button>}
-								</>
-								)}
+								{showAllReviews
+									? <>
+										<Button 
+											className="fs-7 border rounded-pill"
+											onClick={() => setShowAllReviews(false)}
+										>
+											Скрыть все отзывы
+										</Button>
+									</>
+									: <>
+										{reviews.length > 3 && <>
+											<Button 
+												className="fs-7 border rounded-pill"
+												onClick={() => setShowAllReviews(true)}
+											>
+												Показать все отзывы
+											</Button>
+										</>}
+									</>
+								}
 							</Col>
 						</Row>
 						<Row className="g-3">
-							{data.reviews.slice(0, showAllReviews
-								? data.reviews.length
+							{reviews.slice(0, showAllReviews
+								? reviews.length
 								: showCntReviews).map(el => <Col xs={6} sm={6} md={4} key={el._id}>
 									<Card className="h-100">
 										<Card.Body className="position-relative">
@@ -333,7 +346,8 @@ const Product = () => {
 															width: "40px",
 															height: "40px",
 															borderRadius: "50%"
-														}}/>
+														}}
+													/>
 												</Col>
 												<Col xs={12} sm={8} lg={10}>
 													<Card.Text>
@@ -343,7 +357,7 @@ const Product = () => {
 											</Row>
 											<Row>
 												<Card.Text className="small text-muted">
-													{dataConvert(el.updated_at)[0]} в {dataConvert(el.updated_at)[1]}
+													{dataConvert(el.updated_at)}
 												</Card.Text>
 											</Row>
 											<Card.Title>
@@ -359,7 +373,7 @@ const Product = () => {
 																pe-3 pb-2"
 												>
 													<Trash
-														onClick={()=>delReview(el._id)}
+														onClick={() => delReview(el._id)}
 														className="h-50 w-50 trash cursor-pointer"
 													/>
 												</span>
@@ -372,7 +386,10 @@ const Product = () => {
 						
 					</Col>
 					: hideForm && <Col>
-						<Button variant="outline-info" onClick={() => setHideForm(false)}>
+						<Button
+							variant="outline-info"
+							onClick={() => setHideForm(false)}
+						>
 							Написать отзыв
 						</Button>
 					</Col>
@@ -388,4 +405,4 @@ const Product = () => {
 	</Container>
 }
 
-export default Product;
+export default Product

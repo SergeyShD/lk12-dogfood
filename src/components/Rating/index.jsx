@@ -9,9 +9,9 @@ const Rating = ({ rating = 0, isAnimationEnabled = false, onChange, onChangeErro
         setSelectedRating(selected + 1)
         onChange(selected + 1)
         onChangeError(false)
-    };
+    }
 
-    const stars = [];
+    const stars = []
 
     for (let i = 0; i < 5; i++) {
         if (i < selectedRating) {
@@ -21,7 +21,7 @@ const Rating = ({ rating = 0, isAnimationEnabled = false, onChange, onChangeErro
                     onClick={() => handleClick(i)}
                     className={`star ${isAnimationEnabled ? "" : "no-animation"}`}
                 />
-        );
+        )
         } else {
             stars.push(
                 <Star
@@ -29,11 +29,11 @@ const Rating = ({ rating = 0, isAnimationEnabled = false, onChange, onChangeErro
                     onClick={() => handleClick(i)}
                     className={`star ${isAnimationEnabled ? "" : "no-animation"}`}
                 />
-            );
+            )
         }
     }
 
     return <div style={{cursor: "pointer"}}>{stars}</div>
-};
+}
 
-export default Rating;
+export default Rating
