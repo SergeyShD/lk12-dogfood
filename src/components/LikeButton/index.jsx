@@ -4,37 +4,31 @@ import "./style.css"
 
 import Ctx from "../../ctx"
 
-const LikeButton = ({ likes, _id, textRight=false }) => {
-    const { setBaseData, api, userId } = useContext(Ctx)
+const LikeButton = ({ likes, _id, textRight = false }) => {
+    const { setBaseData, api, userId, baseData} = useContext(Ctx)
     const [isLike, setIsLike] = useState(likes.includes(userId))
-    // const [likeFlag, setLikeFlag] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
 
-    // const likeHandler = () => {
-    //     setIsLike(!isLike)
-    //     setLikeFlag(true)
-    //     setBaseData((old) =>
-    //     old.map((el) => {
-    //         if (el._id === _id) {
-    //         isLike
-    //             ? (el.likes = el.likes.filter((lk) => lk !== userId))
-    //             : el.likes.push(userId)
-    //         }
-    //         return el
-    //     })
-    //     )
-    // }
-    const likeHandler = (newState) => {
-        setIsLike(newState)
-        api.setLike(_id, newState).then((data) => {
-            // setLikeFlag(false);
-            api.getProducts().then((newData) => {
-                setBaseData(newData.products)
+    const likeHandler = (newState, event) => {
+        event.preventDefault();
+        setIsLike(newState);
+        api.setLike(_id, newState)
+            .then((data) => {
+                const updatedBaseData = baseData.map((product) => {
+                    if (product._id === _id) {
+                        return {
+                            ...product,
+                            likes: newState ? [...product.likes, userId] : product.likes.filter((id) => id !== userId)
+                        }
+                    }
+                    return product
+                })
+                setBaseData(updatedBaseData)
             })
-        })
-        .catch(
-            setBaseData([])
-        )
+            .catch((error) => {
+                console.error(error);
+                setBaseData([]);
+            })
     }
 
     const handleMouseEnter = () => {
@@ -46,7 +40,7 @@ const LikeButton = ({ likes, _id, textRight=false }) => {
 
     return (
         <span
-            onClick={() => {likeHandler(!isLike)}}
+            onClick={(event) => {likeHandler(!isLike, event)}}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{zIndex: "1", cursor: "pointer", position: "relative"}}

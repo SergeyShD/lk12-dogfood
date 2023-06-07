@@ -36,8 +36,8 @@ const Slider = ({desktop = 4, mobile = 1}) => {
         }
     }, [baseData, cnt])
 
-    useEffect(() => {
-    }, [gds])
+    // useEffect(() => {
+    // }, [gds])
 
     return <Container style={{gridTemplateColumns: "1fr", padding: 0}}>
         <Carousel controls={false} interval={5000} indicators={false}>
