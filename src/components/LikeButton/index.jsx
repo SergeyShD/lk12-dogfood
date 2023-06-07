@@ -32,8 +32,10 @@ const LikeButton = ({ likes, _id, textRight=false }) => {
                 setBaseData(newData.products)
             })
         })
-        }
-    }, [isLike])
+        .catch(
+            setBaseData([])
+        )
+    }
 
     const handleMouseEnter = () => {
         setIsHovered(true)
