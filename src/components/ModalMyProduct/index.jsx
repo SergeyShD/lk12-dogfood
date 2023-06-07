@@ -106,8 +106,8 @@ const ModalMyProduct = ({setHandleClick}) => {
     }
 
     return (
-        <div className="modal-wrapper-myProduct">
-            <Container className="d-block modal-myProduct__custom h-50">
+        <div className="window-box-products"> 
+            {/* <Container className="d-block my-product-card h-50">
                 <X 
                     className="position-absolute top-0 end-0 m-3 fs-3 close"
                     onClick={() => {
@@ -137,11 +137,13 @@ const ModalMyProduct = ({setHandleClick}) => {
                     }
                 </Row>
                 {<>
-                    <Row style={{overflowY: "scroll", height: "79%"}}>
+                <Row >
+                    <div className="" style={{overflow: "hidden", height:"80%"}}>
+                    <Container className="scrollable-container d-block border p-3" >
                         {!inEdit && filteredGoods.map((el) => (
                             <Row
                                 key={el._id}
-                                className="pt-2 pb-2"
+                                className="pt-2 pb-2 pe-0 pl-0 m-0"
                                 onMouseOver={(event) => handleMouseOver(event, el._id)}
                                 onMouseOut={(event) => handleMouseOut(event, el._id)}
                             >
@@ -152,23 +154,28 @@ const ModalMyProduct = ({setHandleClick}) => {
                                             className="h-100 w-100"
                                         />
                                     </Col>
-                                    <Col
-                                        className="d-flex align-items-center fs-4"
+                                    <Col xs={6} sm={7} md={8}
+                                        className="d-flex align-items-center fs-3"
                                         as={Link} to={`/product/${el._id}`}
                                     >
                                         {el.name}
                                     </Col>
-                                    <Col xs={1} className="d-flex align-items-center">
-                                        <PencilFill
-                                            className="h-50 w-50 trash"
-                                            onClick={(event) => clickSetInEdit(event, el._id, true)}
+                                    <Col xs={12} md={2} className="d-flex align-items-center ">
+                                        <Col xs={1} md={6}>
+                                            <PencilFill
+                                                className="button-item"
+                                                onClick={(event) => clickSetInEdit(event, el._id, true)}
                                             />
+                                        </Col>
+                                        <Col xs={1} md={6}>
+                                            <Trash
+                                                className="button-item"
+                                                onClick={() => delHandler(el._id)}
+                                            />
+                                        </Col>
                                     </Col>
                                     <Col xs={1} className="d-flex align-items-center">
-                                        <Trash
-                                            className="h-50 w-50 trash"
-                                            onClick={() => delHandler(el._id)}
-                                        />
+                                        
                                     </Col>
                                 </>}
                                 {!inEdit && (hoveredElement[1] && (el._id === hoveredElement[0])) && <>
@@ -224,7 +231,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                             </Row>
                         ))}
                         {inEdit && <>
-                            <Form onSubmit={editHandler}>{console.log("форма")}
+                            <Form onSubmit={editHandler}>
                                 <Row>
                                     <Col xs={12} md={6}>
                                         <Form.Group className="mb-3">
@@ -359,9 +366,12 @@ const ModalMyProduct = ({setHandleClick}) => {
                                 </Row>
                             </Form>
                         </>}
-                    </Row>
+                    </Container>
+                    </div>
+                </Row>
                 </>}
-        </Container>
+        </Container> */}
+        
     </div>)
 }
 

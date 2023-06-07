@@ -158,7 +158,7 @@ h4{
   background-color: #FFE44D;
   color: rgb(92, 92, 116)
 }
-.button-toMain{
+.button-toMain, .button-delete{
   color:black;
   border: none;
   padding: 8px 16px 8px 16px;
@@ -167,9 +167,27 @@ h4{
   background: white;
   box-shadow: 0px 0px 6px lightgrey;
 }
+.button-delete{
+  color:white;
+  background: rgb(253, 78, 78);
+}
 .button-toMain:hover{
   background-color: #FFE44D;
 }
+.button-delete:hover{
+  background: rgb(247, 37, 37);
+}
+
+.child-div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: red; /* Цвет фона для наглядности */
+}
+
+
 
 @keyframes bounce {
   0% {

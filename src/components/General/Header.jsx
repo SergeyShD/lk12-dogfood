@@ -39,10 +39,14 @@ const Header = ({
                     <BalloonHeart title="Избранное"/>
                 </Link>
                 <Link to="/basket" className="header__link">
+                    <div className="position-relative">
                     <Cart4 title="Корзина"/>
-                    {basket.length > 0 && <span className="header__badge">
-                        {basket.reduce((acc, el) => acc + el.cnt, 0) }
-                    </span>}
+                        {basket.length > 0 && <>
+                            <span className="header__badge">
+                                {basket.reduce((acc, el) => acc + el.cnt, 0) }
+                            </span>
+                        </>}
+                    </div>
                 </Link>
                 <Link to="/profile">
                     <PersonCircle title="Личный кабинет"/>

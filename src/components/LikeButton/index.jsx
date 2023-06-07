@@ -7,34 +7,46 @@ import Ctx from "../../ctx"
 const LikeButton = ({ likes, _id, textRight=false }) => {
     const { setBaseData, api, userId } = useContext(Ctx)
     const [isLike, setIsLike] = useState(likes.includes(userId))
-    const [likeFlag, setLikeFlag] = useState(false)
+    // const [likeFlag, setLikeFlag] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
 
-    const likeHandler = () => {
-        setIsLike(!isLike)
-        setLikeFlag(true)
-        setBaseData((old) =>
-        old.map((el) => {
-            if (el._id === _id) {
-            isLike
-                ? (el.likes = el.likes.filter((lk) => lk !== userId))
-                : el.likes.push(userId)
-            }
-            return el
+    // const likeHandler = () => {
+    //     setIsLike(!isLike)
+    //     setLikeFlag(true)
+    //     setBaseData((old) =>
+    //     old.map((el) => {
+    //         if (el._id === _id) {
+    //         isLike
+    //             ? (el.likes = el.likes.filter((lk) => lk !== userId))
+    //             : el.likes.push(userId)
+    //         }
+    //         return el
+    //     })
+    //     )
+    // }
+    const likeHandler = (newState) => {
+        setIsLike(newState)
+        api.setLike(_id, newState).then((data) => {
+            // setLikeFlag(false);
+            api.getProducts().then((newData) => {
+                setBaseData(newData.products)
+            })
         })
+        .catch(
+            setBaseData([])
         )
     }
 
-    useEffect(() => {
-        if (likeFlag) {
-        api.setLike(_id, isLike).then((data) => {
-            setLikeFlag(false);
-            api.getProducts().then((newData) => {
-            setBaseData(newData.products)
-            })
-        })
-        }
-    }, [isLike])
+    // useEffect(() => {
+    //     if (likeFlag) {
+    //     api.setLike(_id, isLike).then((data) => {
+    //         setLikeFlag(false);
+    //         api.getProducts().then((newData) => {
+    //         setBaseData(newData.products)
+    //         })
+    //     })
+    //     }
+    // }, [isLike])
 
     const handleMouseEnter = () => {
         setIsHovered(true)
@@ -45,7 +57,7 @@ const LikeButton = ({ likes, _id, textRight=false }) => {
 
     return (
         <span
-            onClick={likeHandler}
+            onClick={() => {likeHandler(!isLike)}}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{zIndex: "1", cursor: "pointer", position: "relative"}}

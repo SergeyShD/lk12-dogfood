@@ -38,7 +38,7 @@ const Catalog = ({ goods, userId }) => {
 					</Col>
 				)}
 				{paginate.pageData().map((pro, i) => (
-					<Col key={i} xs={12} sm={6} md={4} lg={3}>
+					<Col key={pro._id} xs={12} sm={6} md={4} lg={3}>
 						<BsCard img={pro.pictures} {...pro} user={userId} />
 					</Col>
 				))}

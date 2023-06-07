@@ -19,6 +19,9 @@ const Basket = () => {
     const del = (id) => {
         setBasket(prev => prev.filter(el => el.id !== id))
     }
+    const delAll = () => {
+        setBasket([])
+    }
 
     const getWordEnding = (count, word) => {
         const lastDigit = count % 10
@@ -37,18 +40,28 @@ const Basket = () => {
     }
 
     return <>
-        <Container className="d-block " >
+        <Container className="d-block" >
             <Row>
                 <h1>Корзина</h1>
             </Row>
             {basket.length > 0
             ? <>
-            <Row>
-                <h3>
-                    <strong>
-                        {basket.length} {getWordEnding(basket.length, "товар")}
-                    </strong>&nbsp;в корзине
-                </h3>
+            <Row className="mb-4">
+                <Col xs={12} md={8}>
+                    <h3>
+                        <strong>
+                            {basket.length} {getWordEnding(basket.length, "товар")}
+                        </strong>&nbsp;в корзине
+                    </h3>
+                </Col>
+                <Col xs={12} md={4} className="d-flex justify-content-end">
+                    <Button
+                        className="button-delete"
+                        onClick={() => setBasket([])}
+                    >
+                        Очистить корзину
+                    </Button>
+                </Col>
             </Row>
             <Row className="justify-content-center g-3">
                 <Col xs={12} lg={8} style={{ height: "400px", overflow: "auto" }}>
