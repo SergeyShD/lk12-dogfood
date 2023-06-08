@@ -140,7 +140,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                     {!inEdit
                         ? <Col xs={12} md={6} className="ps-3 pe-3">
                             <input
-                                className="w-100 border rounded"
+                                className="w-100 border rounded rounded-pill p-3"
                                 value={inputValue}
                                 onChange={handleInputChange}
                             />
@@ -288,7 +288,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                                             <Form.Control
                                                 id="pro-price"
                                                 type="number"
-                                                step="10"
+                                                // step="10"
                                                 min="10"
                                                 max="29990"
                                                 value ={bodyClick.price}

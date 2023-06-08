@@ -63,13 +63,7 @@ h4{
   margin: 10px;
 }
 
-.trash{
-  min-width: 20px;
-  cursor: pointer;
-}
-.trash:hover, .close:hover{
-  color: red;
-}
+
 .check:hover{
   color: green;
 }
@@ -193,7 +187,7 @@ h4{
   position: absolute;
   bottom: 120%;
   left: 90%;
-  z-index: 1;
+  z-index: 9999;
   width: 140px;
   max-width: none;
   border: none;

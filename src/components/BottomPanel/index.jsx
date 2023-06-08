@@ -27,7 +27,7 @@ const BottomPanel = () => {
                         <span>Каталог</span>
                     </div>
                 </Link>
-                <Link to="/">
+                <Link to="/basket">
                     <div className="icon">
                         <Cart size={20} />
                         <span>Корзина</span>

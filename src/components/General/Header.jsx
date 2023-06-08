@@ -7,6 +7,8 @@ import {
     Cart4,
     PersonCircle,
     BuildingUp,
+    Heart,
+    HeartFill
 
 } from "react-bootstrap-icons"
 
@@ -19,11 +21,18 @@ const Header = ({
         setModalOpen
 }) => {
 
-    const {basket} = useContext(Ctx)
+    const {basket, userId, baseData} = useContext(Ctx)
 
     const login = () => {
         setModalOpen(true)
     }
+
+    const countLike = baseData.reduce((acc, obj) => {
+        if (obj.likes.includes(userId)) {
+            return acc + 1;
+    }
+        return acc;
+    }, 0);
 
     return <header>
         <Logo/>
@@ -36,8 +45,21 @@ const Header = ({
         </div>
         <nav className="header__menu">
             {user && <>
-                <Link to="/favorites">
-                    <BalloonHeart title="Избранное"/>
+                <Link to="/favorites" >
+                <div className="position-relative">
+
+                    
+                    {countLike > 0
+                        ? <>
+                            <HeartFill title="Избранное"/>
+                            <span className="header__badge ">
+                                {countLike}
+                            </span>
+                        </>
+                        : <Heart title="Избранное"/>
+                    }
+                    </div>
+
                 </Link>
                 <Link to="/basket" className="header__link">
                     <div className="position-relative">

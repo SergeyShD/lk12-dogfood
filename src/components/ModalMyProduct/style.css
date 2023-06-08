@@ -29,8 +29,8 @@
 .my-product-list{
     overflow-y: auto;
     display: block;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     margin: 0.25rem;
 }
 .scrollable-container{
@@ -42,12 +42,14 @@
 .button-item__edit, .button-item__trash{
     font-size: 30px;
     padding: 5px;
+    cursor: pointer;
+}
+.close{
+    cursor: pointer;
 }
 .button-item__edit:hover{
     color:orange;
 }
-.button-item__trash:hover{
+.button-item__trash:hover, .close:hover{
     color:red
 }
-
-
