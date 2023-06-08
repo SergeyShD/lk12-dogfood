@@ -22,30 +22,29 @@ const QuantityCounter = ({ data, id, noDelete = false }) => {
         event.preventDefault()
         event.stopPropagation()
         if (prodInBasket && prodInBasket.cnt) {
-        setBasket((prev) =>
-            prev.map((el) => {
-                if(el.cnt<cntInWarehouse){
-                    setShowNotification(true);
+            setBasket((prev) =>
+                prev.map((el) => {
+                    if(el.cnt === cntInWarehouse){
+                        setShowNotification(true);
+                    }
+                if (el.id === id && el.cnt < cntInWarehouse) {
+                    setCount((prevCount) => prevCount + 1)
+                    el.cnt++
                 }
-            if (el.id === id && el.cnt < cntInWarehouse) {
-                setCount((prevCount) => prevCount + 1)
-                el.cnt++
-            }
-            return el;
-            })
-        );
+                return el;
+                })
+            )
         } else {
-        
-        setCount((prevCount) => prevCount + 1)
-        setBasket((prev) => [
-            ...prev,
-            {
-            id,
-            price: data.price,
-            discount: data.discount,
-            cnt: 1,
-            },
-        ]);
+            setCount((prevCount) => prevCount + 1)
+            setBasket((prev) => [
+                ...prev,
+                {
+                id,
+                price: data.price,
+                discount: data.discount,
+                cnt: 1,
+                },
+            ])
         }
     };
 
@@ -146,3 +145,4 @@ const QuantityCounter = ({ data, id, noDelete = false }) => {
 }
 
 export default QuantityCounter
+

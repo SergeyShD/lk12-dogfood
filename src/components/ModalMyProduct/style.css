@@ -11,22 +11,43 @@
     align-items: center;
     z-index: 10;
     padding: 24px;
-
 }
 .my-product-card{
+    display: block;
     background-color: white;
-    box-sizing: border-box;
     position: relative;
-    padding: 24px;
-    border-radius: 24px;
-    min-height: 50%;
-    
+    border-radius: 20px;
+    height: 50%;
+    padding: 1.75rem;
+    min-width: 300px;
 }
-.scrollable-container {
-    height: 100%;/*calc(100% - 48px); /* Высота контейнера с учетом паддинга */
-    overflow-y: auto; /* Включаем вертикальную прокрутку */
-  }
-.button-item{
+.my-product-card-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.my-product-list{
+    overflow-y: auto;
+    display: block;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin: 0.25rem;
+}
+.scrollable-container{
+    display: block;
+    padding: 1.5rem;
+    width: 100%;
+    overflow-x: auto;
+}
+.button-item__edit, .button-item__trash{
     font-size: 30px;
     padding: 5px;
 }
+.button-item__edit:hover{
+    color:orange;
+}
+.button-item__trash:hover{
+    color:red
+}
+
+

@@ -1,6 +1,6 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect, useRef } from "react"
 import "./style.css"
-import { Container, Row, Col, Table, Form, Button  } from "react-bootstrap"
+import { Container, Row, Col, Table, Form, Button } from "react-bootstrap"
 import { X, Trash, PencilFill } from "react-bootstrap-icons"
 import Ctx from "../../ctx"
 import {Link} from "react-router-dom"
@@ -13,44 +13,59 @@ const ModalMyProduct = ({setHandleClick}) => {
     const [bodyClick, setBodyClick] = useState(null)
     const [tagWord,setTagWord] = useState("")
 
+    const productCardRef = useRef(null);
+    const productListRef = useRef(null);
+
+    const recalculateSizes = () => {
+        const productCardHeight = productCardRef.current.offsetHeight;
+        const headerHeight = document.querySelector('.my-product-card-header').offsetHeight;
+        const productListHeight = productCardHeight - headerHeight - 65;
+
+        productListRef.current.style.height = `${productListHeight}px`;
+    }
+
+    useEffect(() => {
+        recalculateSizes()
+        window.addEventListener('resize', recalculateSizes)
+        return () => {
+            window.removeEventListener('resize', recalculateSizes)
+        }
+    }, [])
+
     const handleInputChange = (event) => {
         setInputValue(event.target.value)
-    };
+    }
 
     const handleMouseOver = (event, id) => {
         event.stopPropagation()
         setHoveredElement([id, true])
-    };
+    }
 
     const handleMouseOut = (event, id) => {
         event.stopPropagation()
         setHoveredElement([id, false])
-    };
+    }
 
     const filteredGoods = inputValue.length > 0
         ? goods.filter((el) => el.name.toLowerCase().includes(inputValue) && el.author._id === userId)
         : goods.filter((el) => el.author._id === userId)
-    
+
     const delHandler = (id) => {
-		api.delSingleProduct(id)
-			.then(data => {
-				setBaseData(prev => prev.filter(el => el._id !== id))
-			})
+        api.delSingleProduct(id)
+            .then(data => {
+                setBaseData(prev => prev.filter(el => el._id !== id))
+            })
             .catch(
                 setBaseData([])
             )
-	}
+    }
+
     const clickSetInEdit = (event, idClick="", check=false) => {
         event.stopPropagation()
         setInEdit(check)
-        console.log(idClick)
-        console.log(filteredGoods)
         setBodyClick(filteredGoods.find(el => {
-            console.log(el._id, "- find")
             return el._id === idClick
         }))
-
-
     }
 
     const tagsHandler = (e) => {
@@ -59,7 +74,7 @@ const ModalMyProduct = ({setHandleClick}) => {
         setTagWord(val)
         if(/\s/.test(last)){
             const word = val.slice(0, val.length - 1)
-            const test = bodyClick.tags?.map(tg => {if(tg.toLowerCase() !== word.toLowerCase()){return word}} )
+            const test = bodyClick.tags?.map(tg => {if(tg.toLowerCase() !== word.toLowerCase()){return word}})
             console.log(bodyClick.tags)
 
             if(test.length){
@@ -103,9 +118,12 @@ const ModalMyProduct = ({setHandleClick}) => {
         )
     }
 
-    return (
+    return <>
         <div className="window-box-products"> 
-            {/* <Container className="d-block my-product-card h-50">
+            <Container
+                ref={productCardRef}
+                className="my-product-card d-block"
+            >
                 <X 
                     className="position-absolute top-0 end-0 m-3 fs-3 close"
                     onClick={() => {
@@ -113,31 +131,29 @@ const ModalMyProduct = ({setHandleClick}) => {
                         setInEdit(false)
                     }}
                 />
-                <Row className="d-flex align-items-center mb-3">
-                    <Col xs={12} md={4}>
+                <Row
+                    className="my-product-card-header"
+                >
+                    <Col xs={5} md={4}>
                         <h1>Мои товары</h1>
                     </Col>
                     {!inEdit
-                        ? <Col xs={12} md={6}>
+                        ? <Col xs={12} md={6} className="ps-3 pe-3">
                             <input
                                 className="w-100 border rounded"
                                 value={inputValue}
                                 onChange={handleInputChange}
                             />
                         </Col>
-                        : <Col>
-                            <Button
-                                onClick={(event) => clickSetInEdit(event)}
-                            >
+                        : <Col className="d-flex justify-content-end align-items-end pe-5">
+                            <Button onClick={(event) => clickSetInEdit(event)}>
                                 Назад
                             </Button>
                         </Col>
                     }
                 </Row>
-                {<>
-                <Row >
-                    <div className="" style={{overflow: "hidden", height:"80%"}}>
-                    <Container className="scrollable-container d-block border p-3" >
+                <Row className="my-product-list" ref={productListRef}>
+                    <Container className="scrollable-container d-block">
                         {!inEdit && filteredGoods.map((el) => (
                             <Row
                                 key={el._id}
@@ -146,34 +162,45 @@ const ModalMyProduct = ({setHandleClick}) => {
                                 onMouseOut={(event) => handleMouseOut(event, el._id)}
                             >
                                 {!inEdit && <>
-                                    <Col xs={2} style={{ minWidth: "70px" }}>
+                                    <Col
+                                        xs={12} md={2}
+                                        className="d-flex align-items-center justify-content-center"
+                                    >
+                                        <Col
+                                            xs={6} md={12}
+                                            style={{ minWidth: "80px", minHeight: "80px" }}
+                                        >
                                         <img
                                             src={el.pictures}
-                                            className="h-100 w-100"
+                                            className="w-100 h-100"
                                         />
+                                        </Col>
                                     </Col>
-                                    <Col xs={6} sm={7} md={8}
-                                        className="d-flex align-items-center fs-3"
+                                    <Col
+                                        className="d-flex align-items-center justify-content-center fs-3 "
+                                        style={{ width: 'auto', overflow: "hidden", textOverflow: "ellipsis" }}
                                         as={Link} to={`/product/${el._id}`}
                                     >
-                                        {el.name}
+                                        <span className="w-auto overflow-hidden text-overflow-ellipsis" >
+                                            {el.name}
+                                        </span>
                                     </Col>
-                                    <Col xs={12} md={2} className="d-flex align-items-center ">
-                                        <Col xs={1} md={6}>
+                                    <Col
+                                        xs={12} md={2}
+                                        className="d-flex align-items-center justify-content-evenly "
+                                    >
+                                        <span>
                                             <PencilFill
-                                                className="button-item"
+                                                className="button-item__edit"
                                                 onClick={(event) => clickSetInEdit(event, el._id, true)}
                                             />
-                                        </Col>
-                                        <Col xs={1} md={6}>
+                                        </span>
+                                        <span>
                                             <Trash
-                                                className="button-item"
+                                                className="button-item__trash"
                                                 onClick={() => delHandler(el._id)}
                                             />
-                                        </Col>
-                                    </Col>
-                                    <Col xs={1} className="d-flex align-items-center">
-                                        
+                                        </span>
                                     </Col>
                                 </>}
                                 {!inEdit && (hoveredElement[1] && (el._id === hoveredElement[0])) && <>
@@ -365,12 +392,11 @@ const ModalMyProduct = ({setHandleClick}) => {
                             </Form>
                         </>}
                     </Container>
-                    </div>
                 </Row>
-                </>}
-        </Container> */}
-        
-    </div>)
+            </Container>
+        </div>
+    </>
 }
 
 export default ModalMyProduct
+
