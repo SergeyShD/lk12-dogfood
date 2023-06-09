@@ -10,8 +10,8 @@ const LikeButton = ({ likes, _id, textRight = false }) => {
     const [isHovered, setIsHovered] = useState(false)
 
     const likeHandler = (newState, event) => {
-        event.preventDefault();
-        setIsLike(newState);
+        event.preventDefault()
+        setIsLike(newState)
         api.setLike(_id, newState)
             .then((data) => {
                 const updatedBaseData = baseData.map((product) => {
@@ -25,10 +25,7 @@ const LikeButton = ({ likes, _id, textRight = false }) => {
                 })
                 setBaseData(updatedBaseData)
             })
-            .catch((error) => {
-                console.error(error);
-                setBaseData([]);
-            })
+            .catch(setBaseData([]))
     }
 
     const handleMouseEnter = () => {

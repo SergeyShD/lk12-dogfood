@@ -9,7 +9,7 @@ const Modal = ({
     setUser
 }) => {
     const {api, userNameLS, userIdLS, userTokenLS} = useContext(Ctx)
-    const [isReg, setIsReg] = useState(false);
+    const [isReg, setIsReg] = useState(false)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [pwd, setPwd] = useState("")
@@ -41,7 +41,7 @@ const Modal = ({
 
         if(isReg){
             if(data?._id){
-                setIsReg(false);
+                setIsReg(false)
             }
         }else{
             if(data && data.token){

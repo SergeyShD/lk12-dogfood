@@ -12,12 +12,12 @@ class Api {
         if (isContentType) {
             headers["Content-Type"] = "application/json"
         }
-        return headers;
+        return headers
     }
     getProducts() {
         return fetch(`${this.path}/products`, {
             headers: this.setHeaders()
-        }).then(this.parseJSON);
+        }).then(this.parseJSON)
     }
     getSingleProduct(id) {
         return fetch(`${this.path}/products/${id}`, {
@@ -106,4 +106,4 @@ class Api {
     }
 }
 
-export default Api;
+export default Api

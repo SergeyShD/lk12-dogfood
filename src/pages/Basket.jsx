@@ -19,9 +19,6 @@ const Basket = () => {
     const del = (id) => {
         setBasket(prev => prev.filter(el => el.id !== id))
     }
-    const delAll = () => {
-        setBasket([])
-    }
 
     const getWordEnding = (count, word) => {
         const lastDigit = count % 10
@@ -64,11 +61,11 @@ const Basket = () => {
                 </Col>
             </Row>
             <Row className="justify-content-center g-3">
-                <Col xs={12} lg={8} style={{ height: "400px", overflow: "auto" }}>
+                <Col xs={12} lg={8} style={{ maxHeight: "400px", overflow: "auto" }}>
                     <Table >
                         <tbody>
                             {basket.map(el => filterData.filter(f => f._id === el.id).map(d => <Fragment key={d._id}>
-                                    <tr key={el.id}>
+                                    <tr key={`${d._id}basket`}>
                                         <td className="text-center">
                                             <img src={d.pictures} alt={d.name} height="70px"/>
                                         </td>
@@ -81,8 +78,8 @@ const Basket = () => {
                                                 </Col>
                                                 <Col xs={12} sm={4} md={3}
                                                     className="d-flex align-items-center "
-                                                > 
-                                                    <QuantityCounter id={el.id} data={el} noDelete={true}/>                                                    
+                                                >
+                                                    <QuantityCounter id={d._id} data={d} noDelete={true}/>                                                    
                                                 </Col>
                                                 <Col xs={12} md={3}
                                                     className="d-flex align-items-center justify-content-start order-first order-md-last"

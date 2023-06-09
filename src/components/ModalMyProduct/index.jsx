@@ -1,12 +1,12 @@
 import { useContext, useState, useEffect, useRef } from "react"
 import "./style.css"
 import { Container, Row, Col, Table, Form, Button } from "react-bootstrap"
-import { X, Trash, PencilFill } from "react-bootstrap-icons"
+import { X, Trash, PencilFill, EmojiFrown } from "react-bootstrap-icons"
 import Ctx from "../../ctx"
 import {Link} from "react-router-dom"
 
 const ModalMyProduct = ({setHandleClick}) => {
-    const { userId, api, setBaseData, dataConvert, baseData } = useContext(Ctx)
+    const { userId, api, setBaseData, dataConvert, baseData, setBasket } = useContext(Ctx)
     const [inputValue, setInputValue] = useState("")
     const [hoveredElement, setHoveredElement] = useState([false,null])
     const [inEdit, setInEdit] = useState(false)
@@ -16,15 +16,15 @@ const ModalMyProduct = ({setHandleClick}) => {
     const [filteredGoods, setFilteredGoods] = useState(baseData.filter((el) => el.author._id === userId))
     const [searchResults, setSearchResults] = useState([])
 
-    const productCardRef = useRef(null);
-    const productListRef = useRef(null);
+    const productCardRef = useRef(null)
+    const productListRef = useRef(null)
 
     const recalculateSizes = () => {
-        const productCardHeight = productCardRef.current.offsetHeight;
-        const headerHeight = document.querySelector('.my-product-card-header').offsetHeight;
-        const productListHeight = productCardHeight - headerHeight - 65;
+        const productCardHeight = productCardRef.current.offsetHeight
+        const headerHeight = document.querySelector('.my-product-card-header').offsetHeight
+        const productListHeight = productCardHeight - headerHeight - 65
 
-        productListRef.current.style.height = `${productListHeight}px`;
+        productListRef.current.style.height = `${productListHeight}px`
     }
 
     useEffect(() => {
@@ -36,13 +36,13 @@ const ModalMyProduct = ({setHandleClick}) => {
     }, [])
 
     const handleInputChange = (event) => {
-        const value = event.target.value;
+        const value = event.target.value
         setInputValue(value)
         if (value.length === 0) {
             setSearchResults([])
         } else {
             const results = filteredGoods.filter(el => el.name.toLowerCase().includes(value.toLowerCase()))
-            setSearchResults(results);
+            setSearchResults(results)
         }
     }
 
@@ -59,7 +59,6 @@ const ModalMyProduct = ({setHandleClick}) => {
     const delHandler = (id) => {
         api.delSingleProduct(id)
             .then(data => {
-                console.log(data)
                 setFilteredGoods(
                     filteredGoods.map(el => {
                         if (el._id !== data._id) {
@@ -78,6 +77,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                         }
                     }).filter(el => el !== null)
                 )
+                setBasket((prev) => prev.filter((el) => el.id !== id))
             })
             .catch(
                 setBaseData([])
@@ -98,7 +98,6 @@ const ModalMyProduct = ({setHandleClick}) => {
         if(/\s/.test(last)){
             const word = val.slice(0, val.length - 1)
             const test = bodyClick.tags?.map(tg => {if(tg.toLowerCase() !== word.toLowerCase()){return word}})
-            console.log(bodyClick.tags)
 
             if(test.length){
                 setBodyClick({ ...bodyClick, tags: [...bodyClick.tags, word]})
@@ -138,16 +137,15 @@ const ModalMyProduct = ({setHandleClick}) => {
                                 return data
                             }
                             else return el
-                        }
-                        )
+                        })
                     )
                     setBaseData(
                         baseData.map(el => {
-                                    if(el._id === id){
-                                        return data
-                                    }
-                                    else return el}
-                                    )
+                            if(el._id === id){
+                                return data
+                            }
+                            else return el
+                            })
                         )
                     setInEdit(false)
                 }
@@ -167,23 +165,24 @@ const ModalMyProduct = ({setHandleClick}) => {
                     className="position-absolute top-0 end-0 m-3 fs-3 close"
                     onClick={() => {setHandleClick(false)}}
                 />
-                <Row
-                    className="my-product-card-header"
-                >
-                    <Col xs={5} md={4}>
-                        <h1>Мои товары</h1>
-                    </Col>
+                <Row className="my-product-card-header">
+                    {filteredGoods.length !== 0
+                        ? <Col xs={5} md={4}>
+                            <h1>Мои товары</h1>
+                        </Col>
+                        : <Col>
+                            <h1>Мои товары</h1>
+                        </Col>
+                    }
                     {!inEdit
-                        ? <Col xs={12} md={6} className="ps-3 pe-3" > 
+                        ? filteredGoods.length !== 0 && <Col xs={12} md={6} className="ps-3 pe-3" > 
                             <input
-                            
                                 className="search-my-product"
                                 value={inputValue}
                                 onChange={handleInputChange}
                                 type="search"
                                 style={(searchResults.length === 0 && inputValue.length !== 0) ? {color: "red"} : {color: "black"}}
                             />
-                            {console.log(searchResults.length, inputValue)}
                         </Col>
                         : <Col className="d-flex justify-content-end align-items-end pe-5">
                             <Button onClick={(event) => clickSetInEdit(event)}>
@@ -192,8 +191,25 @@ const ModalMyProduct = ({setHandleClick}) => {
                         </Col>
                     }
                 </Row>
+                
                 <Row className="my-product-list" ref={productListRef}>
                     <Container className="scrollable-container d-block">
+                        {filteredGoods.length === 0 && <>
+                            <div className="justify-content-center align-items-center h-100">
+                                    <span className="d-block text-center display-1" >
+                                        <EmojiFrown/>
+                                    </span>
+                                    <div>
+                                        <h5 className="fw-bold text-center">
+                                            Вы пока не добавили свой товар
+                                        </h5>
+                                        <p className="fs-6 text-secondary text-center">
+                                            Добавьте товар, нажав кнопку "Добавить товар"
+                                            на странице профиля
+                                        </p>
+                                    </div>
+                            </div>
+                        </>}
                         {!inEdit && (searchResults.length > 0 ? searchResults : filteredGoods).map((el) => (
                             <Row
                                 key={el._id}
@@ -217,17 +233,16 @@ const ModalMyProduct = ({setHandleClick}) => {
                                         </Col>
                                     </Col>
                                     <Col
-                                        className="d-flex align-items-center justify-content-center fs-3 "
-                                        style={{ width: 'auto', overflow: "hidden", textOverflow: "ellipsis" }}
+                                        className="my-product-description"
                                         as={Link} to={`/product/${el._id}`}
                                     >
-                                        <span className="w-auto overflow-hidden text-overflow-ellipsis" >
+                                        <span className="w-auto overflow-hidden text-overflow-ellipsis">
                                             {el.name}
                                         </span>
                                     </Col>
                                     <Col
                                         xs={12} md={2}
-                                        className="d-flex align-items-center justify-content-evenly "
+                                        className="d-flex align-items-center justify-content-evenly"
                                     >
                                         <span>
                                             <PencilFill
@@ -285,7 +300,9 @@ const ModalMyProduct = ({setHandleClick}) => {
                                                     <td>Теги</td>
                                                     <td>
                                                         {el.tags.map((tag, index) => (
-                                                            <span key={index}>{tag}</span>
+                                                            <span key={index}>
+                                                                {tag}
+                                                            </span>
                                                         ))}
                                                     </td>
                                                 </tr>
@@ -432,6 +449,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                         </>}
                     </Container>
                 </Row>
+                
             </Container>
         </div>
     </>

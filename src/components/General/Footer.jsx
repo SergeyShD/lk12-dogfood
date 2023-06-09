@@ -2,7 +2,7 @@ import {Link} from "react-router-dom"
 import {Container, Row, Col} from "react-bootstrap"
 import { Telegram, Facebook, Instagram} from "react-bootstrap-icons"
 
-import Logo from "./Logo"; 
+import Logo from "./Logo"
 
 const links1 = [
     {name: "Каталог", src: "/catalog"},

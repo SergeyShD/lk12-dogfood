@@ -29,10 +29,10 @@ const Header = ({
 
     const countLike = baseData.reduce((acc, obj) => {
         if (obj.likes.includes(userId)) {
-            return acc + 1;
+            return acc + 1
     }
-        return acc;
-    }, 0);
+        return acc
+    }, 0)
 
     return <header>
         <Logo/>

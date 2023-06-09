@@ -63,4 +63,4 @@ const BsCard = ({
     </>
 }
 
-export default BsCard;
+export default BsCard

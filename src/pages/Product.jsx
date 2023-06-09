@@ -19,7 +19,7 @@ const Product = () => {
 	const [hideForm, setHideForm] = useState(true)
 	const [showAllReviews, setShowAllReviews] = useState(false)
 	const [showCntReviews, setshowCntReviews] = useState((isMobile || window.innerWidth <= 768) ? 2 : 3)
-	const [showRatingError, setShowRatingError] = useState(false);
+	const [showRatingError, setShowRatingError] = useState(false)
 	const [reviews, setReviews] = useState([])
 
 	const prodInBasket = basket.find(el => el.id === id)
@@ -41,17 +41,15 @@ const Product = () => {
 	]
 
 	const handleRatingChange = (newRating) => {
-		setRevRating(newRating);
-	};
+		setRevRating(newRating)
+	}
 
 	const addReview = (e) => {
         e.preventDefault()
 		if (revRating === 0) {
-			setShowRatingError(true);
-			return;
+			setShowRatingError(true)
+			return
 		}
-		
-		console.log(revRating)
 		api.setReview(data._id, {
 			text: revText,
 			rating: revRating
@@ -96,7 +94,7 @@ const Product = () => {
 			}
 		}
 		window.addEventListener('resize', handleResize)
-	}, []);
+	}, [])
 
 	const inBasket = basket.filter(el => el.id === id).length > 0
 
@@ -285,10 +283,10 @@ const Product = () => {
 								type="reset"
 								className="me-2"
 								onClick={(e) => {
-									e.preventDefault();
-									setRevText("");
-									setRevRating(0);
-									setHideForm(true);
+									e.preventDefault()
+									setRevText("")
+									setRevRating(0)
+									setHideForm(true)
 								}}
 							>Отмена</Button>
 							<Button type="submit">Добавить</Button>

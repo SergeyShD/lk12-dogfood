@@ -6,11 +6,11 @@ import {Link, useLocation } from "react-router-dom"
 
 const BottomPanel = () => {
 
-    const location = useLocation();
+    const location = useLocation()
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location]);
+        window.scrollTo(0, 0)
+    }, [location])
 
     return (
         <div className="bottom-panel-container">
@@ -47,7 +47,7 @@ const BottomPanel = () => {
                 </Link>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default BottomPanel;
+export default BottomPanel

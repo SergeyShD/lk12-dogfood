@@ -31,6 +31,6 @@ const RatingStatic = ({ rating = 0, isAnimationEnabled = false }) => {
     }
 
     return stars
-};
+}
 
 export default RatingStatic

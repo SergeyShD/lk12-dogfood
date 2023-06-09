@@ -32,8 +32,8 @@ const UpdatedInput = ({ val, isActive, upd, changeActive, name }) => {
                         <Check
                             className="check"
                             onClick={() => {
-                                changeActive(false);
-                                upd(name, inp);
+                                changeActive(false)
+                                upd(name, inp)
                             }}
                         />
                     </Col>
@@ -43,4 +43,4 @@ const UpdatedInput = ({ val, isActive, upd, changeActive, name }) => {
     )
 }
 
-export default UpdatedInput;
+export default UpdatedInput

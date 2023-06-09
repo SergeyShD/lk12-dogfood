@@ -57,7 +57,7 @@ const Catalog = ({ goods, userId }) => {
 				</Col>
 			</Row>
 		</Container>
-	);
-};
+	)
+}
 
-export default Catalog;
+export default Catalog

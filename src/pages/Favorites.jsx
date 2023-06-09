@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import {Container, Row, Col} from "react-bootstrap";
-import BsCard from "../components/BsCard";
+import { useContext } from "react"
+import {Container, Row, Col} from "react-bootstrap"
+import BsCard from "../components/BsCard"
 import Ctx from "../ctx"
 
 const Favorites = () => {
@@ -15,9 +15,9 @@ const Favorites = () => {
 				if (pro.likes.includes(userId)) {
 					return (
 						<Col key={i} xs={12} sm={6} md={4} lg={3}>
-							<BsCard img={pro.pictures} {...pro} user={userId} />
+							<BsCard img={pro.pictures} {...pro} user={userId}/>
 						</Col>
-					);
+					)
 				}
 				return null
 			})}

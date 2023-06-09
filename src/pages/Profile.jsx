@@ -26,7 +26,7 @@ const Profile = ({setUser}) => {
 		body[name] = val
 		api.updAdmin(body, name === "avatar").then(data => {
 			setUserData(data)
-			localStorage.setItem(userNameLS, data.name);
+			localStorage.setItem(userNameLS, data.name)
 		})
 		.catch(
 			setUserData({})

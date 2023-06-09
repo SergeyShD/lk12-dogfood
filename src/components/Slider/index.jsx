@@ -27,10 +27,10 @@ const Slider = ({desktop = 4, mobile = 1}) => {
 
             setGds(baseData.reduce((acc, el, i) => {
                 if (i % cnt === 0) {
-                    acc.push([]);
+                    acc.push([])
                 }
                 acc[acc.length - 1].push(el)
-                return acc;
+                return acc
             }, []))
 
         }
