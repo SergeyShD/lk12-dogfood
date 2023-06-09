@@ -19,7 +19,6 @@ const QuantityCounter = ({ data, id, noDelete = false }) => {
     useEffect(() => {
         if (prodInBasket && prodInBasket.cnt === cntInWarehouse) {
             setShowNotification(false)
-            console.log("сработало")
         }
     }, [])
 

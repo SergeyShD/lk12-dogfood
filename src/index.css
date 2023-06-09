@@ -62,8 +62,13 @@ h4{
   height: 25px;
   margin: 10px;
 }
-
-
+.close, .check{
+  cursor: pointer;
+  min-width: 25px;
+}
+.close:hover{
+  color: red;
+}
 .check:hover{
   color: green;
 }
@@ -129,7 +134,6 @@ h4{
   left:0;
   right:0;
   bottom:0;
-  /* bottom:3.5em; */
 }
 
 .button-buy, .button-toCard{

@@ -44,13 +44,13 @@
     padding: 5px;
     cursor: pointer;
 }
-.close{
+.my-close{
     cursor: pointer;
 }
 .button-item__edit:hover{
     color:orange;
 }
-.button-item__trash:hover, .close:hover{
+.button-item__trash:hover, .my-close:hover{
     color:red
 }
 .search-my-product{

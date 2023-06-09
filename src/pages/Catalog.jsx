@@ -6,8 +6,9 @@ import usePagination from "../hooks/usePagination"
 import Pagination from "../components/Pagination"
 
 const Catalog = ({ goods, userId }) => {
+	const maxCardOn = 12
 	const { searchResult, isMobile } = useContext(Ctx)
-	const paginate = usePagination(goods, 12)
+	const paginate = usePagination(goods, maxCardOn)
 	const [pageRange, setPageRange] = useState(isMobile ? 1 : 5)
 
 	const handleResize = () => {

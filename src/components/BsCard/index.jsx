@@ -11,12 +11,13 @@ const BsCard = ({
     name,
     pictures,
     price,
-    _id
+    _id,
+    stock
 }) => {
     const {userId, basket, setBasket} = useContext(Ctx)
     const inBasket = basket.filter(el => _id === el.id).length > 0
 
-    const addToBasket = !inBasket
+    const addToBasket = !inBasket && stock > 0
         ? (event) => {
             event.preventDefault()
             event.stopPropagation()

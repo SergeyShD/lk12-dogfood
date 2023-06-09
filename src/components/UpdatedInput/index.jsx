@@ -10,23 +10,27 @@ const UpdatedInput = ({ val, isActive, upd, changeActive, name }) => {
     }, [val])
 
     return (
-        <Row>
+        <Row className="w-100">
             {!isActive
                 ? <>
-                    <Col className={`d-flex fs-5 align-items-center ${name !== "avatar" ? "" : "justify-content-end"}`}>
-                    {name !== "avatar" && <div>{val}</div>}
-                    <div>
-                        <PencilFill className="ms-3 pencil" onClick={() => changeActive(true)}/>
-                    </div>
+                    <Col className={`d-flex fs-5 align-items-center
+                        ${name !== "avatar" ? "" : "justify-content-end"}
+                    `}>
+                        {name !== "avatar" && <div>{val}</div>}
+                        <div>
+                            <PencilFill className="ms-3 pencil" onClick={() => changeActive(true)}/>
+                        </div>
                     </Col>
-                    </>
+                </>
                 : <>
-                    <Col xs={12} md={9}>
+                    <Col xs={12} sm={8} md={9}>
                         <Form.Control value={inp} onChange={(e) => setInput(e.target.value)}/>
                     </Col>
                     <Col
-                        xs={12} lg={3}
-                        className={`d-flex fs-5 align-items-center ${name !== "avatar" ? "justify-content-start" : "justify-content-end"}`}
+                        xs={12} sm={4} md={3}
+                        className={`d-flex fs-5 align-items-center
+                            ${name !== "avatar" ? "justify-content-start" : "justify-content-end"}
+                        `}
                     >
                         <X className="me-4 close" onClick={() => changeActive(false)}/>
                         <Check

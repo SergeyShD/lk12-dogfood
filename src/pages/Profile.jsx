@@ -72,9 +72,9 @@ const Profile = ({setUser}) => {
 						</Button>
 					</Col>
 				</Row>
-				<Row className="pt-5">
+				<Row className="pt-5 ">
 					<Col xs={12} sm={6}>
-							<Row className="pb-2">
+							<Row className="pb-2 d-flex align-items-center justify-content-center">
 								<UpdatedInput
 									val={userData.name}
 									isActive={inpName}
@@ -84,9 +84,11 @@ const Profile = ({setUser}) => {
 								/>
 							</Row>
 							<Row className="pb-2 fs-5">
-								<Col>{userData.email}</Col>
+								<Col className="ps-4">
+									{userData.email}
+								</Col>
 							</Row>
-							<Row>
+							<Row className="d-flex align-items-center justify-content-center">
 								<UpdatedInput
 									val={userData.about}
 									isActive={inpAbout}
@@ -106,7 +108,10 @@ const Profile = ({setUser}) => {
 							name="avatar"
 						/>
 						<Row className="mt-3">
-							<Figure className="d-flex align-items-center justify-content-center">
+							<Figure
+								className="d-flex align-items-center justify-content-center"
+								style={{userSelect: "none"}}
+							>
 								<Figure.Image
 									src={userData.avatar}
 									alt={userData.email}

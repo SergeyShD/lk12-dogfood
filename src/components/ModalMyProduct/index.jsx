@@ -162,7 +162,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                 className="my-product-card d-block"
             >
                 <X 
-                    className="position-absolute top-0 end-0 m-3 fs-3 close"
+                    className="position-absolute top-0 end-0 m-3 fs-3 my-close"
                     onClick={() => {setHandleClick(false)}}
                 />
                 <Row className="my-product-card-header">
@@ -195,7 +195,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                 <Row className="my-product-list" ref={productListRef}>
                     <Container className="scrollable-container d-block">
                         {filteredGoods.length === 0 && <>
-                            <div className="justify-content-center align-items-center h-100">
+                            <div className="justify-content-center align-items-center">
                                     <span className="d-block text-center display-1" >
                                         <EmojiFrown/>
                                     </span>
