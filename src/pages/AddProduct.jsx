@@ -6,7 +6,7 @@ import Ctx from "../ctx"
 
 const AddProduct = () => {
     const navigate = useNavigate()
-    const {api, setBaseData} = useContext(Ctx)
+    const {api, setBaseData, baseData} = useContext(Ctx)
     const [name, setName] = useState("")
     const [link, setLink] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIpZro4K74i5eFYf81TWxcg1G3vUOkc0IheA&usqp=CAU")
     const [price, setPrice] = useState(999)
@@ -61,13 +61,16 @@ const AddProduct = () => {
             tags: tagWord && !tags.includes(tagWord) ? [...tags, tagWord] : tags
         }
         api.addProduct(body)
-        .then(data => {
-            if (!data.err && !data.error){
-                clearForm()
-                navigate(`/product/${data._id}`)
-                setBaseData(prev => [...prev, data])
+            .then(data => {
+                if (!data.err && !data.error){
+                    clearForm()
+                    navigate(`/product/${data._id}`)
+                    
+                    setBaseData([...baseData, data])
+
+                }
             }
-        })
+        )
         .catch(
             setBaseData([])
         )

@@ -53,3 +53,16 @@
 .button-item__trash:hover, .close:hover{
     color:red
 }
+.search-my-product{
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 1.25rem;
+    padding-left: 0.75rem;
+    padding-right: 0.5rem;
+    outline: none;
+    background-color: inherit;
+}
+.search-my-product:focus{
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(241, 241, 241);
+}

@@ -6,12 +6,15 @@ import Ctx from "../../ctx"
 import {Link} from "react-router-dom"
 
 const ModalMyProduct = ({setHandleClick}) => {
-    const { goods, userId, api, setBaseData, dataConvert } = useContext(Ctx)
+    const { userId, api, setBaseData, dataConvert, baseData } = useContext(Ctx)
     const [inputValue, setInputValue] = useState("")
     const [hoveredElement, setHoveredElement] = useState([false,null])
     const [inEdit, setInEdit] = useState(false)
     const [bodyClick, setBodyClick] = useState(null)
     const [tagWord,setTagWord] = useState("")
+    const [idProduct, setIdProduct] = useState("")
+    const [filteredGoods, setFilteredGoods] = useState(baseData.filter((el) => el.author._id === userId))
+    const [searchResults, setSearchResults] = useState([])
 
     const productCardRef = useRef(null);
     const productListRef = useRef(null);
@@ -33,7 +36,14 @@ const ModalMyProduct = ({setHandleClick}) => {
     }, [])
 
     const handleInputChange = (event) => {
-        setInputValue(event.target.value)
+        const value = event.target.value;
+        setInputValue(value)
+        if (value.length === 0) {
+            setSearchResults([])
+        } else {
+            const results = filteredGoods.filter(el => el.name.toLowerCase().includes(value.toLowerCase()))
+            setSearchResults(results);
+        }
     }
 
     const handleMouseOver = (event, id) => {
@@ -46,14 +56,28 @@ const ModalMyProduct = ({setHandleClick}) => {
         setHoveredElement([id, false])
     }
 
-    const filteredGoods = inputValue.length > 0
-        ? goods.filter((el) => el.name.toLowerCase().includes(inputValue) && el.author._id === userId)
-        : goods.filter((el) => el.author._id === userId)
-
     const delHandler = (id) => {
         api.delSingleProduct(id)
             .then(data => {
-                setBaseData(prev => prev.filter(el => el._id !== id))
+                console.log(data)
+                setFilteredGoods(
+                    filteredGoods.map(el => {
+                        if (el._id !== data._id) {
+                            return el
+                        } else {
+                            return null
+                        }
+                    }).filter(el => el !== null)
+                )
+                setBaseData(
+                    baseData.map(el => {
+                        if (el._id !== data._id) {
+                            return el
+                        } else {
+                            return null
+                        }
+                    }).filter(el => el !== null)
+                )
             })
             .catch(
                 setBaseData([])
@@ -62,10 +86,9 @@ const ModalMyProduct = ({setHandleClick}) => {
 
     const clickSetInEdit = (event, idClick="", check=false) => {
         event.stopPropagation()
+        setIdProduct(idClick)
         setInEdit(check)
-        setBodyClick(filteredGoods.find(el => {
-            return el._id === idClick
-        }))
+        setBodyClick(filteredGoods.find(el => el._id === idClick))
     }
 
     const tagsHandler = (e) => {
@@ -94,7 +117,7 @@ const ModalMyProduct = ({setHandleClick}) => {
         }
     }
 
-    const editHandler = (e) => {
+    const editHandler = (e, id) => {
         e.preventDefault()
         const body = {
             name: bodyClick.name,
@@ -106,16 +129,32 @@ const ModalMyProduct = ({setHandleClick}) => {
             pictures: bodyClick.pictures,
             tags: bodyClick.tags
         }
-        api.addProduct(body)
-        .then(data => {
-            if (!data.err && !data.error){
-                setBaseData(prev => [...prev, data])
-                setInEdit(false)
-            }
-        })
-        .catch(
-            setBaseData([])
-        )
+        api.updSingleProduct(id, body)
+            .then(data => {
+                if (!data.err && !data.error){
+                    setFilteredGoods(
+                        filteredGoods.map(el => {
+                            if(el._id === id){
+                                return data
+                            }
+                            else return el
+                        }
+                        )
+                    )
+                    setBaseData(
+                        baseData.map(el => {
+                                    if(el._id === id){
+                                        return data
+                                    }
+                                    else return el}
+                                    )
+                        )
+                    setInEdit(false)
+                }
+            })
+            .catch(
+                setBaseData([])
+            )
     }
 
     return <>
@@ -126,10 +165,7 @@ const ModalMyProduct = ({setHandleClick}) => {
             >
                 <X 
                     className="position-absolute top-0 end-0 m-3 fs-3 close"
-                    onClick={() => {
-                        setHandleClick(false)
-                        setInEdit(false)
-                    }}
+                    onClick={() => {setHandleClick(false)}}
                 />
                 <Row
                     className="my-product-card-header"
@@ -138,12 +174,16 @@ const ModalMyProduct = ({setHandleClick}) => {
                         <h1>Мои товары</h1>
                     </Col>
                     {!inEdit
-                        ? <Col xs={12} md={6} className="ps-3 pe-3">
+                        ? <Col xs={12} md={6} className="ps-3 pe-3" > 
                             <input
-                                className="w-100 border rounded rounded-pill p-3"
+                            
+                                className="search-my-product"
                                 value={inputValue}
                                 onChange={handleInputChange}
+                                type="search"
+                                style={(searchResults.length === 0 && inputValue.length !== 0) ? {color: "red"} : {color: "black"}}
                             />
+                            {console.log(searchResults.length, inputValue)}
                         </Col>
                         : <Col className="d-flex justify-content-end align-items-end pe-5">
                             <Button onClick={(event) => clickSetInEdit(event)}>
@@ -154,7 +194,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                 </Row>
                 <Row className="my-product-list" ref={productListRef}>
                     <Container className="scrollable-container d-block">
-                        {!inEdit && filteredGoods.map((el) => (
+                        {!inEdit && (searchResults.length > 0 ? searchResults : filteredGoods).map((el) => (
                             <Row
                                 key={el._id}
                                 className="pt-2 pb-2 pe-0 pl-0 m-0"
@@ -256,7 +296,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                             </Row>
                         ))}
                         {inEdit && <>
-                            <Form onSubmit={editHandler}>
+                            <Form onSubmit={(event) => editHandler(event, idProduct)}>
                                 <Row>
                                     <Col xs={12} md={6}>
                                         <Form.Group className="mb-3">
@@ -288,7 +328,6 @@ const ModalMyProduct = ({setHandleClick}) => {
                                             <Form.Control
                                                 id="pro-price"
                                                 type="number"
-                                                // step="10"
                                                 min="10"
                                                 max="29990"
                                                 value ={bodyClick.price}

@@ -16,6 +16,7 @@ const Search = (user) => {
         setText(e.target.value)
 
     }
+    
     useEffect(() => {
         let str = ''
         if(num && text){
@@ -29,11 +30,13 @@ const Search = (user) => {
         }
         setSearchResult(str)
     }, [num, text])
+
     useEffect(()=>{
         let result = baseData.filter(el => el.name.includes(text.toLowerCase()))
         setGoods(result)
         setNum(result.length)
     }, [text, baseData])
+
     return <>
         <input className="search" type="search" value={text} onChange={changeValue} disabled={!user.user}/>
     </>
