@@ -41,9 +41,11 @@ const Profile = ({setUser}) => {
 	const logOut = () => {
 		setUser("")
 		localStorage.removeItem(user)
-		localStorage.removeItem(basket)
+		localStorage.removeItem(userNameLS)
+		localStorage.removeItem("basket", JSON.stringify(basket))
 		navigate("/")
 	}
+
 	useEffect(() => {
 		api.getAdmin()
 			.then(data => {

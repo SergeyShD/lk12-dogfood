@@ -51,6 +51,8 @@ const App = () => {
 
     const isMobile = (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
 
+
+    
     const getWordEnding = (count, word) => {
         const lastDigit = count % 10
         const lastTwoDigits = count % 100
@@ -101,7 +103,7 @@ const App = () => {
     }, [baseData])
 
     useEffect(() => {
-        localStorage.setItem("basket", JSON.stringify(basket))
+        user && localStorage.setItem("basket", JSON.stringify(basket))
     })
 
     return (

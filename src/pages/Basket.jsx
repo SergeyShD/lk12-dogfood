@@ -173,7 +173,6 @@ const Basket = () => {
                             На главную
                         </Button>
                     </div>
-                    
                 </Col>
             </Row>
             }

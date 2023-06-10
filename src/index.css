@@ -196,6 +196,13 @@ h4{
   user-select: none;
 }
 
+.trash{
+  min-width: 20px;
+}
+.trash:hover{
+  color:red;
+}
+
 @keyframes bounce {
   0% {
       transform: translateY(0);

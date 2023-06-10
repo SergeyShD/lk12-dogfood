@@ -25,7 +25,6 @@ const LikeButton = ({ likes, _id, textRight = false }) => {
                 })
                 setBaseData(updatedBaseData)
             })
-            .catch(setBaseData([]))
     }
 
     const handleMouseEnter = () => {

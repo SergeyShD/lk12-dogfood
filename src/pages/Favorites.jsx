@@ -1,5 +1,7 @@
 import { useContext } from "react"
-import {Container, Row, Col} from "react-bootstrap"
+import {Container, Row, Col, Button} from "react-bootstrap"
+import { EmojiFrown } from "react-bootstrap-icons"
+import {Link} from "react-router-dom"
 import BsCard from "../components/BsCard"
 import Ctx from "../ctx"
 
@@ -21,6 +23,28 @@ const Favorites = () => {
 				}
 				return null
 			})}
+			{baseData.filter((el) => el.likes.includes(userId)).length === 0 && <>
+				<Col  className="text-center">
+                    <span style={{fontSize: "70px"}}>
+                        <EmojiFrown/>
+                    </span>
+                    <h5 className="fw-bold">
+                        У вас пока нет любимых товаров
+                    </h5>
+                    <p className="fs-6 text-secondary">
+                        Добавьте любимый товар, нажав кнопку "Лайк" в карточке товара
+                    </p>
+                    <div className="d-inline-block">
+                        <Button
+                            className="button-toMain"
+                            as={Link}
+                            to="/catalog"
+                        >
+                            В каталог
+                        </Button>
+                    </div>
+                </Col>
+			</>}
 		</Row>
 	</Container>
 }
