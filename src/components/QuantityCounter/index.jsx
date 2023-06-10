@@ -78,9 +78,10 @@ const QuantityCounter = ({ data, id, noDelete = false }) => {
         event.preventDefault()
         event.stopPropagation()
         const newCount = parseInt(event.target.value)
-        if (isNaN(newCount) || (newCount <= 0 && !noDelete)) {
+        console.log(newCount)
+        if (isNaN(newCount) || newCount <= 0) {
             setCount(0)
-            setBasket((prev) => prev.filter((el) => el.id !== id))
+            !noDelete && setBasket((prev) => prev.filter((el) => el.id !== id))
         } else if (newCount >= cntInWarehouse) {
             setBasket((prev) =>
                 prev.map((el) => {
