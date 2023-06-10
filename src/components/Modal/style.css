@@ -1,3 +1,6 @@
+body.modal-open {
+    overflow: hidden;
+}
 .modal-wrapper{
     position: fixed;
     background: #CCCCCC88;

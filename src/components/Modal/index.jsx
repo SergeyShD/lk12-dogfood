@@ -1,6 +1,6 @@
-import{useState, useContext} from "react"
+import{useState, useContext, useEffect} from "react"
 import { X } from "react-bootstrap-icons"
-import {Container, Table, Button, Row, Col} from "react-bootstrap"
+import {Button} from "react-bootstrap"
 import Ctx from "../../ctx"
 import "./style.css"
 
@@ -72,6 +72,21 @@ const Modal = ({
     const st = {
         display: isActive ? "flex" : "none"
     }
+
+    useEffect(() => {
+        const handleBodyScroll = (e) => {
+            if (isActive) {
+                document.body.classList.add("modal-open")
+            } else {
+                document.body.classList.remove("modal-open")
+            }
+        }
+        handleBodyScroll()
+    
+        return () => {
+            document.body.classList.remove("modal-open")
+        }
+    }, [isActive])
 
     return <div className="modal-wrapper" style={st}>
         <div className="modal__custom">
