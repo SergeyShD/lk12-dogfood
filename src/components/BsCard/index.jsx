@@ -41,24 +41,29 @@ const BsCard = ({
                 <img src={pictures} alt={name}/>
                 <Link to={`/product/${_id}`} className="card-link"></Link>
             </div>
-            <div>
+            <div >
                 <h4 className="price">{price} ₽</h4>
                 <p className="name">{name}</p>
-                <button
-                    className={`${!inBasket 
-                        ? "button-buy"
-                        : "button-toCard"} position-relative`
-                    }
-                    onClick={addToBasket}
-                >
-                    {!inBasket
-                            ? "Купить"
-                            : <>
-                                Перейти в корзину
-                                <Link to={`/basket`} className="card-link"></Link>
-                            </>}
-                </button>
-                
+                {stock
+                    ?
+                        <button
+                            className={`${!inBasket 
+                                ? "button-buy"
+                                : "button-toCard"} position-relative`
+                            }
+                            onClick={addToBasket}
+                        >
+                            {!inBasket
+                                    ? "Купить"
+                                    : <>
+                                        Перейти в корзину
+                                        <Link to={`/basket`} className="card-link"></Link>
+                                    </>}
+                        </button>
+                    : <div className="text-center w-100 pt-1 pb-1 text-secondary">
+                        Товара нет в наличии
+                    </div>
+                }
             </div>
         </div>
     </>
