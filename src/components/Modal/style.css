@@ -14,7 +14,7 @@ body.modal-open {
     align-items: center;
     z-index: 10;
 }
-.modal__custom{
+.modal-custom{
     width: 320px;
     background-color: white;
     padding: 20px;
@@ -41,7 +41,7 @@ h3{
     margin: 0;
     margin-bottom: 20px;
 }
-.modal__custom form{
+.modal-custom form{
     display: grid;
     gap: 10px;
 }
@@ -50,7 +50,7 @@ h3{
     grid-template-columns: repeat(2, 1fr);
     font-size: 12px;
 }
-.input__sign{
+.input-sign{
     border: 1px solid #e2e2e2;
     outline: none;
     border-radius: 20px;

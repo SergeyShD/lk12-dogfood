@@ -23,6 +23,21 @@ const userTokenLS = "userToken"
 const priceCourierDelivery = "399 ₽"
 const priceDeliveryToPoint = "199 ₽"
 
+const tableInfo = [
+	{
+		name:"wight",
+		text: "Вес"
+	},
+	{
+		name:"author",
+		text: "Продавец"
+	},
+	{
+		name: "created_at",
+		text: "Дата размещения"
+	}
+]
+
 const dataConvert = (data) => {
     const date = new Date(data)
     const options = { year: "numeric", month: "long", day: "numeric" }
@@ -31,13 +46,14 @@ const dataConvert = (data) => {
     return `${formattedDate} в ${time}`
 }
 
+let basketStore = localStorage.getItem("basket")
+if (basketStore && basketStore[0] === "["){
+    basketStore = JSON.parse(basketStore)
+} else {
+    basketStore = []
+}
+
 const App = () => {
-    let basketStore = localStorage.getItem("basket")
-    if (basketStore && basketStore[0] === "["){
-        basketStore = JSON.parse(basketStore)
-    } else {
-        basketStore = []
-    }
     const [user, setUser] = useState(localStorage.getItem(userNameLS))
     const [userId, setUserId] = useState(localStorage.getItem(userIdLS))
     const [token, setToken] = useState(localStorage.getItem(userTokenLS))
@@ -127,7 +143,8 @@ const App = () => {
             userIdLS,
             userTokenLS,
             getWordEnding,
-            dataConvert
+            dataConvert,
+            tableInfo
         }}>
             <Header
                 user={user}

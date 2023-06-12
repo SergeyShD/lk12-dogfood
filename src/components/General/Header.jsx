@@ -3,7 +3,6 @@ import { useContext } from "react"
 import Logo from "./Logo"
 import Ctx from "../../ctx"
 import {
-    BalloonHeart,
     Cart4,
     PersonCircle,
     BuildingUp,
@@ -43,29 +42,26 @@ const Header = ({
                 user={user}
             />
         </div>
-        <nav className="header__menu">
+        <nav className="header-menu">
             {user && <>
                 <Link to="/favorites" >
                 <div className="position-relative">
-
-                    
                     {countLike > 0
                         ? <>
                             <HeartFill title="Избранное"/>
-                            <span className="header__badge ">
+                            <span className="header-badge ">
                                 {countLike}
                             </span>
                         </>
                         : <Heart title="Избранное"/>
                     }
                     </div>
-
                 </Link>
                 <Link to="/basket" className="header__link">
                     <div className="position-relative">
                     <Cart4 title="Корзина"/>
                         {basket.length > 0 && <>
-                            <span className="header__badge">
+                            <span className="header-badge">
                                 {basket.reduce((acc, el) => acc + el.cnt, 0) }
                             </span>
                         </>}

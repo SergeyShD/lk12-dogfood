@@ -12,7 +12,7 @@ import CardDelivery from "../components/CardDelivery"
 
 const Product = () => {
 	const { id } = useParams()
-	const { api, userId, isMobile, basket, setBasket, dataConvert} = useContext(Ctx)
+	const { api, userId, isMobile, basket, setBasket, dataConvert, tableInfo} = useContext(Ctx)
 	const [data, setData] = useState({})
 	const [revText, setRevText] = useState("")
 	const [revRating, setRevRating] = useState(0)
@@ -24,21 +24,6 @@ const Product = () => {
 
 	const prodInBasket = basket.find(el => el.id === id)
 	const [cnt, setCount] = useState(0)
-	
-	const tableInfo = [
-		{
-			name:"wight",
-			text: "Вес"
-		},
-		{
-			name:"author",
-			text: "Продавец"
-		},
-		{
-			name: "created_at",
-			text: "Дата размещения"
-		}
-	]
 
 	const handleRatingChange = (newRating) => {
 		setRevRating(newRating)
@@ -83,7 +68,7 @@ const Product = () => {
 			.catch(
 				setData({})
 			)
-	}, [])
+	}, [api, id])
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -94,6 +79,10 @@ const Product = () => {
 			}
 		}
 		window.addEventListener('resize', handleResize)
+	
+		return () => {
+			window.removeEventListener('resize', handleResize)
+		}
 	}, [])
 
 	const inBasket = basket.filter(el => el.id === id).length > 0

@@ -9,18 +9,25 @@ const Slider = ({desktop = 4, mobile = 1}) => {
     const [gds, setGds] = useState([[]])
     const [cnt, setCnt] = useState(desktop)
 
-    useEffect(()=> {
-        if (window.innerWidth <= 768) {
-            setCnt(mobile)
-        }
-        window.addEventListener("resize", function() {
+    useEffect(() => {
+        const handleResize = () => {
             if (window.innerWidth <= 768) {
                 setCnt(mobile)
             } else {
                 setCnt(desktop)
             }
-        })
-    }, [])
+        }
+    
+        if (window.innerWidth <= 768) {
+            setCnt(mobile)
+        }
+    
+        window.addEventListener("resize", handleResize)
+    
+        return () => {
+            window.removeEventListener("resize", handleResize)
+        }
+    }, [desktop, mobile])
 
     useEffect(() => {
         if (baseData.length) {
@@ -35,9 +42,6 @@ const Slider = ({desktop = 4, mobile = 1}) => {
 
         }
     }, [baseData, cnt])
-
-    // useEffect(() => {
-    // }, [gds])
 
     return <Container style={{gridTemplateColumns: "1fr", padding: 0}}>
         <Carousel controls={false} interval={5000} indicators={false}>

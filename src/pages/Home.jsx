@@ -29,8 +29,6 @@ const advertising2 = {
 }
 
 const Home = ({user, setActive}) => {
-    
-
     return <>
         <Container fluid style={{backgroundColor: "#FFE44D"}}>
             <Container className="d-block">
@@ -57,7 +55,7 @@ const Home = ({user, setActive}) => {
                                     justify-content-center
                                     align-items-center
                                     text-center
-                                    button__catalog
+                                    button-catalog
                             ">
                                 <List className="me-2"/>
                                 Каталог товаров

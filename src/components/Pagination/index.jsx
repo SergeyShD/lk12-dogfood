@@ -44,5 +44,4 @@ const Pagination = ({ hk, pageRange}) => {
     return <BsPag>{items}</BsPag>
 }
 
-
 export default Pagination

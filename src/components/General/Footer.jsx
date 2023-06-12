@@ -30,7 +30,7 @@ const Footer = () => {
                     <span style={{marginTop: "10px"}}>©{new Date().getFullYear()}</span>
                 </Col>
                 <Col className="p-1" xs={6} lg={3}>
-                    <ul className="footer__nav" style={{justifyContent: "space-around"}}>
+                    <ul className="footer-nav" style={{justifyContent: "space-around"}}>
                         {links1.map(el => <li key={el.name}>
                                             <Link to = {el.src}>{el.name}</Link>
                                         </li>)}
@@ -38,7 +38,7 @@ const Footer = () => {
                     
                 </Col>
                 <Col className="p-1" xs={6} lg={3}>
-                    <ul className="footer__nav" style={{justifyContent: "space-around"}}>
+                    <ul className="footer-nav" style={{justifyContent: "space-around"}}>
                             {links2.map(el => <li key={el.name}>
                                                 <Link to = {el.src}>{el.name}</Link>
                                             </li>)}

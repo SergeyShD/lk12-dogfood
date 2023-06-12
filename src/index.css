@@ -120,11 +120,11 @@ h4{
 .cursor-pointer {
   cursor: pointer;
 }
-.button__catalog{
+.button-catalog{
   background-color: white;
   
 }
-.button__catalog:hover{
+.button-catalog:hover{
   background-color: #fffaa0;
 
 }

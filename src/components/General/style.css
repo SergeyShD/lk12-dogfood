@@ -30,36 +30,32 @@ footer{
 .logo img {
     height: 30px;
 }
-.footer__copy{
-    display: grid;
-    align-content: space-between;
-}
-.footer__nav{
+.footer-nav{
     display: grid;
     gap: 10px;
     padding-left: 0;
 }
 
-.footer__nav a:hover{
+.footer-nav a:hover{
     color: orange;
 }
-.header__menu,
-.header__menu>span{
+.header-menu,
+.header-menu>span{
     font-size: 1.2rem;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.header__menu>span>*{
+.header-menu>span>*{
     cursor: pointer;
 }
-.header__menu svg:hover {
+.header-menu svg:hover {
     fill: orange;
 }
 .logo:hover {
     color: orange;
 }
-.header__badge{
+.header-badge{
     display: flex;
     justify-content: center;
     align-items: center;

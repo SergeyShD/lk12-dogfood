@@ -20,7 +20,7 @@ const QuantityCounter = ({ data, id, noDelete = false }) => {
         if (prodInBasket && prodInBasket.cnt === cntInWarehouse) {
             setShowNotification(false)
         }
-    }, [])
+    }, [prodInBasket, cntInWarehouse])
 
     const increment = (event) => {
         event.preventDefault()
@@ -78,7 +78,6 @@ const QuantityCounter = ({ data, id, noDelete = false }) => {
         event.preventDefault()
         event.stopPropagation()
         const newCount = parseInt(event.target.value)
-        console.log(newCount)
         if (isNaN(newCount) || newCount <= 0) {
             setCount(0)
             !noDelete && setBasket((prev) => prev.filter((el) => el.id !== id))

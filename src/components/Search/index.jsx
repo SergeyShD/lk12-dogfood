@@ -12,9 +12,7 @@ const Search = (user) => {
     
     const changeValue = (e) => {
         navigate("/catalog")
-        let val = e.target.value.toLowerCase()
         setText(e.target.value)
-
     }
     
     useEffect(() => {
@@ -29,13 +27,13 @@ const Search = (user) => {
             str = ''
         }
         setSearchResult(str)
-    }, [num, text])
+    }, [num, text, setSearchResult])
 
     useEffect(()=>{
         let result = baseData.filter(el => el.name.includes(text.toLowerCase()))
         setGoods(result)
         setNum(result.length)
-    }, [text, baseData])
+    }, [text, baseData, setGoods])
 
     return <>
         <input className="search" type="search" value={text} onChange={changeValue} disabled={!user.user}/>

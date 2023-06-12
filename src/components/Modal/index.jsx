@@ -89,7 +89,7 @@ const Modal = ({
     }, [isActive])
 
     return <div className="modal-wrapper" style={st}>
-        <div className="modal__custom">
+        <div className="modal-custom">
                 <X
                     className="modal-close"
                     onClick={(e) => setIsActive(false)}
@@ -97,28 +97,30 @@ const Modal = ({
             <h3>{isReg ? "Регистрация" : "Вход"}</h3>
             <form onSubmit={handleForm}>
                 {isReg && <input
-                    className="input__sign"
+                    className="input-sign"
                     type="text"
                     placeholder="Ваше имя"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />}
                 <input
-                    className={`${happenedUse ? "" : "text-danger"} input__sign`}
+                    className={`${happenedUse ? "" : "text-danger"} input-sign`}
                     type="email"
                     placeholder="Ваш электронный адрес"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="username"
                 />
                 <input
-                    className={`${happenedUse ? "" : "text-danger"} input__sign`}
+                    className={`${happenedUse ? "" : "text-danger"} input-sign`}
                     type="password"
                     placeholder="Ваш пароль"
                     value={pwd}
                     onChange={(e) => setPwd(e.target.value)}
+                    autoComplete="current-password"
                 />
                 {isReg && <input
-                    className="input__sign"
+                    className="input-sign"
                     type="password"
                     placeholder="Повторите пароль"
                     value={pwd2}

@@ -16,7 +16,7 @@ const Favorites = () => {
 			{baseData.map((pro, i) => {
 				if (pro.likes.includes(userId)) {
 					return (
-						<Col key={i} xs={12} sm={6} md={4} lg={3}>
+						<Col key={"catalog" + i} xs={12} sm={6} md={4} lg={3}>
 							<BsCard img={pro.pictures} {...pro} user={userId}/>
 						</Col>
 					)

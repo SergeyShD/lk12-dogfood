@@ -54,9 +54,8 @@ const Profile = ({setUser}) => {
 			.catch(
 				setUserData({})
 			)
-	}, [])
+	}, [api])
 
-	
 	return <>
 		<Container style={{gridTemplateColumns: "1fr"}}>
 			{userId && <>

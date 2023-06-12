@@ -5,27 +5,32 @@ import Ctx from "../ctx"
 import usePagination from "../hooks/usePagination"
 import Pagination from "../components/Pagination"
 
+const maxCardOn = 12
+
 const Catalog = ({ goods, userId }) => {
-	const maxCardOn = 12
 	const { searchResult, isMobile } = useContext(Ctx)
 	const paginate = usePagination(goods, maxCardOn)
 	const [pageRange, setPageRange] = useState(isMobile ? 1 : 5)
-
-	const handleResize = () => {
-		if (window.innerWidth <= 768 || isMobile) {
-			setPageRange(1)
-		} else {
-			setPageRange(5)
-		}
-	}
 
 	useEffect(() => {
 		paginate.step(1)
 	}, [searchResult])
 
 	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth <= 768 || isMobile) {
+				setPageRange(1)
+			} else {
+				setPageRange(5)
+			}
+		}
+
 		window.addEventListener("resize", handleResize)
-	}, [])
+
+		return () => {
+			window.removeEventListener("resize", handleResize)
+		}
+	}, [isMobile])
 
 	return (
 		<Container className="d-block">

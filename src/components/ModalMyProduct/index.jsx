@@ -93,18 +93,16 @@ const ModalMyProduct = ({setHandleClick}) => {
 
     const tagsHandler = (e) => {
         const val = e.target.value
-        const last = val[val.length-1]
+        const last = val[val.length - 1]
         setTagWord(val)
-        if(/\s/.test(last)){
-            const word = val.slice(0, val.length - 1)
-            const test = bodyClick.tags?.map(tg => {if(tg.toLowerCase() !== word.toLowerCase()){return word}})
-
-            if(test.length){
-                setBodyClick({ ...bodyClick, tags: [...bodyClick.tags, word]})
-            }
-            setTagWord("")
+        if (/\s/.test(last)) {
+            const word = val.slice(0, val.length - 1);
+            const isDuplicate = bodyClick.tags?.some(tg => tg.toLowerCase() === word.toLowerCase())
+        if (!isDuplicate) {
+            setBodyClick({ ...bodyClick, tags: [...bodyClick.tags, word] })
         }
-        else{
+        setTagWord("")
+        } else {
             setTagWord(val)
         }
     }
@@ -229,6 +227,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                                         <img
                                             src={el.pictures}
                                             className="w-100 h-100"
+                                            alt={el.name}
                                         />
                                         </Col>
                                     </Col>
