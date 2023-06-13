@@ -51,12 +51,12 @@ const Product = () => {
 	}
 
 	const delReview = (id) => {
-		api.delReview(data._id, id).then(d => {
-			setData(d)
-		})
-		.catch(
-			setData({})
-		)
+		api.delReview(data._id, id)
+			.then(d => {
+				const updatedReviews = reviews.filter(review => review._id !== id)
+				setData(d)
+				setReviews(updatedReviews)
+			})
 	}
 
 	useEffect(() => {
