@@ -60,8 +60,8 @@ const BsCard = ({
                                         <Link to={`/basket`} className="card-link"></Link>
                                     </>}
                         </button>
-                    : <div className="text-center w-100 pt-1 pb-1 text-secondary">
-                        Товара нет в наличии
+                    : <div className="text-center w-100 pt-1 pb-1 text-danger text-waiting">
+                        Скоро будет!
                     </div>
                 }
             </div>

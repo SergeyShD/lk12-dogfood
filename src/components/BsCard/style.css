@@ -32,18 +32,22 @@
     text-overflow: ellipsis;
 }
 
-/* .name {
-min-height: 3em;
-overflow: hidden;
-text-overflow: ellipsis;
-display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;
-} */
 .name {
     height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-
+.name {
+    min-height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.text-waiting {
+    text-transform: uppercase;
+    word-spacing: 0.2em;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+}

@@ -202,7 +202,24 @@ h4{
 .trash:hover{
   color:red;
 }
-
+.pagination-custom a{
+  color: rgb(218, 160, 0);
+  border-color: #FFE44D;
+}
+.pagination-custom a:hover{
+  color: rgb(218, 160, 0);
+  border-color: #FFE44D;
+  background-color: #fcfad8;
+}
+.pagination-custom {
+  color: black;
+}
+.pagination .active>.page-link{
+  color: rgb(218, 160, 0);
+  border-color: #fffaa0;
+  font-weight: bold;
+  background-color: #fffaa0;
+}
 @keyframes bounce {
   0% {
       transform: translateY(0);

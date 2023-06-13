@@ -1,7 +1,7 @@
 
 import {useState, useContext} from "react"
 import {Container, Row, Col, Form, Button} from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import Ctx from "../ctx"
 
 const AddProduct = () => {
@@ -79,6 +79,15 @@ const AddProduct = () => {
     return <Container style={{gridTemplateColumns: "auto"}}>
         <Row>
             <Col xs={12}><h1>Добавить новый товар</h1></Col>
+            <Col>
+                <Button
+					className="rounded-pill mb-3 mt-1 ps-5 pe-5"
+					as={Link}
+					to="/profile"
+				>
+                    Назад
+                </Button>
+            </Col>
             <Form onSubmit={formHandler}>
                 <Row>
                     <Col xs={12} md={6}>
@@ -172,14 +181,17 @@ const AddProduct = () => {
                                 onChange={tagsHandler}/>
                             <Form.Text as="div" className="mt-1 d-flex" style={{gap: ".25rem"}}>
                                 {tags.map(tg=> <Button 
-                                key={tg}
-                                variant={tg === "df" ? "warning" : "secondary"}
-                                disabled={tg === "df"}
-                                onClick={delTag}
-                            >{tg}</Button>)}
+                                    key={tg}
+                                    variant={tg === "df" ? "warning" : "secondary"}
+                                    className="rounded-pill mt-1"
+                                    disabled={tg === "df"}
+                                    onClick={delTag}
+                                >
+                                    {tg}
+                                </Button>)}
                             </Form.Text>
                         </Form.Group>
-                        <Button type="submit">Добавить товар</Button>
+                        <Button type="submit" className="rounded-pill">Добавить товар</Button>
                     </Col>
                 </Row>
             </Form>

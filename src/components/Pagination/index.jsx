@@ -11,10 +11,18 @@ const Pagination = ({ hk, pageRange}) => {
 
     if (i !== 1) {
         items.push(
-            <BsPag.First key="first" onClick={() => hk.step(1)} />
+            <BsPag.First
+                key="first"
+                onClick={() => hk.step(1)}
+                className="pagination-custom"
+            />
         )
         items.push(
-            <BsPag.Prev key="prev" onClick={() => hk.step(hk.page - 1)} />
+            <BsPag.Prev
+                key="prev"
+                onClick={() => hk.step(hk.page - 1)}
+                className="pagination-custom"
+            />
         )
     }
 
@@ -25,6 +33,7 @@ const Pagination = ({ hk, pageRange}) => {
                     key={i}
                     active={i === hk.page}
                     onClick={i === hk.page ? null : step}
+                    className="pagination-custom"
                 >
                     {i}
                 </BsPag.Item>
@@ -34,10 +43,18 @@ const Pagination = ({ hk, pageRange}) => {
 
     if (end !== hk.maxPage) {
         items.push(
-            <BsPag.Next key="next" onClick={() => hk.step(hk.page + 1)} />
+            <BsPag.Next
+                key="next"
+                onClick={() => hk.step(hk.page + 1)}
+                className="pagination-custom"
+            />
         )
         items.push(
-            <BsPag.Last key="last" onClick={() => hk.step(hk.maxPage)} />
+            <BsPag.Last
+                key="last"
+                onClick={() => hk.step(hk.maxPage)}
+                className="pagination-custom"
+            />
         )
     }
 

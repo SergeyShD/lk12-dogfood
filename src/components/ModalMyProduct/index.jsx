@@ -183,7 +183,10 @@ const ModalMyProduct = ({setHandleClick}) => {
                             />
                         </Col>
                         : <Col className="d-flex justify-content-end align-items-end pe-5">
-                            <Button onClick={(event) => clickSetInEdit(event)}>
+                            <Button
+                                onClick={(event) => clickSetInEdit(event)}
+                                className="rounded-pill"
+                            >
                                 Назад
                             </Button>
                         </Col>
@@ -191,7 +194,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                 </Row>
                 
                 <Row className="my-product-list" ref={productListRef}>
-                    <Container className="scrollable-container d-block">
+                    <Container className="scrollable-container d-block pt-3 pb-1">
                         {filteredGoods.length === 0 && <>
                             <div className="justify-content-center align-items-center">
                                     <span className="d-block text-center display-1" >
@@ -285,7 +288,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                                                 </tr>
                                                 <tr>
                                                     <td>Вес</td>
-                                                    <td>{el.weight}</td>
+                                                    <td>{el.wight}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Кол-во лайков</td>
@@ -433,13 +436,14 @@ const ModalMyProduct = ({setHandleClick}) => {
                                                     variant={tg === "df" ? "warning" : "secondary"}
                                                     disabled={tg === "df"}
                                                     onClick={delTag}
+                                                    className="rounded-pill mt-1"
                                                     >
                                                         {tg}
                                                     </Button>
                                                 )}
                                             </Form.Text>
                                         </Form.Group>
-                                        <Button type="submit">
+                                        <Button type="submit" variant="warning" className="rounded-pill">
                                             Изменить товар
                                         </Button>
                                     </Col>
