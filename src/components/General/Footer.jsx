@@ -6,7 +6,7 @@ import Logo from "./Logo"
 
 const links1 = [
     {name: "Каталог", src: "/catalog"},
-    {name: "Корзина", src: "/"},
+    {name: "Корзина", src: "/basket"},
     {name: "Избранное", src: "/favorites"},
     {name: "Оплата и доставка", src: "/"},
     
