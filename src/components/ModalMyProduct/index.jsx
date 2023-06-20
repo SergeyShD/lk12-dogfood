@@ -17,11 +17,12 @@ const ModalMyProduct = ({setHandleClick}) => {
     const [searchResults, setSearchResults] = useState([])
 
     const productCardRef = useRef(null)
+    const headerRef = useRef(null)
     const productListRef = useRef(null)
 
     const recalculateSizes = () => {
         const productCardHeight = productCardRef.current.offsetHeight
-        const headerHeight = document.querySelector('.my-product-card-header').offsetHeight
+        const headerHeight = headerRef.current.offsetHeight
         const productListHeight = productCardHeight - headerHeight - 65
 
         productListRef.current.style.height = `${productListHeight}px`
@@ -163,9 +164,9 @@ const ModalMyProduct = ({setHandleClick}) => {
                     className="position-absolute top-0 end-0 m-3 fs-3 my-close"
                     onClick={() => {setHandleClick(false)}}
                 />
-                <Row className="my-product-card-header">
+                <Row className="my-product-card-header" ref={headerRef}>
                     {filteredGoods.length !== 0
-                        ? <Col xs={5} md={4}>
+                        ? <Col sm={6} md={5}>
                             <h1>Мои товары</h1>
                         </Col>
                         : <Col>
@@ -182,7 +183,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                                 style={(searchResults.length === 0 && inputValue.length !== 0) ? {color: "red"} : {color: "black"}}
                             />
                         </Col>
-                        : <Col className="d-flex justify-content-end align-items-end pe-5">
+                        : <Col className="d-flex justify-content-xs-start justify-content-sm-end align-items-end pe-5">
                             <Button
                                 onClick={(event) => clickSetInEdit(event)}
                                 className="rounded-pill"
@@ -193,7 +194,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                     }
                 </Row>
                 
-                <Row className="my-product-list" ref={productListRef}>
+                <Row className="my-product-list" ref={productListRef} >
                     <Container className="scrollable-container d-block pt-3 pb-1">
                         {filteredGoods.length === 0 && <>
                             <div className="justify-content-center align-items-center">
@@ -225,7 +226,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                                     >
                                         <Col
                                             xs={6} md={12}
-                                            style={{ minWidth: "80px", minHeight: "80px" }}
+                                            style={{ minWidth: "80px", minHeight: "80px"}}
                                         >
                                         <img
                                             src={el.pictures}
@@ -238,7 +239,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                                         className="my-product-description"
                                         as={Link} to={`/product/${el._id}`}
                                     >
-                                        <span className="w-auto overflow-hidden text-overflow-ellipsis">
+                                        <span className="name w-auto overflow-hidden text-overflow-ellipsis">
                                             {el.name}
                                         </span>
                                     </Col>
@@ -443,7 +444,7 @@ const ModalMyProduct = ({setHandleClick}) => {
                                                 )}
                                             </Form.Text>
                                         </Form.Group>
-                                        <Button type="submit" variant="warning" className="rounded-pill">
+                                        <Button type="submit" variant="warning" className="rounded-pill mb-3">
                                             Изменить товар
                                         </Button>
                                     </Col>

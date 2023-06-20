@@ -25,7 +25,7 @@
 .my-product-card-header{
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .my-product-list{
     overflow-y: auto;
@@ -76,4 +76,17 @@
     width: auto;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.name {
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.name {
+    min-height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
