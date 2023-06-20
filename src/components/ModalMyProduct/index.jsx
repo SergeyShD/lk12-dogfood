@@ -69,6 +69,10 @@ const ModalMyProduct = ({isButtonOut}) => {
                         }
                     }).filter(el => el !== null)
                 )
+                if (searchResults.length > 0) {
+                    setSearchResults(searchResults.filter((el) => el._id !== id))
+                }
+                setInputValue("")
                 setBaseData(
                     baseData.map(el => {
                         if (el._id !== data._id) {
