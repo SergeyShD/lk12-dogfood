@@ -5,7 +5,7 @@ import { X, Trash, PencilFill, EmojiFrown } from "react-bootstrap-icons"
 import Ctx from "../../ctx"
 import {Link} from "react-router-dom"
 
-const ModalMyProduct = ({setHandleClick}) => {
+const ModalMyProduct = ({isButtonOut}) => {
     const { userId, api, setBaseData, dataConvert, baseData, setBasket } = useContext(Ctx)
     const [inputValue, setInputValue] = useState("")
     const [hoveredElement, setHoveredElement] = useState([false,null])
@@ -162,11 +162,11 @@ const ModalMyProduct = ({setHandleClick}) => {
             >
                 <X 
                     className="position-absolute top-0 end-0 m-3 fs-3 my-close"
-                    onClick={() => {setHandleClick(false)}}
+                    onClick={isButtonOut}
                 />
                 <Row className="my-product-card-header" ref={headerRef}>
                     {filteredGoods.length !== 0
-                        ? <Col sm={6} md={5}>
+                        ? <Col sm={6} md={5} lg={4}>
                             <h1>Мои товары</h1>
                         </Col>
                         : <Col>

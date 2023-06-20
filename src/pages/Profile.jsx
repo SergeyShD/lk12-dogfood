@@ -13,7 +13,28 @@ const Profile = ({setUser}) => {
 	const [inpAbout, setInpAbout] = useState(false)
 	const [inpAvatar, setInpAvatar] = useState(false)
 	const [handleClick, setHandleClick] = useState(false)
+	const [scrollEnabled, setScrollEnabled] = useState(true)
+	
+	const disableScroll = () => {
+		document.body.style.overflow = "hidden"
+		setScrollEnabled(false)
+	}
 
+	const enableScroll = () => {
+		document.body.style.overflow = "auto"
+		setScrollEnabled(true)
+	}
+
+	useEffect(() => {
+		if (!scrollEnabled) {
+			disableScroll()
+		}
+		
+		return () => {
+			enableScroll()
+		}
+	}, [scrollEnabled])
+	
 	const updUser = (name, val) => {
 		let body = {
 			name:userData.name,
@@ -31,11 +52,16 @@ const Profile = ({setUser}) => {
 		.catch(
 			setUserData({})
 		)
-		
 	}
 
 	const isButtonClick = () => {
 		setHandleClick(true)
+		setScrollEnabled(false)
+	}
+
+	const isButtonOut = () => {
+		setHandleClick(false)
+		setScrollEnabled(true)
 	}
 
 	const logOut = () => {
@@ -142,7 +168,7 @@ const Profile = ({setUser}) => {
 				</Row>
 			</>}
 		</Container>
-		{handleClick && <ModalMyProduct setHandleClick={setHandleClick}/>}
+		{handleClick && <ModalMyProduct isButtonOut={isButtonOut}/>}
 	</>
 }
 export default Profile
